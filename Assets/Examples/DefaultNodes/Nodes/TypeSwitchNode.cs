@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/TypeSwitchNode")]
+[NodeName("TypeSwitchNode")]
 public class TypeSwitchNode : BaseNode
 {
 	[Input]
@@ -12,8 +13,6 @@ public class TypeSwitchNode : BaseNode
 
 	[SerializeField]
 	public bool					toggleType;
-
-	public override string		name => "TypeSwitchNode";
 
 	[CustomPortBehavior(nameof(input))]
 	IEnumerable< PortData > GetInputPort(List< SerializableEdge > edges)

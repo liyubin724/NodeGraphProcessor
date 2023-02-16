@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/VisibleIfAttributeNode")]
+[NodeName("VisibleIfAttributeNode")]
 public class VisibleIfAttributeNode : BaseNode
 {
 	public enum Test1
@@ -39,8 +40,6 @@ public class VisibleIfAttributeNode : BaseNode
 
 	[Output(name = "Out")]
 	public float				output;
-
-	public override string		name => "VisibleIfAttributeNode";
 
 	protected override void Process()
 	{

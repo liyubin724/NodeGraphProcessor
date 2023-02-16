@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/Drawer Field Test")]
+[NodeName("Drawer Field Test")]
 public class DrawerFieldTestNode : BaseNode
 {
 
@@ -49,8 +50,6 @@ public class DrawerFieldTestNode : BaseNode
 
 	[Input("Layer Mask"), ShowAsDrawer]
 	public LayerMask layerMask;
-
-	public override string name => "Drawer Field Test";
 
 	protected override void Process() {}
 }

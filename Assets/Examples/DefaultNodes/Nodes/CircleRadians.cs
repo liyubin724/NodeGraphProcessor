@@ -5,12 +5,11 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/CircleRadians")]
+[NodeName("CircleRadians")]
 public class CircleRadians : BaseNode
 {
 	[Output(name = "In")]
     public List< float >		outputRadians;
-
-	public override string		name => "CircleRadians";
 
 	[CustomPortOutput(nameof(outputRadians), typeof(float))]
 	public void PushOutputRadians(List< SerializableEdge > connectedEdges)

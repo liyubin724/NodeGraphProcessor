@@ -6,12 +6,11 @@ using GraphProcessor;
 namespace NodeGraphProcessor.Examples
 {
 	[System.Serializable, NodeMenuItem("Conditional/Start")]
-	public class StartNode : BaseNode, IConditionalNode
+    [NodeName("Start")]
+    public class StartNode : BaseNode, IConditionalNode
 	{
 		[Output(name = "Executes")]
 		public ConditionalLink		executes;
-
-		public override string		name => "Start";
 
 		public IEnumerable< ConditionalNode >	GetExecutedNodes()
 		{

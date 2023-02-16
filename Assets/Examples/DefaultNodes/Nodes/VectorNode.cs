@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/Vector")]
+[NodeName("Vector4")]
 public class VectorNode : BaseNode
 {
 	[Output(name = "Out")]
@@ -12,8 +13,6 @@ public class VectorNode : BaseNode
 	
 	[Input(name = "In"), SerializeField]
 	public Vector4				input;
-
-	public override string		name => "Vector";
 
 	protected override void Process()
 	{

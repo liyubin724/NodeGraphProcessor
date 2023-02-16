@@ -5,19 +5,17 @@ using GraphProcessor;
 using NodeGraphProcessor.Examples;
 
 [NodeMenuItem("Print")]
+[NodeName("Print")]
 public class PrintNode : BaseNode
 {
 	[Input]
 	public object	obj;
-
-	public override string name => "Print";
 }
 
 [NodeMenuItem("Conditional/Print")]
+[NodeName("Print")]
 public class ConditionalPrintNode : LinearConditionalNode
 {
 	[Input]
 	public object	obj;
-
-	public override string name => "Print";
 }

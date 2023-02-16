@@ -14,15 +14,13 @@ namespace GraphProcessor
 	[Serializable]
 	public abstract class BaseNode
 	{
+        // The name of the node in case it was renamed by a user
+        public string customName;
+
         /// <summary>
         /// Name of the node, it will be displayed in the title section
         /// </summary>
         /// <returns></returns>
-        [Obsolete]
-        public virtual string name => GetType().Name;
-        // The name of the node in case it was renamed by a user
-        public string customName;
-
         public string displayName
         {
             get

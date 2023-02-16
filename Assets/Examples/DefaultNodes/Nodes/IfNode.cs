@@ -7,6 +7,7 @@ using NodeGraphProcessor.Examples;
 using UnityEngine.Rendering;
 
 [System.Serializable, NodeMenuItem("Conditional/If"), NodeMenuItem("Conditional/Branch")]
+[NodeName("If")]
 public class IfNode : ConditionalNode
 {
 	[Input(name = "Condition")]
@@ -19,8 +20,6 @@ public class IfNode : ConditionalNode
 
 	[Setting("Compare Function")]
 	public CompareFunction		compareOperator;
-
-	public override string		name => "If";
 
 	public override IEnumerable< ConditionalNode >	GetExecutedNodes()
 	{

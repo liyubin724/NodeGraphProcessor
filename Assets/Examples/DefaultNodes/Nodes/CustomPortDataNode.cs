@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/PortData")]
+[NodeName("Port Data")]
 public class CustomPortData : BaseNode
 {
 	[Input(name = "In Values", allowMultiple = true)]
@@ -19,8 +20,6 @@ public class CustomPortData : BaseNode
 
 	[Output]
 	public float				output;
-
-	public override string		name => "Port Data";
 
 	protected override void Process()
 	{

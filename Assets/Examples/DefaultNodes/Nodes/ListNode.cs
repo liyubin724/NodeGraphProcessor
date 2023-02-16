@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/List")]
+[NodeName("List")]
 public class ListNode : BaseNode
 {
 	[Output(name = "Out")]
@@ -14,8 +15,6 @@ public class ListNode : BaseNode
 	public Vector4				input;
 
 	public List<GameObject>		objs = new List<GameObject>();
-
-	public override string		name => "List";
 
 	protected override void Process()
 	{

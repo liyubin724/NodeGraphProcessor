@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Conditional/Switch")]
+[NodeName("Switch")]
 public class SwitchNode : BaseNode
 {
 	[Input(name = "In")]
@@ -12,8 +13,6 @@ public class SwitchNode : BaseNode
 
 	[Output(name = "Out")]
 	public float				output;
-
-	public override string		name => "Switch";
 
 	protected override void Process()
 	{

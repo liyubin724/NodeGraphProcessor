@@ -12,10 +12,10 @@ public enum Setting
 }
 
 [System.Serializable, NodeMenuItem("Custom/SettingsNode")]
+[NodeName("SettingNode")]
 public class SettingsNode : BaseNode
 {
 	public Setting				setting;
-	public override string		name => "SettingsNode";
 
 	[Input]
 	public float			input;

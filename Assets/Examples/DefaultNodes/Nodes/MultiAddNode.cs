@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/MultiAdd")]
+[NodeName("Add")]
 public class MultiAddNode : BaseNode
 {
 	[Input]
@@ -12,8 +13,6 @@ public class MultiAddNode : BaseNode
 
 	[Output]
 	public float				output;
-
-	public override string		name => "Add";
 
 	protected override void Process()
 	{

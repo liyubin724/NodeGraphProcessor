@@ -6,6 +6,7 @@ using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/MultiPorts")]
 [NodeAppearance("TestType")]
+[NodeName("CustomPorts")]
 public class CustomPortsNode : BaseNode
 {
     [Input]
@@ -15,8 +16,6 @@ public class CustomPortsNode : BaseNode
 	public List< float >		outputs; // TODO: custom function for this one
 
 	List< object >				values = new List< object >();
-
-	public override string		name => "CustomPorts";
 
     // We keep the max port count so it doesn't cause binding issues
     [SerializeField, HideInInspector]

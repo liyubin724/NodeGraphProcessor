@@ -5,10 +5,9 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Primitives/Text")]
+[NodeName("Text")]
 public class TextNode : BaseNode
 {
 	[Output(name = "Label"), SerializeField]
 	public string				output;
-
-	public override string		name => "Text";
 }

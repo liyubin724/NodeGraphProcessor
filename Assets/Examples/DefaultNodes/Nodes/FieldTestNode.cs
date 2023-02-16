@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/FieldTestNode")]
+[NodeName("FieldTestNode")]
 public class FieldTestNode : BaseNode
 {
 	public string s;
@@ -21,8 +22,6 @@ public class FieldTestNode : BaseNode
 	public bool toggle;
 	public Gradient gradient;
 	public AnimationCurve curve;
-
-	public override string		name => "FieldTestNode";
 
 	protected override void Process() { }
 }

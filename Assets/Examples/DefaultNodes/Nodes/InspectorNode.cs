@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/InspectorNode")]
+[NodeName("InspectorNode")]
 public class InspectorNode : BaseNode
 {
 	[Input(name = "In")]
@@ -17,8 +18,6 @@ public class InspectorNode : BaseNode
 	public bool additionalSettings;
 	[ShowInInspector]
 	public string additionalParam;
-
-	public override string		name => "InspectorNode";
 
 	protected override void Process()
 	{

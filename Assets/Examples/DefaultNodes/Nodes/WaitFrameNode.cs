@@ -6,10 +6,9 @@ using UnityEngine;
 namespace NodeGraphProcessor.Examples
 {
 	[Serializable, NodeMenuItem("Functions/Wait Frames")]
-	public class WaitFrameNode : WaitableNode
+    [NodeName("Wait Frames")]
+    public class WaitFrameNode : WaitableNode
 	{
-		public override string name => "Wait Frames";
-
 		[SerializeField, Input(name = "Frames")]
 		public int frame = 1;
 

@@ -4,6 +4,7 @@ using UnityEngine.Rendering;
 namespace NodeGraphProcessor.Examples
 {
 	[System.Serializable, NodeMenuItem("Conditional/Comparison")]
+	[NodeName("Comparison")]
 	public class Comparison : BaseNode
 	{
 		[Input(name = "In A")]
@@ -16,8 +17,6 @@ namespace NodeGraphProcessor.Examples
 		public bool		compared;
 
 		public CompareFunction		compareFunction = CompareFunction.LessEqual;
-
-		public override string		name => "Comparison";
 
 		protected override void Process()
 		{

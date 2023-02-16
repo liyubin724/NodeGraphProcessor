@@ -3,6 +3,7 @@ using GraphProcessor;
 using UnityEngine.Events;
 
 [System.Serializable, NodeMenuItem("Custom/Unity Event Node")]
+[NodeName("UnityEventNode")]
 public class UnityEventNode : BaseNode
 {
 	[Input(name = "In")]
@@ -12,8 +13,6 @@ public class UnityEventNode : BaseNode
 	public float				output;
 
 	public UnityEvent			evt;
-
-	public override string		name => "Unity Event Node";
 
 	protected override void Process()
 	{

@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/Inheritance1")]
+[NodeName("Inheritance1")]
 public class Inheritance1 :InheritanceBase 
 {
 	[Input(name = "In 1")]
@@ -14,8 +15,6 @@ public class Inheritance1 :InheritanceBase
 	public float				output1;
 
 	public float				field1;
-
-	public override string		name => "Inheritance1";
 
 	protected override void Process()
 	{

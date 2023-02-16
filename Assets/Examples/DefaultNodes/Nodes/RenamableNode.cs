@@ -3,6 +3,7 @@ using GraphProcessor;
 
 [System.Serializable, NodeMenuItem("Custom/Renamable")]
 [NodeCapability(isRenamable = true)]
+[NodeName("Renamable")]
 public class RenamableNode : BaseNode
 {
     [Output("Out")]
@@ -10,8 +11,6 @@ public class RenamableNode : BaseNode
 	
     [Input("In")]
 	public float		input;
-
-	public override string name => "Renamable";
 
 	protected override void Process() => output = input;
 }

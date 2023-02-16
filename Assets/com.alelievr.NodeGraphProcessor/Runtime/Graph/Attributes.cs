@@ -74,6 +74,10 @@ namespace GraphProcessor
     public class NodeNameAttribute : Attribute
     {
         public string name { get; set; }
+		public NodeNameAttribute(string name)
+        {
+            this.name = name;
+        }
     }
 
 	public class NodeAppearanceAttribute : Attribute

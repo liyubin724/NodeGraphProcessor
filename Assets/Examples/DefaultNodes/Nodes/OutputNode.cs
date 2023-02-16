@@ -6,12 +6,11 @@ using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/OutputNode")]
 [NodeCapability(isDeletable = false)]
+[NodeName("OutputNode")]
 public class OutputNode : BaseNode
 {
 	[Input(name = "In")]
     public float                input;
-
-	public override string		name => "OutputNode";
 
 	protected override void Process()
 	{

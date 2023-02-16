@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Operations/Sub")]
+[NodeName("Sub")]
 public class SubNode : BaseNode
 {
 	[Input(name = "A")]
@@ -14,8 +15,6 @@ public class SubNode : BaseNode
 
 	[Output(name = "Out")]
 	public float				output;
-
-	public override string		name => "Sub";
 
 	protected override void Process()
 	{

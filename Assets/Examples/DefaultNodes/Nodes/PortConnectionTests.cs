@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/PortConnectionTests")]
+[NodeName("Port Tests")]
 public class PortConnectionTests : BaseNode
 {
 	[Input]
@@ -14,8 +15,6 @@ public class PortConnectionTests : BaseNode
 	public IEnumerable< object >	outputs;
 
     public float padding;
-
-	public override string		name => "Port Tests";
 
 	protected override void Process() {}
 
