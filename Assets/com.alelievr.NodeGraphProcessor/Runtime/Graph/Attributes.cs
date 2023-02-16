@@ -102,6 +102,27 @@ namespace GraphProcessor
         }
     }
 
+    public class NodeCategoryAttribute : Attribute
+    {
+        public string[] categories { get; private set; } = new string[0];
+
+        public NodeCategoryAttribute(string category)
+        {
+            if (string.IsNullOrEmpty(category))
+            {
+                categories = new string[] { category };
+            }
+        }
+
+        public NodeCategoryAttribute(params string[] values)
+        {
+            if (values != null && values.Length > 0)
+            {
+                categories = values;
+            }
+        }
+    }
+
     /// <summary>
     /// Register the node in the NodeProvider class. The node will also be available in the node creation window.
     /// </summary>
