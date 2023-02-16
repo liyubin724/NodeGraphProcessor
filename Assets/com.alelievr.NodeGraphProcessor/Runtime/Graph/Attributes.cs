@@ -76,6 +76,28 @@ namespace GraphProcessor
         public string name { get; set; }
     }
 
+	public class NodeAppearanceAttribute : Attribute
+	{
+		public Color color { get; private set; } = Color.clear;
+		public string layoutStyle { get; private set; } = string.Empty;
+
+		public NodeAppearanceAttribute(Color color) : this(color, string.Empty)
+		{
+
+		}
+
+		public NodeAppearanceAttribute(string layoutStyle) : this(Color.clear, layoutStyle)
+		{
+
+		}
+
+		public NodeAppearanceAttribute(Color color, string layoutStyle)
+        {
+            this.color = color;
+            this.layoutStyle = layoutStyle;
+        }
+    }
+
     /// <summary>
     /// Register the node in the NodeProvider class. The node will also be available in the node creation window.
     /// </summary>

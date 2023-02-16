@@ -94,13 +94,35 @@ namespace GraphProcessor
         /// <summary>
         /// The accent color of the node
         /// </summary>
-        public virtual Color color => Color.clear;
+        public Color color
+		{
+			get
+			{
+				var attr = GetType().GetCustomAttribute<NodeAppearanceAttribute>();
+				if(attr == null)
+				{
+					return Color.clear;
+				}
+				return attr.color;
+			}
+		}
 		
 		/// <summary>
 		/// Set a custom uss file for the node. We use a Resources.Load to get the stylesheet so be sure to put the correct resources path
 		/// https://docs.unity3d.com/ScriptReference/Resources.Load.html
 		/// </summary>
-        public virtual string       layoutStyle => string.Empty;
+        public string layoutStyle
+		{
+			get
+			{
+                var attr = GetType().GetCustomAttribute<NodeAppearanceAttribute>();
+                if (attr == null)
+                {
+					return string.Empty;
+                }
+				return attr.layoutStyle;
+            }
+		}
 
         //id
         public string				GUID;

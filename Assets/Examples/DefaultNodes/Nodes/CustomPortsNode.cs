@@ -5,6 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/MultiPorts")]
+[NodeAppearance("TestType")]
 public class CustomPortsNode : BaseNode
 {
     [Input]
@@ -16,8 +17,6 @@ public class CustomPortsNode : BaseNode
 	List< object >				values = new List< object >();
 
 	public override string		name => "CustomPorts";
-
-    public override string      layoutStyle => "TestType";
 
     // We keep the max port count so it doesn't cause binding issues
     [SerializeField, HideInInspector]
