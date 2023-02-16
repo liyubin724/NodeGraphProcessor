@@ -74,7 +74,7 @@ namespace GraphProcessor
 			nodeTarget = node;
 			this.owner = owner;
 
-			if (!node.deletable)
+			if (!node.isDeletable)
 				capabilities &= ~Capabilities.Deletable;
 			// Note that the Renamable capability is useless right now as it haven't been implemented in Graphview
 			if (node.isRenamable)
@@ -218,7 +218,7 @@ namespace GraphProcessor
 			void CloseAndSaveTitleEditor(string newTitle)
 			{
 				owner.RegisterCompleteObjectUndo("Renamed node " + newTitle);
-				nodeTarget.SetCustomName(newTitle);
+				nodeTarget.displayName = newTitle;
 
 				// hide title TextBox
 				titleTextField.style.display = DisplayStyle.None;
@@ -231,7 +231,7 @@ namespace GraphProcessor
 
 		void UpdateTitle()
 		{
-			title = (nodeTarget.GetCustomName() == null) ? nodeTarget.GetType().Name : nodeTarget.GetCustomName();
+			title = nodeTarget.displayName;
 		}
 
 		void InitializeSettings()
@@ -1012,7 +1012,7 @@ namespace GraphProcessor
 
         public void ChangeLockStatus()
         {
-            nodeTarget.nodeLock ^= true;
+            nodeTarget.isLocked ^= true;
         }
 
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
@@ -1021,7 +1021,7 @@ namespace GraphProcessor
 			evt.menu.AppendAction("Open Node Script", (e) => OpenNodeScript(), OpenNodeScriptStatus);
 			evt.menu.AppendAction("Open Node View Script", (e) => OpenNodeViewScript(), OpenNodeViewScriptStatus);
 			evt.menu.AppendAction("Debug", (e) => ToggleDebug(), DebugStatus);
-            if (nodeTarget.unlockable)
+            if (nodeTarget.isLockable)
                 evt.menu.AppendAction((nodeTarget.isLocked ? "Unlock" : "Lock"), (e) => ChangeLockStatus(), LockStatus);
         }
 

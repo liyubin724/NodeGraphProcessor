@@ -2,6 +2,7 @@ using UnityEngine;
 using GraphProcessor;
 
 [System.Serializable, NodeMenuItem("Custom/Renamable")]
+[NodeCapability(isRenamable = true)]
 public class RenamableNode : BaseNode
 {
     [Output("Out")]
@@ -11,8 +12,6 @@ public class RenamableNode : BaseNode
 	public float		input;
 
 	public override string name => "Renamable";
-
-    public override bool isRenamable => true;
 
 	protected override void Process() => output = input;
 }

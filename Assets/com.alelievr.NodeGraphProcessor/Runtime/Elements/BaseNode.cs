@@ -14,35 +14,93 @@ namespace GraphProcessor
 	[Serializable]
 	public abstract class BaseNode
 	{
-		[SerializeField]
-		internal string nodeCustomName = null; // The name of the node in case it was renamed by a user
+        /// <summary>
+        /// Name of the node, it will be displayed in the title section
+        /// </summary>
+        /// <returns></returns>
+        [Obsolete]
+        public virtual string name => GetType().Name;
+        // The name of the node in case it was renamed by a user
+        public string customName;
 
-		/// <summary>
-		/// Name of the node, it will be displayed in the title section
-		/// </summary>
-		/// <returns></returns>
-		public virtual string       name => GetType().Name;
-		
-		/// <summary>
-		/// The accent color of the node
-		/// </summary>
-		public virtual Color color => Color.clear;
+        public string displayName
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(customName))
+                {
+                    return customName;
+                }
+                var attr = GetType().GetCustomAttribute<NodeNameAttribute>();
+                if (attr != null && string.IsNullOrEmpty(attr.name))
+                {
+                    return attr.name;
+                }
+                return GetType().Name;
+            }
+
+            set
+            {
+                customName = value;
+            }
+        }
+
+        /// <summary>
+        /// If the node can be locked or not
+        /// </summary>
+        public bool isLockable
+        {
+            get
+            {
+                var attr = GetType().GetCustomAttribute<NodeCapabilityAttribute>();
+                if (attr == null)
+                {
+                    return true;
+                }
+                return attr.isLockable;
+            }
+        }
+
+        /// <summary>True if the node can be deleted, false otherwise</summary>
+        public bool isDeletable
+        {
+            get
+            {
+                var attr = GetType().GetCustomAttribute<NodeCapabilityAttribute>();
+                if (attr == null)
+                {
+                    return true;
+                }
+                return attr.isDeletable;
+            }
+        }
+
+        /// <summary>
+        /// Can the node be renamed in the UI. By default a node can be renamed by double clicking it's name.
+        /// </summary>
+        public bool isRenamable
+        {
+            get
+            {
+                var attr = GetType().GetCustomAttribute<NodeCapabilityAttribute>();
+                if (attr == null)
+                {
+                    return false;
+                }
+                return attr.isRenamable;
+            }
+        }
+
+        /// <summary>
+        /// The accent color of the node
+        /// </summary>
+        public virtual Color color => Color.clear;
 		
 		/// <summary>
 		/// Set a custom uss file for the node. We use a Resources.Load to get the stylesheet so be sure to put the correct resources path
 		/// https://docs.unity3d.com/ScriptReference/Resources.Load.html
 		/// </summary>
         public virtual string       layoutStyle => string.Empty;
-
-		/// <summary>
-		/// If the node can be locked or not
-		/// </summary>
-        public virtual bool         unlockable => true; 
-
-		/// <summary>
-		/// Is the node is locked (if locked it can't be moved)
-		/// </summary>
-        public virtual bool         isLocked => nodeLock; 
 
         //id
         public string				GUID;
@@ -54,9 +112,6 @@ namespace GraphProcessor
 
 		/// <summary>Show the node controlContainer only when the mouse is over the node</summary>
 		public virtual bool			showControlsOnHover => false;
-
-		/// <summary>True if the node can be deleted, false otherwise</summary>
-		public virtual bool			deletable => true;
 
 		/// <summary>
 		/// Container of input ports
@@ -79,10 +134,10 @@ namespace GraphProcessor
 		/// Is debug visible
 		/// </summary>
 		public bool					debug;
-		/// <summary>
-		/// Node locked state
-		/// </summary>
-        public bool                 nodeLock;
+        /// <summary>
+        /// Is the node is locked (if locked it can't be moved)
+        /// </summary>
+        public bool                 isLocked;
 
         public delegate void		ProcessDelegate();
 
@@ -113,11 +168,6 @@ namespace GraphProcessor
 		/// Does the node needs to be visible in the inspector (when selected).
 		/// </summary>
 		public virtual bool			needsInspector => _needsInspector;
-
-		/// <summary>
-		/// Can the node be renamed in the UI. By default a node can be renamed by double clicking it's name.
-		/// </summary>
-		public virtual bool			isRenamable => false;
 
 		/// <summary>
 		/// Is the node created from a duplicate operation (either ctrl-D or copy/paste).
@@ -846,20 +896,6 @@ namespace GraphProcessor
 				onMessageRemoved?.Invoke(message);
 			messages.Clear();
 		}
-
-		/// <summary>
-		/// Set the custom name of the node. This is intended to be used by renamable nodes.
-		/// This custom name will be serialized inside the node.
-		/// </summary>
-		/// <param name="customNodeName">New name of the node.</param>
-		public void SetCustomName(string customName) => nodeCustomName = customName;
-
-		/// <summary>
-		/// Get the name of the node. If the node have a custom name (set using the UI by double clicking on the node title) then it will return this name first, otherwise it returns the value of the name field.
-		/// </summary>
-		/// <returns>The name of the node as written in the title</returns>
-		public string GetCustomName() => String.IsNullOrEmpty(nodeCustomName) ? name : nodeCustomName; 
-
 		#endregion
 	}
 }

@@ -55,10 +55,31 @@ namespace GraphProcessor
 	{
 	}
 
-	/// <summary>
-	/// Register the node in the NodeProvider class. The node will also be available in the node creation window.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public class NodeCapabilityAttribute : Attribute
+    {
+        /// <summary>
+        /// Can the node be renamed in the UI. By default a node can be renamed by double clicking it's name.
+        /// </summary>
+        public bool isRenamable { get; set; } = false;
+        /// <summary>True if the node can be deleted, false otherwise</summary>
+        public bool isDeletable { get; set; } = true;
+        /// <summary>
+        /// If the node can be locked or not
+        /// </summary>
+        public bool isLockable { get; set; } = true;
+    }
+
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    public class NodeNameAttribute : Attribute
+    {
+        public string name { get; set; }
+    }
+
+    /// <summary>
+    /// Register the node in the NodeProvider class. The node will also be available in the node creation window.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 	public class NodeMenuItemAttribute : Attribute
 	{
 		public string	menuTitle;

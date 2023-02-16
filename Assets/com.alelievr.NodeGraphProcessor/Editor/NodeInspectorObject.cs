@@ -53,7 +53,7 @@ namespace GraphProcessor
         {
             var view = new VisualElement();
 
-            view.Add(new Label(nodeView.nodeTarget.name));
+            view.Add(new Label(nodeView.nodeTarget.displayName));
 
             var tmp = nodeView.controlsContainer;
             nodeView.controlsContainer = view;
@@ -61,7 +61,7 @@ namespace GraphProcessor
             nodeView.controlsContainer.AddToClassList("NodeControls");
             var block = nodeView.controlsContainer;
             nodeView.controlsContainer = tmp;
-            
+
             return block;
         }
     }
