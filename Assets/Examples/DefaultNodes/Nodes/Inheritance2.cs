@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/Inheritance2")]
-[NodeName("Inheritance2")]
+[NodeIdentity("Inheritance2")]
 public class Inheritance2 : Inheritance1
 {
 	[Input(name = "In 2")]

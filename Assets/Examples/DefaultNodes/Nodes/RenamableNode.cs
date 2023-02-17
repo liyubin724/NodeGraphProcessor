@@ -3,7 +3,7 @@ using GraphProcessor;
 
 [System.Serializable, NodeMenuItem("Custom/Renamable")]
 [NodeCapability(isRenamable = true)]
-[NodeName("Renamable")]
+[NodeIdentity("Renamable")]
 public class RenamableNode : BaseNode
 {
     [Output("Out")]

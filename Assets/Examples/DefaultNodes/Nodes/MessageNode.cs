@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/MessageNode")]
-[NodeName("MessageNode")]
+[NodeIdentity("MessageNode")]
 public class MessageNode : BaseNode
 {
 	const string k_InputIsNot42Error = "Input is not 42 !";

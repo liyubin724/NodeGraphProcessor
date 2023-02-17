@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/VisibleIfAttributeNode")]
-[NodeName("VisibleIfAttributeNode")]
+[NodeIdentity("VisibleIfAttributeNode")]
 public class VisibleIfAttributeNode : BaseNode
 {
 	public enum Test1

@@ -8,7 +8,7 @@ using System;
 namespace GraphProcessor
 {
 	[System.Serializable]
-	[NodeName("Parameter")]
+	[NodeIdentity("Parameter")]
 	public class ParameterNode : BaseNode
 	{
 		[Input]

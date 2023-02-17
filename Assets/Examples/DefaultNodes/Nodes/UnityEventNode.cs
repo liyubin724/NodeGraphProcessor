@@ -3,7 +3,7 @@ using GraphProcessor;
 using UnityEngine.Events;
 
 [System.Serializable, NodeMenuItem("Custom/Unity Event Node")]
-[NodeName("UnityEventNode")]
+[NodeIdentity("UnityEventNode")]
 public class UnityEventNode : BaseNode
 {
 	[Input(name = "In")]

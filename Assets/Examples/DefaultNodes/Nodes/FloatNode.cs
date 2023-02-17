@@ -4,7 +4,7 @@ using UnityEngine;
 using GraphProcessor;
 
 [System.Serializable, NodeMenuItem("Primitives/Float")]
-[NodeName("Float")]
+[NodeIdentity("Float")]
 public class FloatNode : BaseNode
 {
     [Output("Out")]

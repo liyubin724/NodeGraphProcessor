@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/Vector")]
-[NodeName("Vector4")]
+[NodeIdentity("Vector4")]
 public class VectorNode : BaseNode
 {
 	[Output(name = "Out")]

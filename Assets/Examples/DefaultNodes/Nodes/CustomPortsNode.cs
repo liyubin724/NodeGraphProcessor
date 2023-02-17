@@ -6,7 +6,7 @@ using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/MultiPorts")]
 [NodeAppearance("TestType")]
-[NodeName("CustomPorts")]
+[NodeIdentity("CustomPorts")]
 public class CustomPortsNode : BaseNode
 {
     [Input]

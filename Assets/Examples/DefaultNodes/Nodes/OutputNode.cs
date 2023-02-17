@@ -6,7 +6,7 @@ using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/OutputNode")]
 [NodeCapability(isDeletable = false)]
-[NodeName("OutputNode")]
+[NodeIdentity("OutputNode")]
 public class OutputNode : BaseNode
 {
 	[Input(name = "In")]

@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/Drawer Field Test")]
-[NodeName("Drawer Field Test")]
+[NodeIdentity("Drawer Field Test")]
 public class DrawerFieldTestNode : BaseNode
 {
 

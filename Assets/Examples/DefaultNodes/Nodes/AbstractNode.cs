@@ -4,7 +4,7 @@ using UnityEngine;
 using GraphProcessor;
 using System.Linq;
 
-[NodeName("AbstractNode")]
+[NodeIdentity("AbstractNode")]
 public abstract class AbstractNode : BaseNode
 {
 	[Input(name = "In")]

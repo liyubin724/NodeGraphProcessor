@@ -12,7 +12,7 @@ public enum Setting
 }
 
 [System.Serializable, NodeMenuItem("Custom/SettingsNode")]
-[NodeName("SettingNode")]
+[NodeIdentity("SettingNode")]
 public class SettingsNode : BaseNode
 {
 	public Setting				setting;

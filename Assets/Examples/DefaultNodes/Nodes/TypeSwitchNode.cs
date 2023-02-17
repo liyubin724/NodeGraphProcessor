@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/TypeSwitchNode")]
-[NodeName("TypeSwitchNode")]
+[NodeIdentity("TypeSwitchNode")]
 public class TypeSwitchNode : BaseNode
 {
 	[Input]

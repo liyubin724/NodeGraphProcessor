@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/Game Object")]
-[NodeName("Game Object")]
+[NodeIdentity("Game Object")]
 public class GameObjectNode : BaseNode, ICreateNodeFrom<GameObject>
 {
 	[Output(name = "Out"), SerializeField]

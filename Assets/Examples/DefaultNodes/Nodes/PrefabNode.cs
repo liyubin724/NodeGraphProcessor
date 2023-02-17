@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/Prefab")]
-[NodeName("Prefab")]
+[NodeIdentity("Prefab")]
 public class PrefabNode : BaseNode
 {
 	[Output(name = "Out"), SerializeField]

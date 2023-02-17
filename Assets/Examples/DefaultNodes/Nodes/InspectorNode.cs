@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/InspectorNode")]
-[NodeName("InspectorNode")]
+[NodeIdentity("InspectorNode")]
 public class InspectorNode : BaseNode
 {
 	[Input(name = "In")]

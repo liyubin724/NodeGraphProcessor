@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/MultiAdd")]
-[NodeName("Add")]
+[NodeIdentity("Add")]
 public class MultiAddNode : BaseNode
 {
 	[Input]

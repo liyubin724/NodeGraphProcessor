@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/List")]
-[NodeName("List")]
+[NodeIdentity("List")]
 public class ListNode : BaseNode
 {
 	[Output(name = "Out")]

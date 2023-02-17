@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/InheritanceBase")]
-[NodeName("InheritanceBase")]
+[NodeIdentity("InheritanceBase")]
 public class InheritanceBase : BaseNode
 {
 	[Input(name = "In Base")]

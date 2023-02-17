@@ -71,12 +71,14 @@ namespace GraphProcessor
     }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class NodeNameAttribute : Attribute
+    public class NodeIdentityAttribute : Attribute
     {
-        public string name { get; set; }
-		public NodeNameAttribute(string name)
+        public string name { get; private set; }
+        public string[] categories { get; private set; }
+        public NodeIdentityAttribute(string name,string[] categories = null)
         {
             this.name = name;
+			this.categories = categories;
         }
     }
 
@@ -99,27 +101,6 @@ namespace GraphProcessor
         {
             this.color = color;
             this.layoutStyle = layoutStyle;
-        }
-    }
-
-    public class NodeCategoryAttribute : Attribute
-    {
-        public string[] categories { get; private set; } = new string[0];
-
-        public NodeCategoryAttribute(string category)
-        {
-            if (string.IsNullOrEmpty(category))
-            {
-                categories = new string[] { category };
-            }
-        }
-
-        public NodeCategoryAttribute(params string[] values)
-        {
-            if (values != null && values.Length > 0)
-            {
-                categories = values;
-            }
         }
     }
 

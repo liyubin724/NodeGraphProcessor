@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("String")]
-[NodeName("String")]
+[NodeIdentity("String")]
 public class StringNode : BaseNode
 {
 	[Output(name = "Out"), SerializeField]

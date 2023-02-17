@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Operations/Sub")]
-[NodeName("Sub")]
+[NodeIdentity("Sub")]
 public class SubNode : BaseNode
 {
 	[Input(name = "A")]

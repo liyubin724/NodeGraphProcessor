@@ -6,7 +6,7 @@ using GraphProcessor;
 namespace NodeGraphProcessor.Examples
 {
 	[System.Serializable, NodeMenuItem("Conditional/Start")]
-    [NodeName("Start")]
+    [NodeIdentity("Start")]
     public class StartNode : BaseNode, IConditionalNode
 	{
 		[Output(name = "Executes")]

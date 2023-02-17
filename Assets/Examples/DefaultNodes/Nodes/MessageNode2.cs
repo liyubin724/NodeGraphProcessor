@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/MessageNode2")]
-[NodeName("MessageNode2")]
+[NodeIdentity("MessageNode2")]
 public class MessageNode2 : BaseNode
 {
 	[Input(name = "In")]

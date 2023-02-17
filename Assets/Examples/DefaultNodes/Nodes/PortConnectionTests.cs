@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/PortConnectionTests")]
-[NodeName("Port Tests")]
+[NodeIdentity("Port Tests")]
 public class PortConnectionTests : BaseNode
 {
 	[Input]

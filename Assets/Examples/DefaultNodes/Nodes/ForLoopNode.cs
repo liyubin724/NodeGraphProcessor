@@ -6,7 +6,7 @@ using System.Linq;
 using NodeGraphProcessor.Examples;
 
 [System.Serializable, NodeMenuItem("Conditional/ForLoop")]
-[NodeName("ForLoop")]
+[NodeIdentity("ForLoop")]
 public class ForLoopNode : ConditionalNode
 {
 	[Output(name = "Loop Body")]

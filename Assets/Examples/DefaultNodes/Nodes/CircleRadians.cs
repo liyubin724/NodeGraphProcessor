@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/CircleRadians")]
-[NodeName("CircleRadians")]
+[NodeIdentity("CircleRadians")]
 public class CircleRadians : BaseNode
 {
 	[Output(name = "In")]

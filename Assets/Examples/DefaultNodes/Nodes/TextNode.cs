@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Primitives/Text")]
-[NodeName("Text")]
+[NodeIdentity("Text")]
 public class TextNode : BaseNode
 {
 	[Output(name = "Label"), SerializeField]

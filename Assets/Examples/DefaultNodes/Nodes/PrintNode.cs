@@ -5,7 +5,7 @@ using GraphProcessor;
 using NodeGraphProcessor.Examples;
 
 [NodeMenuItem("Print")]
-[NodeName("Print")]
+[NodeIdentity("Print")]
 public class PrintNode : BaseNode
 {
 	[Input]
@@ -13,7 +13,7 @@ public class PrintNode : BaseNode
 }
 
 [NodeMenuItem("Conditional/Print")]
-[NodeName("Print")]
+[NodeIdentity("Print")]
 public class ConditionalPrintNode : LinearConditionalNode
 {
 	[Input]

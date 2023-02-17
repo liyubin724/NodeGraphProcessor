@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Primitives/Color")]
-[NodeName("Color")]
+[NodeIdentity("Color")]
 public class ColorNode : BaseNode
 {
 	[Output(name = "Color"), SerializeField]

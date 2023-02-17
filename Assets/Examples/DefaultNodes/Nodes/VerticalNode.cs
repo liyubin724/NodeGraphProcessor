@@ -2,7 +2,7 @@ using UnityEngine;
 using GraphProcessor;
 
 [System.Serializable, NodeMenuItem("Custom/Vertical")]
-[NodeName("Vertical")]
+[NodeIdentity("Vertical")]
 public class VerticalNode : BaseNode
 {
 	[Input, Vertical]

@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Conditional/Switch")]
-[NodeName("Switch")]
+[NodeIdentity("Switch")]
 public class SwitchNode : BaseNode
 {
 	[Input(name = "In")]
