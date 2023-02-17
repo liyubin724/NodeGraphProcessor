@@ -30,7 +30,7 @@ namespace GraphProcessor
                     return customName;
                 }
                 var attr = GetType().GetCustomAttribute<NodeIdentityAttribute>();
-                if (attr != null && string.IsNullOrEmpty(attr.name))
+                if (attr != null && !string.IsNullOrEmpty(attr.name))
                 {
                     return attr.name;
                 }
