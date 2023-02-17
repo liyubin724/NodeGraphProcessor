@@ -744,8 +744,10 @@ namespace GraphProcessor
 		protected virtual void SetNodeColor(Color color)
 		{
 			titleContainer.style.borderBottomColor = new StyleColor(color);
-			titleContainer.style.borderBottomWidth = new StyleFloat(color.a > 0 ? 5f : 0f);
-		}
+			titleContainer.style.borderBottomWidth = new StyleFloat(color.a > 0 ? 3f : 0f);
+            titleContainer.style.borderTopColor = new StyleColor(color);
+            titleContainer.style.borderTopWidth = new StyleFloat(color.a > 0 ? 3f : 0f);
+        }
 		
 		private void AddEmptyField(FieldInfo field, bool fromInspector)
 		{
