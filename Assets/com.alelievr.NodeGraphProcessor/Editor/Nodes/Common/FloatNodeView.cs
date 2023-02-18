@@ -9,7 +9,7 @@ public class FloatNodeView : BaseNodeView
 		var floatNode = nodeTarget as FloatNode;
 
 		var floatField = new FloatField("Value") { value = floatNode.output };
-		floatField.style.width = 100;
+		floatField.style.width = 200;
 		floatField.RegisterValueChangedCallback(evt =>
 		{
 			owner.RegisterCompleteObjectUndo("Editor float node");
