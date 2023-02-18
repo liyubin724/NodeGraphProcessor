@@ -172,7 +172,7 @@ namespace GraphProcessor
 
 			UpdateTitle();
             SetPosition(nodeTarget.position);
-			SetNodeColor(nodeTarget.color);
+			SetNodeColor(nodeTarget.LayoutColor);
             
 			AddInputContainer();
 

@@ -92,7 +92,7 @@ namespace GraphProcessor
         /// <summary>
         /// The accent color of the node
         /// </summary>
-        public Color color
+        public Color LayoutColor
 		{
 			get
 			{
