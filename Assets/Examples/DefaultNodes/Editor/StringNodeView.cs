@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using UnityEditor.UIElements;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
-using GraphProcessor;
+﻿using GraphProcessor;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 [NodeCustomEditor(typeof(StringNode))]
 public class StringNodeView : BaseNodeView

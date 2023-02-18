@@ -5,7 +5,7 @@ using GraphProcessor;
 using System.Linq;
 using System;
 
-[System.Serializable, NodeMenuItem("Utils/Relay")]
+[System.Serializable, NodeMenuItem("Relay")]
 [NodeAppearance("GraphProcessorStyles/RelayNode")]
 public class RelayNode : BaseNode
 {

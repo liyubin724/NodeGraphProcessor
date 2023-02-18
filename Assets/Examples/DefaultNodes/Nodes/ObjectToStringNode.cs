@@ -1,13 +1,13 @@
 ﻿using GraphProcessor;
 
-[System.Serializable,NodeMenuItem("Primitives/To String")]
+[System.Serializable,NodeMenuItem("Common/Object To String")]
 [NodeIdentity("Object To String")]
 public class ObjectToStringNode : BaseNode
 {
-    [Input(name = "Input")]
+    [Input(name = "obj")]
     public object input;
 
-    [Output(name = "Output")]
+    [Output(name = "str")]
     public string output;
 
     protected override void Process()

@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using GraphProcessor;
 using UnityEngine;
-using GraphProcessor;
-using System.Linq;
 
-[System.Serializable, NodeMenuItem("String")]
+[System.Serializable, NodeMenuItem("Common/String")]
 [NodeIdentity("String")]
 public class StringNode : BaseNode
 {
