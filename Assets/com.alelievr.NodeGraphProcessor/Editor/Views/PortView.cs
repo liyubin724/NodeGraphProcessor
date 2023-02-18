@@ -46,6 +46,15 @@ namespace GraphProcessor
 			var userPortStyle = Resources.Load<StyleSheet>(userPortStyleFile);
 			if (userPortStyle != null)
 				styleSheets.Add(userPortStyle);
+
+			var customStyleSheets = PortTypeStyleProvider.GetStyleSheets();
+			if(customStyleSheets != null)
+			{
+				foreach(var styleSheet in customStyleSheets)
+				{
+                    styleSheets.Add(styleSheet);
+                }
+			}
 			
 			if (portData.vertical)
 				AddToClassList("Vertical");
