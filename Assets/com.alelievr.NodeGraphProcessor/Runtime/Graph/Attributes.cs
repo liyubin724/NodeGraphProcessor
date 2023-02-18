@@ -292,4 +292,14 @@ namespace GraphProcessor
 
 	[AttributeUsage(AttributeTargets.Method)]
 	public class IsCompatibleWithGraph : Attribute {}
+
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public class GraphCompatibleNodeCategoryAttribute : Attribute
+    {
+        public string[] categories { get; private set; }
+        public GraphCompatibleNodeCategoryAttribute(params string[] categories)
+        {
+            this.categories = categories;
+        }
+    }
 }

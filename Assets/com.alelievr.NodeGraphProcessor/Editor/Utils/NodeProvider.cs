@@ -277,17 +277,42 @@ namespace GraphProcessor
 
         public static IEnumerable<(string path, Type type)>	GetNodeMenuEntries(BaseGraph graph = null)
 		{
-			foreach (var node in genericNodes.nodePerMenuTitle)
-				yield return (node.Key, node.Value);
+            foreach (var node in genericNodes.nodePerMenuTitle)
+            {
+                if (graph == null || IsNodeCompatibleForGraph(node.Value, graph.GetType()))
+                {
+                    yield return (node.Key, node.Value);
+                }
+            }
 
-			if (graph != null && specificNodeDescriptions.TryGetValue(graph, out var specificNodes))
+            if (graph != null && specificNodeDescriptions.TryGetValue(graph, out var specificNodes))
 			{
 				foreach (var node in specificNodes.nodePerMenuTitle)
 					yield return (node.Key, node.Value);
 			}
 		}
 
-		public static MonoScript GetNodeViewScript(Type type)
+		private static bool IsNodeCompatibleForGraph(Type nodeType,Type graphType)
+		{
+			var nodeIdentityAttr = nodeType.GetCustomAttribute<NodeIdentityAttribute>();
+			if(nodeIdentityAttr == null || nodeIdentityAttr.categories == null || nodeIdentityAttr.categories.Length == 0)
+			{
+				return true;
+			}
+
+			var graphAttr = graphType.GetCustomAttribute<GraphCompatibleNodeCategoryAttribute>();
+			if (graphAttr == null || graphAttr.categories == null || graphAttr.categories.Length == 0)
+			{
+				return true;
+			}
+
+			var nodeCategories = nodeIdentityAttr.categories;
+			var graphCategories = graphAttr.categories;
+			return graphCategories.Any(c => nodeCategories.Contains(c));
+		}
+
+
+        public static MonoScript GetNodeViewScript(Type type)
 		{
 			nodeViewScripts.TryGetValue(type, out var script);
 
@@ -317,6 +342,10 @@ namespace GraphProcessor
 		{
 			foreach (var description in genericNodes.nodeCreatePortDescription)
 			{
+				if(graph!=null && !IsNodeCompatibleForGraph(description.nodeType, graph.GetType()))
+				{
+					continue;
+				}
 				if (!IsPortCompatible(description))
 					continue;
 
