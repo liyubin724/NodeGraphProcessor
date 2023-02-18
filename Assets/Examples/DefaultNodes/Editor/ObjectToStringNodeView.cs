@@ -1,14 +1,14 @@
 ﻿using GraphProcessor;
 using UnityEngine.UIElements;
 
-[NodeCustomEditor(typeof(ConvertToStringNode))]
-public class ConvertToStringNodeView : BaseNodeView
+[NodeCustomEditor(typeof(ObjectToStringNode))]
+public class ObjectToStringNodeView : BaseNodeView
 {
     Label resultLabel;
-    ConvertToStringNode node;
+    ObjectToStringNode node;
     public override void Enable()
     {
-        node = nodeTarget as ConvertToStringNode;
+        node = nodeTarget as ObjectToStringNode;
 
         resultLabel = new Label();
         controlsContainer.Add(resultLabel);

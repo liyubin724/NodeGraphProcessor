@@ -1,13 +1,8 @@
 ﻿using GraphProcessor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 [System.Serializable,NodeMenuItem("Primitives/To String")]
-[NodeIdentity("ToString")]
-public class ConvertToStringNode : BaseNode
+[NodeIdentity("Object To String")]
+public class ObjectToStringNode : BaseNode
 {
     [Input(name = "Input")]
     public object input;
