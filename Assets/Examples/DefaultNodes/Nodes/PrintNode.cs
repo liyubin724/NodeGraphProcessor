@@ -4,7 +4,7 @@ using UnityEngine;
 using GraphProcessor;
 using NodeGraphProcessor.Examples;
 
-[NodeMenuItem("Print")]
+[NodeMenuItem("Common/Print")]
 [NodeIdentity("Print")]
 public class PrintNode : BaseNode
 {
