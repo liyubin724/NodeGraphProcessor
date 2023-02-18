@@ -14,30 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedNodes: []
   nodes:
-  - id: 0
-  - id: 1
-  - id: 2
-  - id: 3
-  - id: 4
-  - id: 5
-  - id: 6
-  - id: 7
-  - id: 8
-  - id: 9
-  - id: 10
-  - id: 11
-  - id: 12
-  - id: 13
-  - id: 14
-  - id: 15
-  - id: 16
-  - id: 17
-  - id: 18
-  - id: 19
-  - id: 20
-  - id: 21
-  - id: 22
-  - id: 23
+  - rid: 0
+  - rid: 1
+  - rid: 2
+  - rid: 3
+  - rid: 4
+  - rid: 5
+  - rid: 6
+  - rid: 7
+  - rid: 8
+  - rid: 9
+  - rid: 10
+  - rid: 11
+  - rid: 12
+  - rid: 13
+  - rid: 14
+  - rid: 15
+  - rid: 16
+  - rid: 17
+  - rid: 18
+  - rid: 19
+  - rid: 20
+  - rid: 21
+  - rid: 22
+  - rid: 23
+  - rid: 7066231755678679107
   edges:
   - GUID: 04cee6c7-b233-40e1-b41a-31f6093f1482
     owner: {fileID: 11400000}
@@ -52,14 +53,6 @@ MonoBehaviour:
     inputNodeGUID: e277d5c6-386e-4f6b-bd63-af2353f3e4d8
     outputNodeGUID: ab7c80f0-51fd-401a-9d67-0b6543025f87
     inputFieldName: obj
-    outputFieldName: output
-    inputPortIdentifier: 
-    outputPortIdentifier: 
-  - GUID: 7658160d-36a7-43aa-8fda-fd2de9cbdda3
-    owner: {fileID: 11400000}
-    inputNodeGUID: 95bce55f-47d9-4c5d-bdcd-1f5bbbf57d1b
-    outputNodeGUID: 34e17a0c-9187-47eb-a21c-d105ee6ed911
-    inputFieldName: inputB
     outputFieldName: output
     inputPortIdentifier: 
     outputPortIdentifier: 
@@ -143,29 +136,37 @@ MonoBehaviour:
     outputFieldName: output
     inputPortIdentifier: 
     outputPortIdentifier: 
+  - GUID: 2b59c2f4-6ba6-447e-a761-a8c990db86c9
+    owner: {fileID: 11400000}
+    inputNodeGUID: 42eb43b8-ac7e-4f38-b49b-26ba1bc42732
+    outputNodeGUID: 34e17a0c-9187-47eb-a21c-d105ee6ed911
+    inputFieldName: obj
+    outputFieldName: output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
   groups:
   - title: New Comment Block
-    color: {r: 0, g: 0, b: 0, a: 0}
+    color: {r: 1, g: 0.06132078, b: 0.06132078, a: 0}
     position:
       serializedVersion: 2
-      x: 377
-      y: 38
-      width: 460
-      height: 370
+      x: -340.96716
+      y: 662.9187
+      width: 312
+      height: 84
     size: {x: 300, y: 100}
     innerNodeGUIDs: []
   - title: Print
-    color: {r: 0.4627451, g: 0.14901963, b: 0.20610665, a: 1}
+    color: {r: 0.29184955, g: 0.4627451, b: 0.14901963, a: 1}
     position:
       serializedVersion: 2
-      x: -67.000015
-      y: 53.999996
-      width: 260
-      height: 346.99997
+      x: -500.7799
+      y: 749.106
+      width: 127
+      height: 84
     size: {x: 300, y: 100}
     innerNodeGUIDs: []
   stackNodes:
-  - id: 24
+  - rid: 24
   pinnedElements:
   - position:
       serializedVersion: 2
@@ -207,8 +208,18 @@ MonoBehaviour:
     editorType:
       serializedType: GraphProcessor.ProcessorView, com.alelievr.NodeGraphProcessor.Editor,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - position:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 150
+      height: 200
+    opened: 1
+    editorType:
+      serializedType: ConditionalProcessorView, Assembly-CSharp-Editor, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
   exposedParameters:
-  - id: 25
+  - rid: 25
   serializedParameterList:
   - guid: 
     name: 
@@ -219,7 +230,7 @@ MonoBehaviour:
       serializedValue: 
     input: 1
     settings:
-      id: 26
+      rid: -2
   - guid: 
     name: 
     type: 
@@ -229,7 +240,7 @@ MonoBehaviour:
       serializedValue: 
     input: 1
     settings:
-      id: 26
+      rid: -2
   - guid: 
     name: 
     type: 
@@ -239,7 +250,7 @@ MonoBehaviour:
       serializedValue: 
     input: 1
     settings:
-      id: 26
+      rid: -2
   - guid: 
     name: 
     type: 
@@ -249,7 +260,7 @@ MonoBehaviour:
       serializedValue: 
     input: 1
     settings:
-      id: 26
+      rid: -2
   - guid: 
     name: 
     type: 
@@ -259,7 +270,7 @@ MonoBehaviour:
       serializedValue: 
     input: 1
     settings:
-      id: 26
+      rid: -2
   - guid: 
     name: 
     type: 
@@ -269,7 +280,7 @@ MonoBehaviour:
       serializedValue: 
     input: 1
     settings:
-      id: 26
+      rid: -2
   - guid: 
     name: 
     type: 
@@ -279,7 +290,7 @@ MonoBehaviour:
       serializedValue: 
     input: 1
     settings:
-      id: 26
+      rid: -2
   - guid: 
     name: 
     type: 
@@ -289,7 +300,7 @@ MonoBehaviour:
       serializedValue: 
     input: 1
     settings:
-      id: 26
+      rid: -2
   - guid: 
     name: 
     type: 
@@ -299,7 +310,7 @@ MonoBehaviour:
       serializedValue: 
     input: 1
     settings:
-      id: 26
+      rid: -2
   stickyNotes:
   - position:
       serializedVersion: 2
@@ -311,21 +322,24 @@ MonoBehaviour:
     content: TODO
   - position:
       serializedVersion: 2
-      x: 224.40001
-      y: 719.285
-      width: 233
-      height: 101
+      x: 224
+      y: 721
+      width: 209
+      height: 164
     title: New Sticky Note
     content: Write your text here
   nodeInspectorReference: {fileID: 0}
-  position: {x: 781, y: -9.999998, z: 0}
-  scale: {x: 0.7561437, y: 0.7561437, z: 1}
+  position: {x: 1370, y: -500, z: 0}
+  scale: {x: 1.7490063, y: 1.7490063, z: 1}
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 0
       type: {class: ColorNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: c2542e31-668d-4816-b7e9-f41dcdec423d
         computeOrder: 0
         position:
@@ -336,12 +350,12 @@ MonoBehaviour:
           height: 97
         expanded: 1
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         color: {r: 1, g: 0, b: 0.25098038, a: 1}
-    00000001:
+    - rid: 1
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: 3327402b-5ad1-4564-af17-2025a850d4bb
         computeOrder: 1
         position:
@@ -352,13 +366,13 @@ MonoBehaviour:
           height: 101
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 10
         input: 10
-    00000002:
+    - rid: 2
       type: {class: MultiAddNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: 9a1c513a-65bc-4906-83b7-4a7b66699064
         computeOrder: 2
         position:
@@ -369,30 +383,30 @@ MonoBehaviour:
           height: 114
         expanded: 0
         debug: 1
-        nodeLock: 0
+        isLocked: 0
         output: 10
-    00000003:
+    - rid: 3
       type: {class: SubNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: 95bce55f-47d9-4c5d-bdcd-1f5bbbf57d1b
-        computeOrder: 4
+        computeOrder: 3
         position:
           serializedVersion: 2
-          x: 699
-          y: 169
-          width: 113
-          height: 114
+          x: 603
+          y: 62.797737
+          width: 103
+          height: 113
         expanded: 0
         debug: 1
-        nodeLock: 0
+        isLocked: 0
         inputA: 0
-        inputB: 140
-        output: -140
-    00000004:
+        inputB: 0
+        output: 0
+    - rid: 4
       type: {class: PrintNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: 42eb43b8-ac7e-4f38-b49b-26ba1bc42732
         computeOrder: 5
         position:
@@ -403,11 +417,11 @@ MonoBehaviour:
           height: 105
         expanded: 0
         debug: 1
-        nodeLock: 0
-    00000005:
+        isLocked: 0
+    - rid: 5
       type: {class: PrintNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: 6398414c-0e45-44d7-a62f-3267016dbca1
         computeOrder: 6
         position:
@@ -418,28 +432,28 @@ MonoBehaviour:
           height: 90
         expanded: 0
         debug: 0
-        nodeLock: 0
-    00000006:
+        isLocked: 0
+    - rid: 6
       type: {class: PrefabNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: ffd2cf4b-87c3-42a6-9822-04bae7a5700b
         computeOrder: 7
         position:
           serializedVersion: 2
-          x: 1066
-          y: 344
+          x: 861.24384
+          y: 198.06049
           width: 136
-          height: 225
+          height: 223
         expanded: 1
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: {fileID: 1636575971871760, guid: f78111bdbdeaf6644806fc49fcaf1d30,
           type: 3}
-    00000007:
+    - rid: 7
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: e99da4fb-6a11-4b19-8594-f37f55d96114
         computeOrder: 8
         position:
@@ -450,13 +464,13 @@ MonoBehaviour:
           height: 101.000015
         expanded: 1
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 140
         input: 140
-    00000008:
+    - rid: 8
       type: {class: TextNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: ab7c80f0-51fd-401a-9d67-0b6543025f87
         computeOrder: 9
         position:
@@ -467,12 +481,12 @@ MonoBehaviour:
           height: 96
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: Hello World
-    00000009:
+    - rid: 9
       type: {class: PrintNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: e277d5c6-386e-4f6b-bd63-af2353f3e4d8
         computeOrder: 10
         position:
@@ -483,13 +497,13 @@ MonoBehaviour:
           height: 90
         expanded: 0
         debug: 0
-        nodeLock: 0
-    0000000A:
+        isLocked: 0
+    - rid: 10
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: 34e17a0c-9187-47eb-a21c-d105ee6ed911
-        computeOrder: 3
+        computeOrder: 4
         position:
           serializedVersion: 2
           x: 501
@@ -498,31 +512,31 @@ MonoBehaviour:
           height: 101
         expanded: 1
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 140
         input: 140
-    0000000B:
+    - rid: 11
       type: {class: SettingsNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: b14b2e69-b835-4b73-ae8e-6f7f986575bb
         computeOrder: 11
         position:
           serializedVersion: 2
-          x: -124.79325
-          y: 477.20392
-          width: 159
-          height: 92
+          x: -141.70323
+          y: 558.87146
+          width: 156
+          height: 103
         expanded: 1
         debug: 0
-        nodeLock: 0
+        isLocked: 1
         setting: 0
         input: 0
         output: 0
-    0000000C:
+    - rid: 12
       type: {class: PrintNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: 42bd42f7-7c33-4d6c-8cff-24e051b0e644
         computeOrder: 12
         position:
@@ -533,28 +547,28 @@ MonoBehaviour:
           height: 90
         expanded: 0
         debug: 0
-        nodeLock: 0
-    0000000D:
+        isLocked: 0
+    - rid: 13
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: c647797a-972a-442d-86fe-327825c1fe11
         computeOrder: 13
         position:
           serializedVersion: 2
-          x: 347.81113
-          y: 446.60037
-          width: 108.00001
-          height: 101
+          x: 88
+          y: 509.5
+          width: 102
+          height: 99
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 0
         input: 0
-    0000000E:
+    - rid: 14
       type: {class: CustomPortData, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: acf42c0b-dc50-476f-8d14-b9e756fd1e2d
         computeOrder: 14
         position:
@@ -565,12 +579,12 @@ MonoBehaviour:
           height: 149
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 0
-    0000000F:
+    - rid: 15
       type: {class: PrintNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: ea0aaa89-4654-402b-9518-0c8d3b0a0be7
         computeOrder: 15
         position:
@@ -581,11 +595,11 @@ MonoBehaviour:
           height: 90
         expanded: 0
         debug: 0
-        nodeLock: 0
-    00000010:
+        isLocked: 0
+    - rid: 16
       type: {class: PortConnectionTests, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: d0c72054-62bf-409c-a49f-4230da5526d5
         computeOrder: 16
         position:
@@ -596,12 +610,12 @@ MonoBehaviour:
           height: 245
         expanded: 1
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         padding: 0
-    00000011:
+    - rid: 17
       type: {class: PortConnectionTests, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: 0bb81f44-19ac-4b15-a7a6-f0f319a6d5c7
         computeOrder: 17
         position:
@@ -612,23 +626,23 @@ MonoBehaviour:
           height: 264
         expanded: 1
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         padding: 0
-    00000012:
+    - rid: 18
       type: {class: DrawerFieldTestNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: a93ff68f-3bcb-4234-815f-f44501daf144
         computeOrder: 18
         position:
           serializedVersion: 2
-          x: 598.1502
-          y: 856
-          width: 142
-          height: 627
+          x: 522.5
+          y: 856.00024
+          width: 167
+          height: 387
         expanded: 1
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         vector4: {x: 0, y: 0, z: 0, w: 0}
         vector3: {x: 0, y: 0, z: 0}
         vector2: {x: 0, y: 0}
@@ -650,10 +664,10 @@ MonoBehaviour:
         layerMask:
           serializedVersion: 2
           m_Bits: 0
-    00000013:
+    - rid: 19
       type: {class: InspectorNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: fc76049e-5e1f-422a-a991-b02e5ed5ee67
         computeOrder: 19
         position:
@@ -664,15 +678,15 @@ MonoBehaviour:
           height: 77
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         input: 0
         output: 0
         additionalSettings: 0
         additionalParam: 
-    00000014:
+    - rid: 20
       type: {class: DrawerFieldTestNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: ac9a5d83-a834-41cb-89cf-eb5239cc0868
         computeOrder: 20
         position:
@@ -683,7 +697,7 @@ MonoBehaviour:
           height: 341
         expanded: 1
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         vector4: {x: 0, y: 0, z: 0, w: 0}
         vector3: {x: 0, y: 0, z: 0}
         vector2: {x: 0, y: 0}
@@ -705,10 +719,10 @@ MonoBehaviour:
         layerMask:
           serializedVersion: 2
           m_Bits: 0
-    00000015:
+    - rid: 21
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: 14b82653-ebb2-4fe6-98c3-5a7f87047b3f
         computeOrder: 21
         position:
@@ -719,29 +733,29 @@ MonoBehaviour:
           height: 101
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 42
         input: 42
-    00000016:
+    - rid: 22
       type: {class: ColorNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: fca11789-0eba-4f38-a9cb-4f6f829515d0
         computeOrder: 22
         position:
           serializedVersion: 2
-          x: -405.48395
-          y: 354.0001
+          x: -498.89734
+          y: 381.00003
           width: 200
-          height: 97
-        expanded: 0
+          height: 95
+        expanded: 1
         debug: 0
-        nodeLock: 0
-        color: {r: 0.47539377, g: 0, b: 1, a: 0}
-    00000017:
+        isLocked: 0
+        color: {r: 1, g: 1, b: 1, a: 0}
+    - rid: 23
       type: {class: MultiAddNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
+        customName: 
         GUID: a72964c7-8c86-4c52-808e-3d88920df180
         computeOrder: 23
         position:
@@ -752,20 +766,20 @@ MonoBehaviour:
           height: 101
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 0
-    00000018:
+    - rid: 24
       type: {class: BaseStackNode, ns: GraphProcessor, asm: com.alelievr.NodeGraphProcessor.Runtime}
       data:
-        position: {x: 914.0975, y: 6.5799994}
+        position: {x: 850.00006, y: -28.499996}
         title: Stack
         acceptDrop: 1
         acceptNewNode: 1
         nodeGUIDs:
-        - ffd2cf4b-87c3-42a6-9822-04bae7a5700b
         - 42eb43b8-ac7e-4f38-b49b-26ba1bc42732
         - e99da4fb-6a11-4b19-8594-f37f55d96114
-    00000019:
+        - ffd2cf4b-87c3-42a6-9822-04bae7a5700b
+    - rid: 25
       type: {class: FloatParameter, ns: GraphProcessor, asm: com.alelievr.NodeGraphProcessor.Runtime}
       data:
         guid: eb80df62-f248-4ec9-afd4-f9ed08bfaa16
@@ -777,11 +791,9 @@ MonoBehaviour:
           serializedValue: 
         input: 1
         settings:
-          id: 27
+          rid: 27
         val: 0
-    0000001A:
-      type: {class: , ns: , asm: }
-    0000001B:
+    - rid: 27
       type: {class: FloatParameter/FloatSettings, ns: GraphProcessor, asm: com.alelievr.NodeGraphProcessor.Runtime}
       data:
         isHidden: 0
@@ -790,3 +802,22 @@ MonoBehaviour:
         mode: 0
         min: 0
         max: 1
+    - rid: 7066231755678679107
+      type: {class: Comparison, ns: NodeGraphProcessor.Examples, asm: Assembly-CSharp}
+      data:
+        customName: 
+        GUID: 67445972-86d1-4ae1-b7ea-6f37d80badd1
+        computeOrder: 24
+        position:
+          serializedVersion: 2
+          x: 543.1947
+          y: 645.72986
+          width: 212
+          height: 157
+        expanded: 0
+        debug: 1
+        isLocked: 0
+        inA: 0
+        inB: 0
+        compared: 1
+        compareFunction: 4

@@ -26,6 +26,7 @@ MonoBehaviour:
   - rid: 10
   - rid: 549668227529048064
   - rid: 549668227529048065
+  - rid: 7066231755678679040
   edges:
   - GUID: 6fc14a9b-739f-41b2-93d6-0c31954c30d8
     owner: {fileID: 11400000}
@@ -320,3 +321,21 @@ MonoBehaviour:
         isLocked: 0
         output: 0
         input: 0
+    - rid: 7066231755678679040
+      type: {class: CustomPortsNode, ns: , asm: Assembly-CSharp}
+      data:
+        customName: 
+        GUID: 90b2ca5a-405b-40ca-af98-58151dff90d4
+        computeOrder: 12
+        position:
+          serializedVersion: 2
+          x: 692.6957
+          y: 136.5
+          width: 147
+          height: 75
+        expanded: 0
+        debug: 0
+        isLocked: 0
+        inputs: []
+        outputs: []
+        portCount: 1
