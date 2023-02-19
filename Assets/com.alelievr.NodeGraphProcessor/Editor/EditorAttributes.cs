@@ -18,7 +18,7 @@ namespace GraphProcessor
 	}
 
 	[AttributeUsage(AttributeTargets.Property)]
-	public class CustomPortTypeStyleAttribute : Attribute
+	public class PortTypeStyleAttribute : Attribute
 	{
 	}
 }

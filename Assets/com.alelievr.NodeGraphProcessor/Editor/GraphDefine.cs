@@ -4,14 +4,12 @@ namespace GraphProcessor
 {
     public static class PortDefine
     {
-        [CustomPortTypeStyle]
-        public static List<string> PortStyleSheets
+        [PortTypeStyle]
+        public static string PortStyleSheets
         {
             get
             {
-                return new List<string>() {
-                    "GraphProcessorStyles/PortTypeView"
-                };
+                return "GraphProcessorStyles/PortTypeView";
             }
         }
     }
