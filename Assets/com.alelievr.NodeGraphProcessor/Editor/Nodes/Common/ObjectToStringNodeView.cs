@@ -1,34 +1,37 @@
 ﻿using GraphProcessor;
 using UnityEngine.UIElements;
 
-[NodeCustomEditor(typeof(ObjectToStringNode))]
-public class ObjectToStringNodeView : BaseNodeView
+namespace GraphProcessor
 {
-    Label resultLabel;
-    ObjectToStringNode node;
-    public override void Enable()
+    [NodeCustomEditor(typeof(ObjectToStringNode))]
+    public class ObjectToStringNodeView : BaseNodeView
     {
-        node = nodeTarget as ObjectToStringNode;
-
-        resultLabel = new Label();
-        controlsContainer.Add(resultLabel);
-
-        nodeTarget.onProcessed += UpdateResultLabel;
-        onPortConnected += (p) => UpdateResultLabel();
-        onPortDisconnected+= (p) => UpdateResultLabel();
-
-        UpdateResultLabel();
-    }
-
-    void UpdateResultLabel()
-    {
-        if(string.IsNullOrEmpty(node.output))
+        Label resultLabel;
+        ObjectToStringNode node;
+        public override void Enable()
         {
-            resultLabel.text = string.Empty;
+            node = nodeTarget as ObjectToStringNode;
+
+            resultLabel = new Label();
+            controlsContainer.Add(resultLabel);
+
+            nodeTarget.onProcessed += UpdateResultLabel;
+            onPortConnected += (p) => UpdateResultLabel();
+            onPortDisconnected += (p) => UpdateResultLabel();
+
+            UpdateResultLabel();
         }
-        else
+
+        void UpdateResultLabel()
         {
-            resultLabel.text = node.output;
+            if (string.IsNullOrEmpty(node.output))
+            {
+                resultLabel.text = string.Empty;
+            }
+            else
+            {
+                resultLabel.text = node.output;
+            }
         }
     }
 }

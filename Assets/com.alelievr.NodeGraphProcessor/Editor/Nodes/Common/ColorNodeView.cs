@@ -1,11 +1,14 @@
 using GraphProcessor;
 
-[NodeCustomEditor(typeof(ColorNode))]
-public class ColorNodeView : BaseNodeView
+namespace GraphProcessor
 {
-	public override void Enable()
-	{
-		AddControlField(nameof(ColorNode.value));
-		style.width = 200;
-	}
+    [NodeCustomEditor(typeof(ColorNode))]
+    public class ColorNodeView : BaseNodeView
+    {
+        public override void Enable()
+        {
+            AddControlField(nameof(ColorNode.value));
+            style.width = 200;
+        }
+    }
 }

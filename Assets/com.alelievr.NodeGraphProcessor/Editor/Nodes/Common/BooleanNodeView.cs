@@ -1,19 +1,22 @@
 ﻿using GraphProcessor;
 using UnityEngine.UIElements;
 
-[NodeCustomEditor(typeof(BooleanNode))]
-public class BooleanNodeView : BaseNodeView
+namespace GraphProcessor
 {
-    public override void Enable()
+    [NodeCustomEditor(typeof(BooleanNode))]
+    public class BooleanNodeView : BaseNodeView
     {
-        var node = nodeTarget as BooleanNode;
-
-        var toggleField = new Toggle("Value") { value = node.output};
-        toggleField.RegisterValueChangedCallback((evt) =>
+        public override void Enable()
         {
-            owner.RegisterCompleteObjectUndo("Editor bool node");
-            node.output = evt.newValue;
-        });
-        controlsContainer.Add(toggleField);
+            var node = nodeTarget as BooleanNode;
+
+            var toggleField = new Toggle("Value") { value = node.output };
+            toggleField.RegisterValueChangedCallback((evt) =>
+            {
+                owner.RegisterCompleteObjectUndo("Editor bool node");
+                node.output = evt.newValue;
+            });
+            controlsContainer.Add(toggleField);
+        }
     }
 }

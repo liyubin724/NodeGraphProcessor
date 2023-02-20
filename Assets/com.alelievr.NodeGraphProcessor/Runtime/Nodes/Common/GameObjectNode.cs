@@ -1,16 +1,19 @@
 ﻿using GraphProcessor;
 using UnityEngine;
 
-[System.Serializable, NodeMenuItem("Common/Game Object")]
-[NodeIdentity("Game Object")]
-public class GameObjectNode : BaseNode, ICreateNodeFrom<GameObject>
+namespace GraphProcessor
 {
-	[Output(name = "Out"), SerializeField]
-	public GameObject			output;
+    [System.Serializable, NodeMenuItem("Common/Game Object")]
+    [NodeIdentity("Game Object")]
+    public class GameObjectNode : BaseNode, ICreateNodeFrom<GameObject>
+    {
+        [Output(name = "Out"), SerializeField]
+        public GameObject output;
 
-	public bool InitializeNodeFromObject(GameObject value)
-	{
-		output = value;
-		return true;
-	}
+        public bool InitializeNodeFromObject(GameObject value)
+        {
+            output = value;
+            return true;
+        }
+    }
 }
