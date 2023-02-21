@@ -59,7 +59,7 @@ namespace GraphProcessor
 			if (portData.vertical)
 				AddToClassList("Vertical");
 			
-			this.tooltip = portData.tooltip;
+			this.tooltip = string.IsNullOrEmpty(portData.tooltip)?portType.ToString():portData.tooltip;
 		}
 
 		public static PortView CreatePortView(Direction direction, FieldInfo fieldInfo, PortData portData, BaseEdgeConnectorListener edgeConnectorListener)
@@ -119,7 +119,7 @@ namespace GraphProcessor
 			if (name != null)
 				portName = name;
 			visualClass = "Port_" + portType.Name;
-			tooltip = portData.tooltip;
+			tooltip = string.IsNullOrEmpty(portData.tooltip)?portType.ToString():portData.tooltip;
 		}
 
 		public override void Connect(Edge edge)
