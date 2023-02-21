@@ -149,7 +149,7 @@ namespace GraphProcessor
 		/// <summary>
 		/// Is the node expanded
 		/// </summary>
-		public bool					expanded;
+		public bool					expanded = true;
 		/// <summary>
 		/// Is debug visible
 		/// </summary>
