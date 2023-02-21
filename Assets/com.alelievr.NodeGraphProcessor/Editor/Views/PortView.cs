@@ -22,8 +22,6 @@ namespace GraphProcessor
 		protected FieldInfo		fieldInfo;
 		protected BaseEdgeConnectorListener	listener;
 
-		string userPortStyleFile = "PortViewTypes";
-
 		List< EdgeView >		edges = new List< EdgeView >();
 
 		public int connectionCount => edges.Count;
@@ -42,10 +40,6 @@ namespace GraphProcessor
 			styleSheets.Add(Resources.Load<StyleSheet>(portStyle));
 
 			UpdatePortSize();
-
-			var userPortStyle = Resources.Load<StyleSheet>(userPortStyleFile);
-			if (userPortStyle != null)
-				styleSheets.Add(userPortStyle);
 
 			var customStyleSheets = PortTypeStyleProvider.GetStyleSheets();
 			if(customStyleSheets != null)
