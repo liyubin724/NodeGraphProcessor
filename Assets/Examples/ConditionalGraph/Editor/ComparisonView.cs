@@ -40,9 +40,9 @@ public class ComparisonView : BaseNodeView
 			controlsContainer.Add(inputA);
 			controlsContainer.Add(inputB);
 
-			if (inA.GetEdges().Count > 0)
+			if (inA == null || inA.GetEdges().Count > 0)
 				controlsContainer.Remove(inputA);
-			if (inB.GetEdges().Count > 0)
+			if (inB == null || inB.GetEdges().Count > 0)
 				controlsContainer.Remove(inputB);
 		}
 	}
