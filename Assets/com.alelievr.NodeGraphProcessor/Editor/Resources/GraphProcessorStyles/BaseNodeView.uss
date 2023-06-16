@@ -254,3 +254,7 @@ ParameterNodeView #controls EnumField > VisualElement > VisualElement {
 {
     display: none;
 }
+
+.NodeControls > * > * > Label {
+    min-width: 45px;
+}
