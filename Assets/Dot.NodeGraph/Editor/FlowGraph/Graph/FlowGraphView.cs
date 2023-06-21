@@ -1,18 +1,16 @@
+using GraphProcessor;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class FlowGraphView : MonoBehaviour
+namespace DotEditor.NodeGraph
 {
-    // Start is called before the first frame update
-    void Start()
+    public class FlowGraphView : BaseGraphView
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public FlowGraphView(EditorWindow window) : base(window)
+        {
+        }
     }
 }
+

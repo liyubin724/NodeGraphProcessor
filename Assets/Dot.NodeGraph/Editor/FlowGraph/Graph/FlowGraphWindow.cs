@@ -1,18 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
+using DotEngine.NodeGraph.Flow;
+using GraphProcessor;
 using UnityEngine;
 
-public class FlowGraphWindow : MonoBehaviour
+namespace DotEditor.NodeGraph
 {
-    // Start is called before the first frame update
-    void Start()
+    public class FlowGraphWindow : BaseGraphWindow
     {
-        
-    }
+        private FlowGraph flowGraph;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public static void ShowWindow(FlowGraph flowGraph)
+        {
+            var win = CreateWindow<FlowGraphWindow>();
+            win.titleContent = new GUIContent("Flow Graph Window");
+
+            win.InitializeGraph(flowGraph);
+
+            win.Show();
+        }
+
+        protected override void InitializeWindow(BaseGraph graph)
+        {
+            flowGraph = graph as FlowGraph;
+
+            if(graphView == null)
+            {
+                graphView = new FlowGraphView(this);
+            }
+
+            rootView.Add(graphView);
+        }
+
+        protected override void OnDestroy()
+        {
+            graphView?.Dispose();
+        }
     }
 }
