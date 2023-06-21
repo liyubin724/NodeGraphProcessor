@@ -1,39 +1,42 @@
 ﻿using GraphProcessor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace DotEngine.NodeGraph.Flow
 {
-    public abstract class BaseFlowNode : BaseNode, IFlowNode
+    public abstract class BaseFlowNode : BaseNode
     {
-        public abstract IEnumerable<IFlowNode> GetExecutedNodes();
-
-        public override FieldInfo[] GetNodeFields()
+        public virtual IEnumerable<BaseFlowNode> GetNextNodes()
         {
-            var fields = base.GetNodeFields();
-            Array.Sort(fields, (f1, f2) => f1.Name == "executed" ? -1 : 1);
-            return fields;
+            return GetOutputNodes()
+                .Where(n => n is BaseFlowNode)
+                .Select(n => n as BaseFlowNode);
+        }
+
+        public virtual IEnumerable<BaseNode> GetDependencyNodes()
+        {
+            return GetInputNodes().Where(n => !(n is BaseFlowNode));
         }
     }
 
     public abstract class BaseStartFlowNode : BaseFlowNode
     {
-        [Output("Executes", allowMultiple = true)]
-        public FlowLink executes;
+        [Output("Next", allowMultiple = true)]
+        public FlowLink nextLink;
     }
 
     public abstract class BaseLinearFlowNode : BaseFlowNode
     {
-        [Input("Executed")]
-        public FlowLink executed;
-    }
+        [Input("Prev")]
+        public FlowLink prevLink;
 
-    public abstract class EndFlowNode : BaseLinearFlowNode
-    {
-        public override IEnumerable<IFlowNode> GetExecutedNodes()
+        public override FieldInfo[] GetNodeFields()
         {
-            return null;
+            var fields = base.GetNodeFields();
+            Array.Sort(fields, (f1, f2) => f1.Name == nameof(prevLink) ? -1 : 1);
+            return fields;
         }
     }
 }

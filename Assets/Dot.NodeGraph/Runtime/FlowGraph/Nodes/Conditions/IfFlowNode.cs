@@ -18,11 +18,11 @@ namespace DotEngine.NodeGraph.Flow
         [Output(name = "False")]
         public FlowLink @false;
 
-        public override IEnumerable<IFlowNode> GetExecutedNodes()
+        public override IEnumerable<BaseFlowNode> GetNextNodes()
         {
             string name = condition ? nameof(@true) : nameof(@false);
 
-            return outputPorts.FirstOrDefault(n => n.fieldName == name).GetEdges().Select(e => e.inputNode as IFlowNode);
+            return outputPorts.FirstOrDefault(n => n.fieldName == name).GetEdges().Select(e => e.inputNode as BaseFlowNode);
         }
     }
 }
