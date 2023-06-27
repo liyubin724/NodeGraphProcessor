@@ -13,7 +13,7 @@ public class TypeSwitchNode : BaseNode
 	[SerializeField]
 	public bool					toggleType;
 
-	public override string		name => "TypeSwitchNode";
+	public override string		displayName => "TypeSwitchNode";
 
 	[CustomPortBehavior(nameof(input))]
 	IEnumerable< PortData > GetInputPort(List< SerializableEdge > edges)

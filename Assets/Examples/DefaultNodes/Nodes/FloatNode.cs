@@ -12,7 +12,7 @@ public class FloatNode : BaseNode
     [Input("In")]
 	public float		input;
 
-	public override string name => "Float";
+	public override string displayName => "Float";
 
 	protected override void Process() => output = input;
 }

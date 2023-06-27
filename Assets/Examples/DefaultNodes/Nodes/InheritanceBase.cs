@@ -15,7 +15,7 @@ public class InheritanceBase : BaseNode
 
 	public float				fieldBase;
 
-	public override string		name => "InheritanceBase";
+	public override string		displayName => "InheritanceBase";
 
 	protected override void Process()
 	{

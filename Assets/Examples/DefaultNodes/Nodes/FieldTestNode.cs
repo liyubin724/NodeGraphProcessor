@@ -22,7 +22,7 @@ public class FieldTestNode : BaseNode
 	public Gradient gradient;
 	public AnimationCurve curve;
 
-	public override string		name => "FieldTestNode";
+	public override string		displayName => "FieldTestNode";
 
 	protected override void Process() { }
 }

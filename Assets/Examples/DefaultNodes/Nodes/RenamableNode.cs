@@ -10,7 +10,7 @@ public class RenamableNode : BaseNode
     [Input("In")]
 	public float		input;
 
-	public override string name => "Renamable";
+	public override string displayName => "Renamable";
 
     public override bool isRenamable => true;
 

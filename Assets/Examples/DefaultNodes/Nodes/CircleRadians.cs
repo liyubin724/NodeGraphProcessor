@@ -10,7 +10,7 @@ public class CircleRadians : BaseNode
 	[Output(name = "In")]
     public List< float >		outputRadians;
 
-	public override string		name => "CircleRadians";
+	public override string		displayName => "CircleRadians";
 
 	[CustomPortOutput(nameof(outputRadians), typeof(float))]
 	public void PushOutputRadians(List< SerializableEdge > connectedEdges)

@@ -18,7 +18,7 @@ public class InspectorNode : BaseNode
 	[ShowInInspector]
 	public string additionalParam;
 
-	public override string		name => "InspectorNode";
+	public override string		displayName => "InspectorNode";
 
 	protected override void Process()
 	{

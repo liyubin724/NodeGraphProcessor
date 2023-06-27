@@ -8,7 +8,7 @@ namespace NodeGraphProcessor.Examples
 	[Serializable, NodeMenuItem("Functions/Wait")]
 	public class WaitNode : WaitableNode
 	{
-		public override string name => "Wait";
+		public override string displayName => "Wait";
 
 		[SerializeField, Input(name = "Seconds")]
 		public float waitTime = 1f;

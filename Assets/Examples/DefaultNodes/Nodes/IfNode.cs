@@ -20,7 +20,7 @@ public class IfNode : ConditionalNode
 	[Setting("Compare Function")]
 	public CompareFunction		compareOperator;
 
-	public override string		name => "If";
+	public override string		displayName => "If";
 
 	public override IEnumerable< ConditionalNode >	GetExecutedNodes()
 	{

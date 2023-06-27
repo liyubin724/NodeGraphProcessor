@@ -15,7 +15,7 @@ public class PortConnectionTests : BaseNode
 
     public float padding;
 
-	public override string		name => "Port Tests";
+	public override string		displayName => "Port Tests";
 
 	protected override void Process() {}
 

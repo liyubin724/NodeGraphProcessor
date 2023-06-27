@@ -10,7 +10,7 @@ public class PrintNode : BaseNode
 	[Input]
 	public object	obj;
 
-	public override string name => "Print";
+	public override string displayName => "Print";
 }
 
 [NodeMenuItem("Conditional/Print")]
@@ -19,5 +19,5 @@ public class ConditionalPrintNode : LinearConditionalNode
 	[Input]
 	public object	obj;
 
-	public override string name => "Print";
+	public override string displayName => "Print";
 }

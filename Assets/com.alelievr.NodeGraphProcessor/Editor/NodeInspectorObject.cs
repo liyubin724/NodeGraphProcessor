@@ -53,7 +53,7 @@ namespace GraphProcessor
         {
             var view = new VisualElement();
 
-            view.Add(new Label(nodeView.nodeTarget.name));
+            view.Add(new Label(nodeView.nodeTarget.displayName));
 
             var tmp = nodeView.controlsContainer;
             nodeView.controlsContainer = view;

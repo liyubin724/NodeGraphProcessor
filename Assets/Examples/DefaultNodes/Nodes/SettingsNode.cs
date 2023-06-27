@@ -15,7 +15,7 @@ public enum Setting
 public class SettingsNode : BaseNode
 {
 	public Setting				setting;
-	public override string		name => "SettingsNode";
+	public override string		displayName => "SettingsNode";
 
 	[Input]
 	public float			input;

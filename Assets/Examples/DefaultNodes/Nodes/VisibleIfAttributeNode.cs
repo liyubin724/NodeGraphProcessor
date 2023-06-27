@@ -40,7 +40,7 @@ public class VisibleIfAttributeNode : BaseNode
 	[Output(name = "Out")]
 	public float				output;
 
-	public override string		name => "VisibleIfAttributeNode";
+	public override string		displayName => "VisibleIfAttributeNode";
 
 	protected override void Process()
 	{

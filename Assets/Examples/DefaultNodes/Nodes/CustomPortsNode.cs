@@ -15,7 +15,7 @@ public class CustomPortsNode : BaseNode
 
 	List< object >				values = new List< object >();
 
-	public override string		name => "CustomPorts";
+	public override string		displayName => "CustomPorts";
 
     public override string      layoutStyle => "TestType";
 

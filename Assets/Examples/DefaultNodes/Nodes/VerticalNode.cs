@@ -14,7 +14,7 @@ public class VerticalNode : BaseNode
 	[Output, Vertical]
 	public float				output3;
 
-	public override string		name => "Vertical";
+	public override string		displayName => "Vertical";
 
 	protected override void Process()
 	{

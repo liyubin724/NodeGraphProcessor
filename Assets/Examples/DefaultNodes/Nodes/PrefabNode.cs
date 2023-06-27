@@ -10,5 +10,5 @@ public class PrefabNode : BaseNode
 	[Output(name = "Out"), SerializeField]
 	public GameObject			output;
 
-	public override string		name => "Prefab";
+	public override string		displayName => "Prefab";
 }

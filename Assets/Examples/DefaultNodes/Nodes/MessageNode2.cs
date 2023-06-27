@@ -13,7 +13,7 @@ public class MessageNode2 : BaseNode
 	[Output(name = "Out")]
 	public float				output;
 
-	public override string		name => "MessageNode2";
+	public override string		displayName => "MessageNode2";
 
 	protected override void Process()
 	{

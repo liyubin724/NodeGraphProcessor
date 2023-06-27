@@ -12,7 +12,7 @@ public class MessageNode : BaseNode
 	[Input(name = "In")]
     public float                input;
 
-	public override string		name => "MessageNode";
+	public override string		displayName => "MessageNode";
 
 	[Setting("Message Type")]
 	public NodeMessageType messageType = NodeMessageType.Error;

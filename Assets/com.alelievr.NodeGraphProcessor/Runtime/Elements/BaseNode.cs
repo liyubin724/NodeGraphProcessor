@@ -1,28 +1,37 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
-using System.Reflection;
-using Unity.Jobs;
 using System.Linq;
+using System.Reflection;
+using UnityEngine;
 
 namespace GraphProcessor
 {
-	public delegate IEnumerable< PortData > CustomPortBehaviorDelegate(List< SerializableEdge > edges);
+    public delegate IEnumerable< PortData > CustomPortBehaviorDelegate(List< SerializableEdge > edges);
 	public delegate IEnumerable< PortData > CustomPortTypeBehaviorDelegate(string fieldName, string displayName, object value);
 
 	[Serializable]
 	public abstract class BaseNode
 	{
-		[SerializeField]
-		internal string nodeCustomName = null; // The name of the node in case it was renamed by a user
+        // The name of the node in case it was renamed by a user
+        public string customName = null;
 
 		/// <summary>
 		/// Name of the node, it will be displayed in the title section
 		/// </summary>
 		/// <returns></returns>
-		public virtual string       name => GetType().Name;
-		
+		public virtual string displayName
+		{
+			get
+			{
+				string name = customName;
+				if(string.IsNullOrEmpty(name))
+				{
+					name = GetType().Name;
+				}
+				return name;
+			}
+		}
+
 		/// <summary>
 		/// The accent color of the node
 		/// </summary>
@@ -846,20 +855,6 @@ namespace GraphProcessor
 				onMessageRemoved?.Invoke(message);
 			messages.Clear();
 		}
-
-		/// <summary>
-		/// Set the custom name of the node. This is intended to be used by renamable nodes.
-		/// This custom name will be serialized inside the node.
-		/// </summary>
-		/// <param name="customNodeName">New name of the node.</param>
-		public void SetCustomName(string customName) => nodeCustomName = customName;
-
-		/// <summary>
-		/// Get the name of the node. If the node have a custom name (set using the UI by double clicking on the node title) then it will return this name first, otherwise it returns the value of the name field.
-		/// </summary>
-		/// <returns>The name of the node as written in the title</returns>
-		public string GetCustomName() => String.IsNullOrEmpty(nodeCustomName) ? name : nodeCustomName; 
-
 		#endregion
 	}
 }

@@ -10,7 +10,7 @@ public class OutputNode : BaseNode
 	[Input(name = "In")]
     public float                input;
 
-	public override string		name => "OutputNode";
+	public override string		displayName => "OutputNode";
 
 	public override bool		deletable => false;
 

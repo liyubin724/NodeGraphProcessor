@@ -13,7 +13,7 @@ public class UnityEventNode : BaseNode
 
 	public UnityEvent			evt;
 
-	public override string		name => "Unity Event Node";
+	public override string		displayName => "Unity Event Node";
 
 	protected override void Process()
 	{

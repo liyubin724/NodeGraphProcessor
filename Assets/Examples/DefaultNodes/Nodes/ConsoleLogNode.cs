@@ -7,7 +7,7 @@ namespace NodeGraphProcessor.Examples
 	[Serializable, NodeMenuItem("Debug/Console Log")]
 	public class ConsoleNode : LinearConditionalNode
 	{
-		public override string name => "Console Log";
+		public override string displayName => "Console Log";
 
 		[Input("Object")]
 		public object obj;

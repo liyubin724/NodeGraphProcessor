@@ -17,7 +17,7 @@ namespace NodeGraphProcessor.Examples
 
 		public CompareFunction		compareFunction = CompareFunction.LessEqual;
 
-		public override string		name => "Comparison";
+		public override string		displayName => "Comparison";
 
 		protected override void Process()
 		{

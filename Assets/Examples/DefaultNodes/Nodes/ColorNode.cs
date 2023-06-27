@@ -10,5 +10,5 @@ public class ColorNode : BaseNode
 	[Output(name = "Color"), SerializeField]
 	new public Color				color;
 
-	public override string		name => "Color";
+	public override string		displayName => "Color";
 }
