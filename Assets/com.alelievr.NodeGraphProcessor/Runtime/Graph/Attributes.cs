@@ -5,10 +5,37 @@ using System;
 
 namespace GraphProcessor
 {
-	/// <summary>
-	/// Tell that this field is will generate an input port
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false,Inherited = false)]
+    public class NodeAttribute : Attribute
+	{
+		public string name { get; private set; }
+		public string icon { get; set; }
+		public string color { get; set; }
+
+		public NodeAttribute(string name)
+		{
+			this.name = name;
+		}
+	}
+
+	[AttributeUsage(AttributeTargets.Class,AllowMultiple =false,Inherited = false)]
+	public class NodeCapabilityAttribute : Attribute
+	{
+		public bool isDeletable { get; set; } = true;
+		public bool isRenamable { get; set; } = false;
+		public bool isUnlockable { get; set; } = true;
+    }
+
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    public class NodeStyleAttribute : Attribute
+	{
+		public string layoutStyle { get; set; }
+	}
+
+    /// <summary>
+    /// Tell that this field is will generate an input port
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
 	public class InputAttribute : Attribute
 	{
 		public string		name;

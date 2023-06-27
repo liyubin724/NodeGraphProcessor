@@ -10,5 +10,5 @@ public class StringNode : BaseNode
 	[Output(name = "Out"), SerializeField]
 	public string				output;
 
-	public override string		displayName => "String";
+	public override string		name => "String";
 }

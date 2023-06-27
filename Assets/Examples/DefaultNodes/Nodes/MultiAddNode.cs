@@ -13,7 +13,7 @@ public class MultiAddNode : BaseNode
 	[Output]
 	public float				output;
 
-	public override string		displayName => "Add";
+	public override string		name => "Add";
 
 	protected override void Process()
 	{

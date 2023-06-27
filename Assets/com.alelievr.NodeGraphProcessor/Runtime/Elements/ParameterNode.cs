@@ -16,7 +16,7 @@ namespace GraphProcessor
 		[Output]
 		public object output;
 
-		public override string displayName => "Parameter";
+		public override string name => "Parameter";
 
 		// We serialize the GUID of the exposed parameter in the graph so we can retrieve the true ExposedParameter from the graph
 		[SerializeField, HideInInspector]

@@ -20,7 +20,7 @@ public class CustomPortData : BaseNode
 	[Output]
 	public float				output;
 
-	public override string		displayName => "Port Data";
+	public override string		name => "Port Data";
 
 	protected override void Process()
 	{

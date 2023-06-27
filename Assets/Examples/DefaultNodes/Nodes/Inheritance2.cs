@@ -15,7 +15,7 @@ public class Inheritance2 : Inheritance1
 
 	public float				field2;
 
-	public override string		displayName => "Inheritance2";
+	public override string		name => "Inheritance2";
 
 	protected override void Process()
 	{

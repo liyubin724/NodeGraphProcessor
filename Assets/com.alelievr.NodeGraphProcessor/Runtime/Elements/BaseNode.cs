@@ -10,7 +10,7 @@ namespace GraphProcessor
 	public delegate IEnumerable< PortData > CustomPortTypeBehaviorDelegate(string fieldName, string displayName, object value);
 
 	[Serializable]
-	public abstract class BaseNode
+	public abstract partial class BaseNode
 	{
         // The name of the node in case it was renamed by a user
         public string customName = null;
@@ -19,39 +19,7 @@ namespace GraphProcessor
 		/// Name of the node, it will be displayed in the title section
 		/// </summary>
 		/// <returns></returns>
-		public virtual string displayName
-		{
-			get
-			{
-				string name = customName;
-				if(string.IsNullOrEmpty(name))
-				{
-					name = GetType().Name;
-				}
-				return name;
-			}
-		}
-
-		/// <summary>
-		/// The accent color of the node
-		/// </summary>
-		public virtual Color color => Color.clear;
-		
-		/// <summary>
-		/// Set a custom uss file for the node. We use a Resources.Load to get the stylesheet so be sure to put the correct resources path
-		/// https://docs.unity3d.com/ScriptReference/Resources.Load.html
-		/// </summary>
-        public virtual string       layoutStyle => string.Empty;
-
-		/// <summary>
-		/// If the node can be locked or not
-		/// </summary>
-        public virtual bool         unlockable => true; 
-
-		/// <summary>
-		/// Is the node is locked (if locked it can't be moved)
-		/// </summary>
-        public virtual bool         isLocked => nodeLock; 
+		public virtual string name => GetType().Name;
 
         //id
         public string				GUID;
@@ -60,12 +28,6 @@ namespace GraphProcessor
 
 		/// <summary>Tell wether or not the node can be processed. Do not check anything from inputs because this step happens before inputs are sent to the node</summary>
 		public virtual bool			canProcess => true;
-
-		/// <summary>Show the node controlContainer only when the mouse is over the node</summary>
-		public virtual bool			showControlsOnHover => false;
-
-		/// <summary>True if the node can be deleted, false otherwise</summary>
-		public virtual bool			deletable => true;
 
 		/// <summary>
 		/// Container of input ports
@@ -88,10 +50,10 @@ namespace GraphProcessor
 		/// Is debug visible
 		/// </summary>
 		public bool					debug;
-		/// <summary>
-		/// Node locked state
-		/// </summary>
-        public bool                 nodeLock;
+        /// <summary>
+        /// Is the node is locked (if locked it can't be moved)
+        /// </summary>
+        public bool isLocked;
 
         public delegate void		ProcessDelegate();
 
@@ -122,11 +84,6 @@ namespace GraphProcessor
 		/// Does the node needs to be visible in the inspector (when selected).
 		/// </summary>
 		public virtual bool			needsInspector => _needsInspector;
-
-		/// <summary>
-		/// Can the node be renamed in the UI. By default a node can be renamed by double clicking it's name.
-		/// </summary>
-		public virtual bool			isRenamable => false;
 
 		/// <summary>
 		/// Is the node created from a duplicate operation (either ctrl-D or copy/paste).

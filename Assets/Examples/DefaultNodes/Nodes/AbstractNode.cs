@@ -12,7 +12,7 @@ public abstract class AbstractNode : BaseNode
 	[Output(name = "Out")]
 	public float				output;
 
-	public override string		displayName => "AbstractNode";
+	public override string		name => "AbstractNode";
 
 	protected override void Process()
 	{

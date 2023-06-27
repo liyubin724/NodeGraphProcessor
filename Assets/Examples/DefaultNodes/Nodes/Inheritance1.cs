@@ -15,7 +15,7 @@ public class Inheritance1 :InheritanceBase
 
 	public float				field1;
 
-	public override string		displayName => "Inheritance1";
+	public override string		name => "Inheritance1";
 
 	protected override void Process()
 	{

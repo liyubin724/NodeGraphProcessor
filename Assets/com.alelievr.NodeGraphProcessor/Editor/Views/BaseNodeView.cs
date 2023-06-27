@@ -29,6 +29,7 @@ namespace GraphProcessor
 
         public VisualElement 					controlsContainer;
 		protected VisualElement					debugContainer;
+		protected VisualElement					leftTitleContainer;
 		protected VisualElement					rightTitleContainer;
 		protected VisualElement					topPortContainer;
 		protected VisualElement					bottomPortContainer;
@@ -66,6 +67,30 @@ namespace GraphProcessor
 		private float      selectedNodesNearBottom;
 		private float      selectedNodesAvgHorizontal;
 		private float      selectedNodesAvgVertical;
+
+		private Image m_TitleIcon;
+        public Texture icon
+		{
+			get
+			{
+				return m_TitleIcon?.image;
+			}
+			set
+			{
+				if(value == null)
+				{
+					m_TitleIcon.RemoveFromHierarchy();
+				}
+				else
+				{
+					if(m_TitleIcon.panel == null)
+					{
+						leftTitleContainer.Add(m_TitleIcon);
+					}
+				}
+				m_TitleIcon.image = value;
+			}
+		}
 		
 		#region  Initialization
 		
@@ -74,9 +99,9 @@ namespace GraphProcessor
 			nodeTarget = node;
 			this.owner = owner;
 
-			if (!node.deletable)
+			if (!node.isDeletable)
 				capabilities &= ~Capabilities.Deletable;
-			// Note that the Renamable capability is useless right now as it haven't been implemented in Graphview
+
 			if (node.isRenamable)
 				capabilities |= Capabilities.Renamable;
 
@@ -132,6 +157,13 @@ namespace GraphProcessor
 			controlsContainer.AddToClassList("NodeControls");
 			mainContainer.Add(controlsContainer);
 
+            leftTitleContainer = new VisualElement { name = "LeftTitleContainer" };
+			titleContainer.Insert(0, leftTitleContainer);
+
+			m_TitleIcon = new Image { name = "TitleIconImage" };
+			m_TitleIcon.style.width = 24;
+			m_TitleIcon.style.height = 24;
+
 			rightTitleContainer = new VisualElement{ name = "RightTitleContainer" };
 			titleContainer.Add(rightTitleContainer);
 
@@ -172,7 +204,7 @@ namespace GraphProcessor
 
 			UpdateTitle();
             SetPosition(nodeTarget.position);
-			SetNodeColor(nodeTarget.color);
+			SetNodeColor();
             
 			AddInputContainer();
 
@@ -233,7 +265,8 @@ namespace GraphProcessor
 		void UpdateTitle()
 		{
 			title = nodeTarget.displayName;
-		}
+			icon = nodeTarget.icon;
+        }
 
 		void InitializeSettings()
 		{
@@ -742,11 +775,17 @@ namespace GraphProcessor
 			}
 		}
 
-		protected virtual void SetNodeColor(Color color)
+		protected virtual void SetNodeColor()
 		{
-			titleContainer.style.borderBottomColor = new StyleColor(color);
-			titleContainer.style.borderBottomWidth = new StyleFloat(color.a > 0 ? 5f : 0f);
-		}
+			var colorStr = nodeTarget.color;
+			if (!string.IsNullOrEmpty(colorStr))
+			{
+                if (ColorUtility.TryParseHtmlString(colorStr, out var c))
+                {
+                    titleContainer.style.backgroundColor = new StyleColor(c);
+                }
+            }
+        }
 		
 		private void AddEmptyField(FieldInfo field, bool fromInspector)
 		{
@@ -1013,7 +1052,7 @@ namespace GraphProcessor
 
         public void ChangeLockStatus()
         {
-            nodeTarget.nodeLock ^= true;
+            nodeTarget.isLocked ^= true;
         }
 
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
@@ -1022,7 +1061,7 @@ namespace GraphProcessor
 			evt.menu.AppendAction("Open Node Script", (e) => OpenNodeScript(), OpenNodeScriptStatus);
 			evt.menu.AppendAction("Open Node View Script", (e) => OpenNodeViewScript(), OpenNodeViewScriptStatus);
 			evt.menu.AppendAction("Debug", (e) => ToggleDebug(), DebugStatus);
-            if (nodeTarget.unlockable)
+            if (nodeTarget.isUnlockable)
                 evt.menu.AppendAction((nodeTarget.isLocked ? "Unlock" : "Lock"), (e) => ChangeLockStatus(), LockStatus);
         }
 

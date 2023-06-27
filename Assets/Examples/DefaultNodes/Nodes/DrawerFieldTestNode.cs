@@ -50,7 +50,7 @@ public class DrawerFieldTestNode : BaseNode
 	[Input("Layer Mask"), ShowAsDrawer]
 	public LayerMask layerMask;
 
-	public override string displayName => "Drawer Field Test";
+	public override string name => "Drawer Field Test";
 
 	protected override void Process() {}
 }

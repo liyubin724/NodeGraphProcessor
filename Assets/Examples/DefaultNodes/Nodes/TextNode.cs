@@ -10,5 +10,5 @@ public class TextNode : BaseNode
 	[Output(name = "Label"), SerializeField]
 	public string				output;
 
-	public override string		displayName => "Text";
+	public override string		name => "Text";
 }

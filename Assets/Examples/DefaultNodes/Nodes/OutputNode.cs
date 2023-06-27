@@ -5,14 +5,11 @@ using GraphProcessor;
 using System.Linq;
 
 [System.Serializable, NodeMenuItem("Custom/OutputNode")]
+[NodeCapabilityAttribute(isDeletable = false)]
 public class OutputNode : BaseNode
 {
 	[Input(name = "In")]
     public float                input;
-
-	public override string		displayName => "OutputNode";
-
-	public override bool		deletable => false;
 
 	protected override void Process()
 	{

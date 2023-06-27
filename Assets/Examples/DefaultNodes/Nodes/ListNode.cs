@@ -15,7 +15,7 @@ public class ListNode : BaseNode
 
 	public List<GameObject>		objs = new List<GameObject>();
 
-	public override string		displayName => "List";
+	public override string		name => "List";
 
 	protected override void Process()
 	{

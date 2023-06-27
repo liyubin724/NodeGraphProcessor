@@ -10,7 +10,7 @@ public class GameObjectNode : BaseNode, ICreateNodeFrom<GameObject>
 	[Output(name = "Out"), SerializeField]
 	public GameObject			output;
 
-	public override string		displayName => "Game Object";
+	public override string		name => "Game Object";
 
 	public bool InitializeNodeFromObject(GameObject value)
 	{

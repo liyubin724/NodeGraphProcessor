@@ -13,7 +13,7 @@ public class VectorNode : BaseNode
 	[Input(name = "In"), SerializeField]
 	public Vector4				input;
 
-	public override string		displayName => "Vector";
+	public override string		name => "Vector";
 
 	protected override void Process()
 	{

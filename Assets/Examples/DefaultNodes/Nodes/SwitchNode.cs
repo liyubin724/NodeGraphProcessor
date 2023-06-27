@@ -13,7 +13,7 @@ public class SwitchNode : BaseNode
 	[Output(name = "Out")]
 	public float				output;
 
-	public override string		displayName => "Switch";
+	public override string		name => "Switch";
 
 	protected override void Process()
 	{

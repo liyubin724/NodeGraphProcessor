@@ -20,7 +20,7 @@ public class ForLoopNode : ConditionalNode
 	[Output]
 	public int					index;
 
-	public override string		displayName => "ForLoop";
+	public override string		name => "ForLoop";
 
 	protected override void Process() => index++; // Implement all logic that affects the loop inner fields
 

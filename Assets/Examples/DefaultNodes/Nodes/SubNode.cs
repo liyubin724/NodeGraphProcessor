@@ -15,7 +15,7 @@ public class SubNode : BaseNode
 	[Output(name = "Out")]
 	public float				output;
 
-	public override string		displayName => "Sub";
+	public override string		name => "Sub";
 
 	protected override void Process()
 	{

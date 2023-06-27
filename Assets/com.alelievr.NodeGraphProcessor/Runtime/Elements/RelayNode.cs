@@ -6,6 +6,7 @@ using System.Linq;
 using System;
 
 [System.Serializable, NodeMenuItem("Utils/Relay")]
+[NodeStyle(layoutStyle = "GraphProcessorStyles/RelayNode")]
 public class RelayNode : BaseNode
 {
 	const string packIdentifier = "_Pack";
@@ -39,8 +40,6 @@ public class RelayNode : BaseNode
 		outputIndex = 0;
 		output = input;
 	}
-
-	public override string layoutStyle => "GraphProcessorStyles/RelayNode";
 
 	[CustomPortInput(nameof(input), typeof(object), true)]
 	public void GetInputs(List< SerializableEdge > edges)

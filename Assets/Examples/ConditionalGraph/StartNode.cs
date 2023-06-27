@@ -11,7 +11,7 @@ namespace NodeGraphProcessor.Examples
 		[Output(name = "Executes")]
 		public ConditionalLink		executes;
 
-		public override string		displayName => "Start";
+		public override string		name => "Start";
 
 		public IEnumerable< ConditionalNode >	GetExecutedNodes()
 		{
