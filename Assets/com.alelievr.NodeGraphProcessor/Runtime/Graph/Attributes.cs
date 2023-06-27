@@ -32,6 +32,17 @@ namespace GraphProcessor
 		public string layoutStyle { get; set; }
 	}
 
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    public class NodeTagAttribute : Attribute
+	{
+		public string[] tags { get; private set; }
+
+		public NodeTagAttribute(params string[] tags)
+		{
+			this.tags = tags;
+		}
+	}
+
     /// <summary>
     /// Tell that this field is will generate an input port
     /// </summary>
