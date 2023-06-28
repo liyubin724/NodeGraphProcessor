@@ -16,4 +16,10 @@ namespace GraphProcessor
 			this.nodeType = nodeType;
 		}
 	}
+
+	[AttributeUsage(AttributeTargets.Property)]
+	public class PortCustomStyleAttribute : Attribute
+	{
+		public PortCustomStyleAttribute() { }
+	}
 }

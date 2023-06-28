@@ -1,14 +1,13 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
-using System;
 using System.Reflection;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace GraphProcessor
 {
-	public class PortView : Port
+    public class PortView : Port
 	{
 		public string				fieldName => fieldInfo.Name;
 		public Type					fieldType => fieldInfo.FieldType;
@@ -21,8 +20,6 @@ namespace GraphProcessor
 
 		protected FieldInfo		fieldInfo;
 		protected BaseEdgeConnectorListener	listener;
-
-		string userPortStyleFile = "PortViewTypes";
 
 		List< EdgeView >		edges = new List< EdgeView >();
 
@@ -41,12 +38,18 @@ namespace GraphProcessor
 
 			styleSheets.Add(Resources.Load<StyleSheet>(portStyle));
 
+			var customPortTypeStyles = PortProvider.GetTypeStyles();
+			if (customPortTypeStyles != null && customPortTypeStyles.Length > 0)
+			{
+				foreach(var style in customPortTypeStyles)
+				{
+					styleSheets.Add(style);
+				}
+			}
+
 			UpdatePortSize();
 
-			var userPortStyle = Resources.Load<StyleSheet>(userPortStyleFile);
-			if (userPortStyle != null)
-				styleSheets.Add(userPortStyle);
-			
+
 			if (portData.vertical)
 				AddToClassList("Vertical");
 			
@@ -98,7 +101,7 @@ namespace GraphProcessor
 		public virtual void Initialize(BaseNodeView nodeView, string name)
 		{
 			this.owner = nodeView;
-			AddToClassList(fieldName);
+			//AddToClassList(fieldName);
 
 			// Correct port type if port accept multiple values (and so is a container)
 			if (direction == Direction.Input && portData.acceptMultipleEdges && portType == fieldType) // If the user haven't set a custom field type
