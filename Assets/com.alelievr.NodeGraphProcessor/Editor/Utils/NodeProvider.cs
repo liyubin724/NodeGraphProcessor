@@ -278,7 +278,14 @@ namespace GraphProcessor
         public static IEnumerable<(string path, Type type)>	GetNodeMenuEntries(BaseGraph graph = null)
 		{
 			foreach (var node in genericNodes.nodePerMenuTitle)
+			{
+				if(!IsNodeCompatible(node.Value, graph))
+				{
+					continue;
+				}
+
 				yield return (node.Key, node.Value);
+			}
 
 			if (graph != null && specificNodeDescriptions.TryGetValue(graph, out var specificNodes))
 			{
@@ -317,6 +324,11 @@ namespace GraphProcessor
 		{
 			foreach (var description in genericNodes.nodeCreatePortDescription)
 			{
+				if(!IsNodeCompatible(description.nodeType, graph))
+				{
+					continue;
+				}
+
 				if (!IsPortCompatible(description))
 					continue;
 
@@ -344,5 +356,32 @@ namespace GraphProcessor
 				return true;
 			}
 		}
+
+		private static bool IsNodeCompatible(Type nodeType,BaseGraph graph = null)
+		{
+			if(graph == null)
+			{
+				return true;
+			}
+
+			var compatibleTagAttr = graph.GetType().GetCustomAttribute<GraphCompatibleTagAttribute>();
+			if(compatibleTagAttr == null)
+			{
+				return true;
+			}
+
+			var filterTags = compatibleTagAttr.compatibleTags;
+
+            var tagAttr = nodeType.GetCustomAttribute<NodeTagAttribute>();
+            if (tagAttr != null && tagAttr.tags != null)
+            {
+                if (filterTags.Intersect(tagAttr.tags).Any())
+                {
+					return true;
+                }
+            }
+
+			return false;
+        }
 	}
 }

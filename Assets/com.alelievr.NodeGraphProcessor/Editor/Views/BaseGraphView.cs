@@ -1363,37 +1363,14 @@ namespace GraphProcessor
 
 		public virtual IEnumerable<(string path, Type type)> FilterCreateNodeMenuEntries()
 		{
-            string[] filterTags = new string[0];
-            if (graph != null)
-            {
-                var compatibleTagAttr = graph.GetType().GetCustomAttribute<GraphCompatibleTagAttribute>();
-                if (compatibleTagAttr != null)
-                {
-                    filterTags = compatibleTagAttr.compatibleTags;
-                }
-            }
-
+            // By default we don't filter anything
             foreach (var nodeMenuItem in NodeProvider.GetNodeMenuEntries(graph))
-			{
-				if(filterTags.Length == 0)
-				{
-					yield return nodeMenuItem;
-				}
-				else
-				{
-					var tagAttr = nodeMenuItem.type.GetCustomAttribute<NodeTagAttribute>();
-					if (tagAttr != null && tagAttr.tags != null)
-					{
-						if (filterTags.Intersect(tagAttr.tags).Any())
-						{
-							yield return nodeMenuItem;
-						}
-					}
-				}
-            }
-		}
+                yield return nodeMenuItem;
 
-		public RelayNodeView AddRelayNode(PortView inputPort, PortView outputPort, Vector2 position)
+            // TODO: add exposed properties to this list
+        }
+
+        public RelayNodeView AddRelayNode(PortView inputPort, PortView outputPort, Vector2 position)
 		{
 			var relayNode = BaseNode.CreateFromType<RelayNode>(position);
 			var view = AddNode(relayNode) as RelayNodeView;
