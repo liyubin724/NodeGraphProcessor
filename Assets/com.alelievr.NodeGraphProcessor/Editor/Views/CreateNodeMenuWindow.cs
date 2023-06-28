@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using UnityEngine;
-using UnityEditor.UIElements;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace GraphProcessor
 {
@@ -109,7 +107,7 @@ namespace GraphProcessor
 
             var titlePaths = new HashSet< string >();
 
-            var nodePaths = NodeProvider.GetNodeMenuEntries(graphView.graph);
+            var nodePaths = graphView.FilterCreateNodeMenuEntries().OrderBy(k => k.path);//NodeProvider.GetNodeMenuEntries(graphView.graph);
 
             tree.Add(new SearchTreeEntry(new GUIContent($"Relay", icon))
             {

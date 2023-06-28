@@ -6,6 +6,8 @@ namespace DotEngine.NodeGraph.Flow
 {
     [Serializable]
     [NodeMenuItem("Flow/Debug/Log")]
+    [Node("Log")]
+    [NodeTag("flow")]
     public class DebugLogNode : BaseLinearFlowNode
     {
         [Input("Message")]

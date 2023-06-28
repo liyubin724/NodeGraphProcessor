@@ -1,24 +1,21 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using UnityEditor.UIElements;
-using UnityEngine.UIElements;
-using UnityEditor.Experimental.GraphView;
 using System.Linq;
-using System;
-using UnityEditor.SceneManagement;
 using System.Reflection;
-
-using Status = UnityEngine.UIElements.DropdownMenuAction.Status;
+using UnityEditor;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
+using Status = UnityEngine.UIElements.DropdownMenuAction.Status;
 
 namespace GraphProcessor
 {
-	/// <summary>
-	/// Base class to write a custom view for a node
-	/// </summary>
-	public class BaseGraphView : GraphView, IDisposable
+    /// <summary>
+    /// Base class to write a custom view for a node
+    /// </summary>
+    public class BaseGraphView : GraphView, IDisposable
 	{
 		public delegate void ComputeOrderUpdatedDelegate();
 		public delegate void NodeDuplicatedDelegate(BaseNode duplicatedNode, BaseNode newNode);
@@ -1366,11 +1363,34 @@ namespace GraphProcessor
 
 		public virtual IEnumerable<(string path, Type type)> FilterCreateNodeMenuEntries()
 		{
-			// By default we don't filter anything
-			foreach (var nodeMenuItem in NodeProvider.GetNodeMenuEntries(graph))
-				yield return nodeMenuItem;
+            string[] filterTags = new string[0];
+            if (graph != null)
+            {
+                var compatibleTagAttr = graph.GetType().GetCustomAttribute<GraphCompatibleTagAttribute>();
+                if (compatibleTagAttr != null)
+                {
+                    filterTags = compatibleTagAttr.compatibleTags;
+                }
+            }
 
-			// TODO: add exposed properties to this list
+            foreach (var nodeMenuItem in NodeProvider.GetNodeMenuEntries(graph))
+			{
+				if(filterTags.Length == 0)
+				{
+					yield return nodeMenuItem;
+				}
+				else
+				{
+					var tagAttr = nodeMenuItem.type.GetCustomAttribute<NodeTagAttribute>();
+					if (tagAttr != null && tagAttr.tags != null)
+					{
+						if (filterTags.Intersect(tagAttr.tags).Any())
+						{
+							yield return nodeMenuItem;
+						}
+					}
+				}
+            }
 		}
 
 		public RelayNodeView AddRelayNode(PortView inputPort, PortView outputPort, Vector2 position)

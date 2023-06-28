@@ -7,6 +7,8 @@ namespace DotEngine.NodeGraph.Flow
 {
     [Serializable]
     [NodeMenuItem("Flow/Conditions/IF")]
+    [Node("If")]
+    [NodeTag("flow")]
     public class IfFlowNode : BaseLinearFlowNode
     {
         [Input(name = "Condition")]

@@ -43,6 +43,18 @@ namespace GraphProcessor
 		}
 	}
 
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    public class GraphCompatibleTagAttribute : Attribute
+	{
+		public string[] compatibleTags { get; private set; }
+
+		public GraphCompatibleTagAttribute(params string[] tags)
+		{
+			this.compatibleTags = tags;
+		}
+
+    }
+
     /// <summary>
     /// Tell that this field is will generate an input port
     /// </summary>

@@ -6,6 +6,7 @@ namespace DotEngine.NodeGraph.Flow
 {
     [Serializable]
     [CreateAssetMenu(fileName ="flow_graph.asset",menuName = "Node Graph/Flow")]
+    [GraphCompatibleTag("basic","flow")]
     public class FlowGraph : BaseGraph
     {
 
