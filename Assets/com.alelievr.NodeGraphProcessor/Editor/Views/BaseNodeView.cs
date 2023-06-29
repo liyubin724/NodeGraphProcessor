@@ -1030,6 +1030,7 @@ namespace GraphProcessor
             if (initializing || !nodeTarget.isLocked)
             {
                 base.SetPosition(newPos);
+				base.style.width = newPos.width;
 
 				if (!initializing)
 					owner.RegisterCompleteObjectUndo("Moved graph node");

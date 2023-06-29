@@ -11,6 +11,8 @@ namespace GraphProcessor
 		public string name { get; private set; }
 		public string icon { get; set; }
 		public string color { get; set; }
+		public float width { get; set; } = 100;
+		public float height { get; set; } = 100;
 
 		public NodeAttribute(string name)
 		{

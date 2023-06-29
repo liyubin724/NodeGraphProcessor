@@ -171,7 +171,7 @@ namespace GraphProcessor
 
 			var node = Activator.CreateInstance(nodeType) as BaseNode;
 
-			node.position = new Rect(position, new Vector2(100, 100));
+			node.position = new Rect(position, node.defaultSize);
 
 			ExceptionToLog.Call(() => node.OnNodeCreated());
 

@@ -139,6 +139,20 @@ namespace GraphProcessor
                 return false;
             }
         }
+
+        public Vector2 defaultSize
+        {
+            get
+            {
+                var attr = GetType().GetCustomAttribute<NodeAttribute>();
+                if(attr != null )
+                {
+                    return new Vector2(attr.width, attr.height);
+                }
+
+                return new Vector2(100, 100);
+            }
+        }
     }
 #endif
 }
