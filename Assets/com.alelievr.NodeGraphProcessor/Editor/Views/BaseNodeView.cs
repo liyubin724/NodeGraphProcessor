@@ -127,9 +127,8 @@ namespace GraphProcessor
 
 			InitializeSettings();
 
-			RefreshExpandedState();
-
-			this.RefreshPorts();
+			expanded = nodeTarget.expanded;
+			RefreshPorts();
 
 			RegisterCallback<GeometryChangedEvent>(OnGeometryChanged);
 			RegisterCallback<DetachFromPanelEvent>(e => ExceptionToLog.Call(Disable));
@@ -1047,7 +1046,9 @@ namespace GraphProcessor
 			{
 				base.expanded = value;
 				nodeTarget.expanded = value;
-			}
+
+				controlsContainer.style.display = value ? DisplayStyle.Flex : DisplayStyle.None;
+            }
 		}
 
         public void ChangeLockStatus()
