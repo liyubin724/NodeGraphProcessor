@@ -5,6 +5,8 @@ using UnityEngine;
 namespace DotEngine.NodeGraph
 {
     [Serializable]
+    [Node("Debug Log")]
+    [NodeTag("debug")]
     [NodeMenuItem("Debug/Log")]
     public class DebugLogNode : BaseNode
     {
