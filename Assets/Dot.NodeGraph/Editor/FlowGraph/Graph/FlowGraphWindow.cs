@@ -25,6 +25,7 @@ namespace DotEditor.NodeGraph
             if(graphView == null)
             {
                 graphView = new FlowGraphView(this);
+                graphView.Add(new MiniMapView(graphView));
             }
 
             rootView.Add(graphView);

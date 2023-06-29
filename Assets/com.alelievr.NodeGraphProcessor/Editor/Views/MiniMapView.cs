@@ -1,22 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEditor.UIElements;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
 
 namespace GraphProcessor
 {
-	public class MiniMapView : MiniMap
+    public class MiniMapView : MiniMap
 	{
-		new BaseGraphView	graphView;
-		Vector2				size;
-
-		public MiniMapView(BaseGraphView baseGraphView)
+		public MiniMapView(BaseGraphView graphView) : this(graphView, new Vector2(200, 150))
 		{
-			this.graphView = baseGraphView;
-			SetPosition(new Rect(0, 0, 100, 100));
-			size = new Vector2(100, 100);
+
+		}
+
+		public MiniMapView(BaseGraphView baseGraphView,Vector2 size) : base()
+		{
+			graphView = baseGraphView;
+
+			SetPosition(new Rect(0,0, size.x, size.y));
+
+			base.capabilities |= Capabilities.Resizable;
 		}
 	}
 }
