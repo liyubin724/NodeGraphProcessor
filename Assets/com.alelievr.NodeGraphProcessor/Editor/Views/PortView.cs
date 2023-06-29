@@ -161,7 +161,8 @@ namespace GraphProcessor
 			if (!String.IsNullOrEmpty(data.displayName))
 				base.portName = data.displayName;
 
-			portData = data;
+            portData = data;
+            tooltip = string.IsNullOrEmpty(portData.tooltip) ? portType.ToString() : portData.tooltip;
 
 			// Update the edge in case the port color have changed
 			schedule.Execute(() => {
