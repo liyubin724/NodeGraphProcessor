@@ -15,9 +15,57 @@ namespace DotEngine.NodeGraph.Flow
                 .Select(n => n as BaseFlowNode);
         }
 
-        public virtual IEnumerable<BaseNode> GetDependencyNodes()
+        public BaseNode[] GetAllDependencies()
         {
-            return GetInputNodes().Where(n => !(n is BaseFlowNode));
+            Stack<BaseNode> dependencyStack = new Stack<BaseNode>();
+            dependencyStack.Push(this);
+
+            List<BaseNode> dependencies = new List<BaseNode>();
+            while (dependencyStack.Count > 0)
+            {
+                var node = dependencyStack.Pop();
+
+                if (node is BaseFlowNode)
+                {
+                    continue;
+                }
+                dependencies.Insert(0, node);
+
+                foreach (var dep in node.GetInputNodes())
+                {
+                    dependencyStack.Push(dep);
+                }
+            }
+
+            return dependencies.ToArray();
+        }
+
+        public void OnExecute()
+        {
+            ProcessDependencies();
+
+            OnProcess();
+
+            foreach (var nextNode in GetNextNodes())
+            {
+                nextNode.OnExecute();
+            }
+        }
+
+        protected virtual void ProcessDependencies()
+        {
+            var dependencies = GetAllDependencies();
+
+            HashSet<BaseNode> processedNodeSet = new HashSet<BaseNode>();
+            foreach (var dep in dependencies)
+            {
+                if (!processedNodeSet.Contains(dep))
+                {
+                    dep.OnProcess();
+
+                    processedNodeSet.Add(dep);
+                }
+            }
         }
     }
 

@@ -1,13 +1,13 @@
 using DotEngine.NodeGraph.Flow;
 using GraphProcessor;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace DotEditor.NodeGraph
 {
     public class FlowGraphWindow : BaseGraphWindow
     {
-        private FlowGraph flowGraph;
-
         public static void ShowWindow(FlowGraph flowGraph)
         {
             var win = CreateWindow<FlowGraphWindow>();
@@ -18,17 +18,33 @@ namespace DotEditor.NodeGraph
             win.Show();
         }
 
+        private bool isShow = false;
         protected override void InitializeWindow(BaseGraph graph)
         {
-            flowGraph = graph as FlowGraph;
-
-            if(graphView == null)
+            if (graphView == null)
             {
                 graphView = new FlowGraphView(this);
                 graphView.Add(new MiniMapView(graphView));
+
+                var toolbar = new Toolbar();
+                var toggleProcessPanel = new ToolbarToggle();
+                toggleProcessPanel.text = "Show Processor";
+                toggleProcessPanel.RegisterValueChangedCallback(evt =>
+                {
+                    isShow = !isShow;
+                    graphView.ToggleView<FlowGraphProcessorView>();
+                });
+                toolbar.Add(toggleProcessPanel);
+
+                graphView.Add(toggleProcessPanel);
             }
 
             rootView.Add(graphView);
+        }
+
+        protected override void InitializeGraphView(BaseGraphView view)
+        {
+            base.InitializeGraphView(view);
         }
 
         protected override void OnDestroy()
