@@ -9,7 +9,7 @@ namespace DotEngine.NodeGraph.Flow
     [NodeMenuItem("Flow/Conditions/IF")]
     [Node("If")]
     [NodeTag("flow")]
-    public class IfFlowNode : BaseLinearFlowNode
+    public class IfNode : BaseLinearFlowNode
     {
         [Input(name = "Condition")]
         public bool condition;

@@ -724,13 +724,31 @@ namespace GraphProcessor
 			return null;
 		}
 
-		/// <summary>
-		/// Get the port from field name and identifier
-		/// </summary>
-		/// <param name="fieldName">C# field name</param>
-		/// <param name="identifier">Unique port identifier</param>
-		/// <returns></returns>
-		public NodePort	GetPort(string fieldName, string identifier)
+		public IEnumerable<BaseNode> FindAllInDependencies(Func<BaseNode, bool> condition)
+		{
+            Stack<BaseNode> dependencies = new Stack<BaseNode>(GetInputNodes());
+			while(dependencies.Count > 0)
+			{
+				var node = dependencies.Pop();
+				if(condition(node))
+				{
+					yield return node;
+				}
+
+				foreach(var dep in node.GetInputNodes())
+				{
+					dependencies.Push(dep);
+				}
+			}
+        }
+
+        /// <summary>
+        /// Get the port from field name and identifier
+        /// </summary>
+        /// <param name="fieldName">C# field name</param>
+        /// <param name="identifier">Unique port identifier</param>
+        /// <returns></returns>
+        public NodePort	GetPort(string fieldName, string identifier)
 		{
 			return inputPorts.Concat(outputPorts).FirstOrDefault(p => {
 				var bothNull = String.IsNullOrEmpty(identifier) && String.IsNullOrEmpty(p.portData.identifier);

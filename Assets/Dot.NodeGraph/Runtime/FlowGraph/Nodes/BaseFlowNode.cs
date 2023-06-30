@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 
 namespace DotEngine.NodeGraph.Flow
 {
@@ -29,25 +30,11 @@ namespace DotEngine.NodeGraph.Flow
 
         protected virtual void ProcessDependencies()
         {
-            Stack<BaseNode> dependencyStack = new Stack<BaseNode>();
-            dependencyStack.Push(this);
-
-            List<BaseNode> dependencies = new List<BaseNode>();
-            while (dependencyStack.Count > 0)
+            var dependencies = FindAllInDependencies((n) =>
             {
-                var node = dependencyStack.Pop();
-
-                if (node is BaseFlowNode)
-                {
-                    continue;
-                }
-                dependencies.Insert(0, node);
-
-                foreach (var dep in node.GetInputNodes())
-                {
-                    dependencyStack.Push(dep);
-                }
-            }
+                return n is not BaseFlowNode;
+            }).ToList();
+            dependencies.Reverse();
 
             HashSet<BaseNode> processedNodeSet = new HashSet<BaseNode>();
             foreach (var dep in dependencies)

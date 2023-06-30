@@ -36,7 +36,7 @@ namespace DotEditor.NodeGraph
                 });
                 toolbar.Add(toggleProcessPanel);
 
-                graphView.Add(toggleProcessPanel);
+                graphView.Add(toolbar);
             }
 
             rootView.Add(graphView);
