@@ -132,14 +132,24 @@ namespace GraphProcessor
 
 		Dictionary<Type, (Type nodeType, MethodInfo initalizeNodeFromObject)> nodeTypePerCreateAssetType = new Dictionary<Type, (Type, MethodInfo)>();
 
-		public BaseGraphView(EditorWindow window)
+        readonly string graphWindowStyle = "GraphProcessorStyles/BaseGraphView";
+
+        public BaseGraphView(EditorWindow window)
 		{
-			serializeGraphElements = SerializeGraphElementsCallback;
+            styleSheets.Add(Resources.Load<StyleSheet>(graphWindowStyle));
+
+            serializeGraphElements = SerializeGraphElementsCallback;
 			canPasteSerializedData = CanPasteSerializedDataCallback;
 			unserializeAndPaste = UnserializeAndPasteCallback;
             graphViewChanged = GraphViewChangedCallback;
 			viewTransformChanged = ViewTransformChangedCallback;
             elementResized = ElementResizedCallback;
+
+			style.flexGrow = 1;
+
+			var gridView = new GridBackground();
+			gridView.StretchToParentSize();
+			Insert(0,gridView);
 
 			RegisterCallback< KeyDownEvent >(KeyDownCallback);
 			RegisterCallback< DragPerformEvent >(DragPerformedCallback);
@@ -149,14 +159,12 @@ namespace GraphProcessor
 
 			InitializeManipulators();
 
-			SetupZoom(0.05f, 2f);
+			SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
 
 			Undo.undoRedoPerformed += ReloadView;
 
 			createNodeMenu = ScriptableObject.CreateInstance< CreateNodeMenuWindow >();
 			createNodeMenu.Initialize(this, window);
-
-			this.StretchToParentSize();
 		}
 
 		protected virtual NodeInspectorObject CreateNodeInspectorObject()
