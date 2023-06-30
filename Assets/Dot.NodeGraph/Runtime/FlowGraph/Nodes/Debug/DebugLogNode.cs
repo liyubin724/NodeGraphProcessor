@@ -22,7 +22,7 @@ namespace DotEngine.NodeGraph.Flow
         protected override void Process()
         {
             var format = string.IsNullOrEmpty(messageFormat) ? "{0}" : messageFormat;
-            var message = string.Format(format, target);
+            var message = string.Format(format, target??"null");
             switch (logType)
             {
                 case LogType.Log:
