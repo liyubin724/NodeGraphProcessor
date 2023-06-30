@@ -5,19 +5,24 @@ using UnityEngine;
 namespace DotEngine.NodeGraph.Flow
 {
     [Serializable]
-    [NodeMenuItem("Flow/Debug/Log")]
+    [NodeMenuItem("Flow/Debug/Debug Log")]
     [Node("Log")]
     [NodeTag("flow")]
     public class DebugLogNode : BaseLinearFlowNode
     {
-        [Input("Message")]
+        [Input("Target")]
+        public object target;
+
+        [Input("Format")]
         [SerializeField]
-        public string message;
+        public string messageFormat;
 
         public LogType logType = LogType.Log;
 
         protected override void Process()
         {
+            var format = string.IsNullOrEmpty(messageFormat) ? "{0}" : messageFormat;
+            var message = string.Format(format, target);
             switch (logType)
             {
                 case LogType.Log:
@@ -26,12 +31,10 @@ namespace DotEngine.NodeGraph.Flow
                 case LogType.Warning:
                     Debug.LogWarning(message);
                     break;
+                case LogType.Assert:
                 case LogType.Error:
                 case LogType.Exception:
                     Debug.LogError(message);
-                    break;
-                case LogType.Assert:
-                    Debug.Assert(message != null);
                     break;
             }
         }

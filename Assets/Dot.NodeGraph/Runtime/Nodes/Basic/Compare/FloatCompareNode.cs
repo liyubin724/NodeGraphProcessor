@@ -4,7 +4,9 @@ using System;
 namespace DotEngine.NodeGraph
 {
     [Serializable]
-    [NodeMenuItem("Basic/Compare/Float")]
+    [Node("Compare(Float)")]
+    [NodeTag("basic")]
+    [NodeMenuItem("Basic/Compare/Compare(Float)")]
     public class FloatCompareNode : BaseCompareValueNode<float>
     {
     }

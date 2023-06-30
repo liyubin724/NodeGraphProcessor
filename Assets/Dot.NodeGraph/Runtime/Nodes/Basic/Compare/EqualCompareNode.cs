@@ -4,7 +4,9 @@ using System;
 namespace DotEngine.NodeGraph
 {
     [Serializable]
-    [NodeMenuItem("Basic/Compare/Equal")]
+    [Node("Equal(Object)")]
+    [NodeTag("basic")]
+    [NodeMenuItem("Basic/Compare/Equal(Object)")]
     internal class EqualCompareNode : BaseCompareNode<object,object>
     {
         protected override bool Compare()

@@ -15,7 +15,19 @@ namespace DotEngine.NodeGraph.Flow
                 .Select(n => n as BaseFlowNode);
         }
 
-        public BaseNode[] GetAllDependencies()
+        public virtual void OnExecute()
+        {
+            ProcessDependencies();
+
+            OnProcess();
+
+            foreach (var nextNode in GetNextNodes())
+            {
+                nextNode.OnExecute();
+            }
+        }
+
+        protected virtual void ProcessDependencies()
         {
             Stack<BaseNode> dependencyStack = new Stack<BaseNode>();
             dependencyStack.Push(this);
@@ -36,25 +48,6 @@ namespace DotEngine.NodeGraph.Flow
                     dependencyStack.Push(dep);
                 }
             }
-
-            return dependencies.ToArray();
-        }
-
-        public void OnExecute()
-        {
-            ProcessDependencies();
-
-            OnProcess();
-
-            foreach (var nextNode in GetNextNodes())
-            {
-                nextNode.OnExecute();
-            }
-        }
-
-        protected virtual void ProcessDependencies()
-        {
-            var dependencies = GetAllDependencies();
 
             HashSet<BaseNode> processedNodeSet = new HashSet<BaseNode>();
             foreach (var dep in dependencies)
