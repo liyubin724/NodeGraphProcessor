@@ -504,6 +504,9 @@ namespace GraphProcessor
 			{
 				var inputAttribute = field.GetCustomAttribute< InputAttribute >();
 				var outputAttribute = field.GetCustomAttribute< OutputAttribute >();
+				if (inputAttribute == null && outputAttribute == null)
+					continue ;
+
 				var tooltipAttribute = field.GetCustomAttribute< TooltipAttribute >();
 				var showInInspector = field.GetCustomAttribute< ShowInInspector >();
 				var vertical = field.GetCustomAttribute< VerticalAttribute >();
@@ -514,9 +517,6 @@ namespace GraphProcessor
 
 				if (showInInspector != null)
 					_needsInspector = true;
-
-				if (inputAttribute == null && outputAttribute == null)
-					continue ;
 
 				//check if field is a collection type
 				isMultiple = (inputAttribute != null) ? inputAttribute.allowMultiple : (outputAttribute.allowMultiple);
