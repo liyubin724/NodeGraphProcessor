@@ -35,8 +35,6 @@ namespace GameEditor.Asset.ImportSetting
             tis.spriteAlignment = (int)pivotMode;
             tis.spriteGenerateFallbackPhysicsShape = enablePhysics;
             importer.SetTextureSettings(tis);
-
-            AssetDatabase.ImportAsset(assetPath);
         }
     }
 }

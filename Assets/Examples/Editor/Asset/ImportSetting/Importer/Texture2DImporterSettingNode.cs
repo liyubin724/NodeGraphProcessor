@@ -16,8 +16,6 @@ namespace GameEditor.Asset.ImportSetting
             importer.textureShape = TextureImporterShape.Texture2D;
 
             base.SetImporter(assetPath, importer);
-
-            AssetDatabase.ImportAsset(assetPath);
         }
     }
 }

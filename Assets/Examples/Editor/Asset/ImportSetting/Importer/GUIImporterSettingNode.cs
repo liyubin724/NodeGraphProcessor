@@ -23,8 +23,6 @@ namespace GameEditor.Asset.ImportSetting
             importer.alphaIsTransparency = true;
             importer.isReadable = false;
             importer.anisoLevel = 1;
-
-            AssetDatabase.ImportAsset(assetPath);
         }
     }
 }
