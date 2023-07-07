@@ -29,9 +29,9 @@ namespace DotEngine.NodeGraph
         public List<bool> conditions;
 
         [CustomPortBehavior(nameof(conditions))]
-        IEnumerable<PortData> ListDependencies(List<SerializableEdge> edges)
+        public IEnumerable<PortData> ListDependencies(List<SerializableEdge> edges)
         {
-            for(int i =0;i<edges.Count+1;i++)
+            for (int i = 0; i < edges.Count + 1; i++)
             {
                 yield return new PortData
                 {
