@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameEditor.Asset.ImportSetting
 {
-    public abstract class BaseAssetFilterNode : BaseAssetImportNode
+    public abstract class BaseFilterNode : BaseAssetSettingNode
     {
         [Input("Assets")]
         public List<string> inputAssetPaths;

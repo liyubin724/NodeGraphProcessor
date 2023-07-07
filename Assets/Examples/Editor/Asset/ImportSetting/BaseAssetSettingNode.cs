@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GameEditor.Asset.ImportSetting
 {
-    public abstract class BaseAssetImportNode : BaseNode
+    public abstract class BaseAssetSettingNode : BaseNode
     {
     }
 }

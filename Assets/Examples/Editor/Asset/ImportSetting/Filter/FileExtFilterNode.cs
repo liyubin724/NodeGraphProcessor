@@ -10,7 +10,7 @@ namespace GameEditor.Asset.ImportSetting
     [Node("File Ext Filter")]
     [NodeMenuItem("Asset Importer/Filter/File Ext Filter")]
     [NodeTag("asset-importer")]
-    public class AssetFileExtFilterNode : BaseAssetFilterNode
+    public class FileExtFilterNode : BaseFilterNode
     {
         public List<string> extensions;
 

@@ -11,7 +11,7 @@ namespace GameEditor.Asset.ImportSetting
     [Node("Folder Finder")]
     [NodeMenuItem("Asset Importer/Finder/Folder Finder")]
     [NodeTag("asset-importer")]
-    public class AssetFolderFinderNode : BaseAssetFinderNode
+    public class FolderFinderNode : BaseAssetFinderNode
     {
         [Input]
         public List<string> assetFolders;
