@@ -379,7 +379,15 @@ namespace GraphProcessor
 
 		public void PullDatas()
 		{
-			ForEach(p => p.PullData());
+			ForEach((port) =>
+			{
+				if (port.GetEdges().Count > 0)
+				{
+					port.PullData();
+				}
+			});
+
+			//ForEach(p => p.PullData());
 		}
 	}
 
@@ -390,7 +398,15 @@ namespace GraphProcessor
 
 		public void PushDatas()
 		{
-			ForEach(p => p.PushData());
-		}
+            ForEach((port) =>
+            {
+                if (port.GetEdges().Count > 0)
+                {
+                    port.PushData();
+                }
+            });
+
+            //ForEach(p => p.PushData());
+        }
 	}
 }
