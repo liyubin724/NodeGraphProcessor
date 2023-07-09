@@ -24,9 +24,8 @@ namespace GameEditor.Asset.ImportSetting
                 if(importer != null)
                 {
                     SetImporter(assetPath, importer);
+                    AssetDatabase.ImportAsset(assetPath);
                 }
-
-                AssetDatabase.ImportAsset(assetPath);
             }
         }
 
