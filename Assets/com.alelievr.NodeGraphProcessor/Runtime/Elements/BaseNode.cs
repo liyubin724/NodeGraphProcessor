@@ -12,26 +12,13 @@ namespace GraphProcessor
     [Serializable]
     public abstract partial class BaseNode
     {
-        // The name of the node in case it was renamed by a user
-        [SerializeField]
-        private string m_CustomName = null;
         /// <summary>
-        /// Set/Get the custom name of the node. 
+        /// the custom name of the node. 
+        // The name of the node in case it was renamed by a user
         /// This is intended to be used by renamable nodes.
         /// This custom name will be serialized inside the node.
         /// </summary>
-        public string customName
-        {
-            get
-            {
-                return m_CustomName;
-            }
-
-            set
-            {
-                m_CustomName = value;
-            }
-        }
+        public string customName = null;
 
         /// <summary>
         /// Is the node is locked (if locked it can't be moved)

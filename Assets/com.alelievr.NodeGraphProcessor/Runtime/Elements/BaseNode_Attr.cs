@@ -13,16 +13,26 @@ namespace GraphProcessor
         {
             get
             {
-                var type = GetType();
-                var n = type.Name;
-
-                var attr = type.GetCustomAttribute<NodeIdentityAttribute>();
+                var attr = GetType().GetCustomAttribute<NodeIdentityAttribute>();
                 if (attr != null && !string.IsNullOrEmpty(attr.name))
                 {
-                    n = attr.name;
+                    return attr.name;
                 }
 
-                return n;
+                return GetType().Name;
+            }
+        }
+
+        public string displayName
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(customName))
+                {
+                    return customName;
+                }
+
+                return name;
             }
         }
 
