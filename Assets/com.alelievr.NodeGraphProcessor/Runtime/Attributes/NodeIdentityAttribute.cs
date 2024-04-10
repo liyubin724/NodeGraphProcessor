@@ -7,6 +7,7 @@ namespace GraphProcessor
     {
         public string name { get; private set; }
         public bool enable { get; set; } = true;
+        public string icon { get; set; }
         public bool canProcess { get; set; } = true;
         public bool showControlsOnHover { get; set; } = false;
 

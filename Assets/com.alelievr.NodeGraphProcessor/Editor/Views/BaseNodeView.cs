@@ -77,7 +77,7 @@ namespace GraphProcessor
             if (!node.deletable)
                 capabilities &= ~Capabilities.Deletable;
             // Note that the Renamable capability is useless right now as it haven't been implemented in Graphview
-            if (node.isRenamable)
+            if (node.renamable)
                 capabilities |= Capabilities.Renamable;
 
             owner.computeOrderUpdated += ComputeOrderUpdatedCallback;
