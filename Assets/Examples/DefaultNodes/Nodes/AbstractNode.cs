@@ -16,8 +16,9 @@ public abstract class AbstractNode : BaseNode
 }
 
 [System.Serializable, NodeMenuItem("Custom/Abstract Child1")]
-[NodeIdentity("AbstractNodeChild1")]
+[NodeIdentity("Abstract Node Child 1")]
 public class AbstractNodeChild1 : AbstractNode { }
+
 [System.Serializable, NodeMenuItem("Custom/Abstract Child2")]
-[NodeIdentity("AbstractNodeChild2")]
+[NodeIdentity("Abstract Node Child 2")]
 public class AbstractNodeChild2 : AbstractNode { }

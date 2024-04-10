@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using GraphProcessor;
 
 namespace GraphProcessor.Examples
 {
@@ -17,7 +15,5 @@ namespace GraphProcessor.Examples
             // Return all the nodes connected to the executes port
             return GetOutputNodes().Where(n => n is ConditionalNode).Select(n => n as ConditionalNode);
         }
-
-        public override FieldInfo[] GetNodeFields() => base.GetNodeFields();
     }
 }

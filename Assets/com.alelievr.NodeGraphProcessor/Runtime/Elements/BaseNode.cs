@@ -21,7 +21,7 @@ namespace GraphProcessor
         /// This custom name will be serialized inside the node.
         /// </summary>
         public string customName = null;
-        //Node view datas
+        //the position and size of nodeView
         public Rect position;
         /// <summary>
         /// Is the node expanded
@@ -39,7 +39,7 @@ namespace GraphProcessor
         /// <summary>
         /// Is the node is locked (if locked it can't be moved)
         /// </summary>
-        public virtual bool isLocked => nodeLock;
+        public bool isLocked => nodeLock;
 
         /// <summary>
         /// Container of input ports
@@ -58,8 +58,7 @@ namespace GraphProcessor
         /// Triggered when the node is processes
         /// </summary>
         public event ProcessDelegate onProcessed;
-        public event Action<string, NodeMessageType> onMessageAdded;
-        public event Action<string> onMessageRemoved;
+
         /// <summary>
         /// Triggered after an edge was connected on the node
         /// </summary>
@@ -99,32 +98,37 @@ namespace GraphProcessor
         internal Dictionary<Type, CustomPortTypeBehaviorDelegate> customPortTypeBehaviorMap = new Dictionary<Type, CustomPortTypeBehaviorDelegate>();
 
         [NonSerialized]
-        private List<string> messages = new List<string>();
-
-        [NonSerialized]
         protected BaseGraph graph;
 
         internal class NodeFieldInformation
         {
             public string name;
             public string fieldName;
-            public FieldInfo info;
-            public bool input;
+            public FieldInfo fieldInfo;
+            public bool isInput;
             public bool isMultiple;
             public string tooltip;
-            public CustomPortBehaviorDelegate behavior;
-            public bool vertical;
+            public bool isVertical;
 
-            public NodeFieldInformation(FieldInfo info, string name, bool input, bool isMultiple, string tooltip, bool vertical, CustomPortBehaviorDelegate behavior)
+            public CustomPortBehaviorDelegate behavior;
+
+            public NodeFieldInformation(
+                FieldInfo fieldInfo,
+                string name,
+                bool isInput,
+                bool isMultiple,
+                string tooltip,
+                bool isVertical,
+                CustomPortBehaviorDelegate behavior)
             {
-                this.input = input;
+                this.isInput = isInput;
                 this.isMultiple = isMultiple;
-                this.info = info;
+                this.fieldInfo = fieldInfo;
                 this.name = name;
-                this.fieldName = info.Name;
+                this.fieldName = fieldInfo.Name;
                 this.behavior = behavior;
                 this.tooltip = tooltip;
-                this.vertical = vertical;
+                this.isVertical = isVertical;
             }
         }
 
@@ -158,15 +162,18 @@ namespace GraphProcessor
 
         void InitializeCustomPortTypeMethods()
         {
-            MethodInfo[] methods = new MethodInfo[0];
             Type baseType = GetType();
             while (true)
             {
-                methods = baseType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
+                if (baseType == null)
+                {
+                    break;
+                }
+
+                var methods = baseType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
                 foreach (var method in methods)
                 {
                     var typeBehaviors = method.GetCustomAttributes<CustomPortTypeBehavior>().ToArray();
-
                     if (typeBehaviors.Length == 0)
                         continue;
 
@@ -187,8 +194,6 @@ namespace GraphProcessor
 
                 // Try to also find private methods in the base class
                 baseType = baseType.BaseType;
-                if (baseType == null)
-                    break;
             }
         }
 
@@ -200,7 +205,7 @@ namespace GraphProcessor
         {
             InitializeCustomPortTypeMethods();
 
-            foreach (var key in OverrideFieldOrder(nodeFields.Values.Select(k => k.info)))
+            foreach (var key in OverrideFieldOrder(nodeFields.Values.Select(k => k.fieldInfo)))
             {
                 var nodeField = nodeFields[key.Name];
 
@@ -211,7 +216,7 @@ namespace GraphProcessor
                 else
                 {
                     // If we don't have a custom behavior on the node, we just have to create a simple port
-                    AddPort(nodeField.input, nodeField.fieldName, new PortData { acceptMultipleEdges = nodeField.isMultiple, displayName = nodeField.name, tooltip = nodeField.tooltip, vertical = nodeField.vertical });
+                    AddPort(nodeField.isInput, nodeField.fieldName, new PortData { acceptMultipleEdges = nodeField.isMultiple, displayName = nodeField.name, tooltip = nodeField.tooltip, vertical = nodeField.isVertical });
                 }
             }
         }
@@ -237,7 +242,11 @@ namespace GraphProcessor
             }
 
             // Order by MetadataToken and inheritance level to sync the order with the port order (make sure FieldDrawers are next to the correct port)
-            return fields.OrderByDescending(f => (long)(((GetFieldInheritanceLevel(f) << 32)) | (long)f.MetadataToken));
+            return fields.OrderByDescending((f) =>
+            {
+                return (long)(((GetFieldInheritanceLevel(f) << 32)) | (long)f.MetadataToken);
+            });
+
         }
 
         protected BaseNode()
@@ -255,7 +264,7 @@ namespace GraphProcessor
         {
             bool changed = false;
 
-            foreach (var key in OverrideFieldOrder(nodeFields.Values.Select(k => k.info)))
+            foreach (var key in OverrideFieldOrder(nodeFields.Values.Select(k => k.fieldInfo)))
             {
                 var field = nodeFields[key.Name];
                 changed |= UpdatePortsForField(field.fieldName);
@@ -271,7 +280,7 @@ namespace GraphProcessor
         {
             bool changed = false;
 
-            foreach (var key in OverrideFieldOrder(nodeFields.Values.Select(k => k.info)))
+            foreach (var key in OverrideFieldOrder(nodeFields.Values.Select(k => k.fieldInfo)))
             {
                 var field = nodeFields[key.Name];
                 changed |= UpdatePortsForFieldLocal(field.fieldName);
@@ -299,7 +308,7 @@ namespace GraphProcessor
 
             List<string> finalPorts = new List<string>();
 
-            var portCollection = fieldInfo.input ? (NodePortContainer)inputPorts : outputPorts;
+            var portCollection = fieldInfo.isInput ? (NodePortContainer)inputPorts : outputPorts;
 
             // Gather all fields for this port (before to modify them)
             var nodePorts = portCollection.Where(p => p.fieldName == fieldName);
@@ -313,9 +322,9 @@ namespace GraphProcessor
             }
             else
             {
-                var customPortTypeBehavior = customPortTypeBehaviorMap[fieldInfo.info.FieldType];
+                var customPortTypeBehavior = customPortTypeBehaviorMap[fieldInfo.fieldInfo.FieldType];
 
-                foreach (var portData in customPortTypeBehavior(fieldName, fieldInfo.name, fieldInfo.info.GetValue(this)))
+                foreach (var portData in customPortTypeBehavior(fieldName, fieldInfo.name, fieldInfo.fieldInfo.GetValue(this)))
                     AddPortData(portData);
             }
 
@@ -325,7 +334,7 @@ namespace GraphProcessor
                 // Guard using the port identifier so we don't duplicate identifiers
                 if (port == null)
                 {
-                    AddPort(fieldInfo.input, fieldName, portData);
+                    AddPort(fieldInfo.isInput, fieldName, portData);
                     changed = true;
                 }
                 else
@@ -358,7 +367,7 @@ namespace GraphProcessor
                     // If the current port does not appear in the list of final ports, we remove it
                     if (!finalPorts.Any(id => id == currentPort.portData.identifier))
                     {
-                        RemovePort(fieldInfo.input, currentPort);
+                        RemovePort(fieldInfo.isInput, currentPort);
                         changed = true;
                     }
                 }
@@ -387,7 +396,7 @@ namespace GraphProcessor
             if (info.behavior != null)
                 return true;
 
-            if (customPortTypeBehaviorMap.ContainsKey(info.info.FieldType))
+            if (customPortTypeBehaviorMap.ContainsKey(info.fieldInfo.FieldType))
                 return true;
 
             return false;
@@ -466,40 +475,41 @@ namespace GraphProcessor
         void InitializeInOutDatas()
         {
             var fields = GetNodeFields();
-            var methods = GetType().GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-
             foreach (var field in fields)
             {
                 var inputAttribute = field.GetCustomAttribute<InputAttribute>();
                 var outputAttribute = field.GetCustomAttribute<OutputAttribute>();
+                if (inputAttribute == null && outputAttribute == null)
+                    continue;
+
                 var tooltipAttribute = field.GetCustomAttribute<TooltipAttribute>();
                 var showInInspector = field.GetCustomAttribute<ShowInInspector>();
                 var vertical = field.GetCustomAttribute<VerticalAttribute>();
+
                 bool isMultiple = false;
-                bool input = false;
+                bool isInput = false;
                 string name = field.Name;
                 string tooltip = null;
 
                 if (showInInspector != null)
                     _needsInspector = true;
 
-                if (inputAttribute == null && outputAttribute == null)
-                    continue;
 
                 //check if field is a collection type
                 isMultiple = (inputAttribute != null) ? inputAttribute.allowMultiple : (outputAttribute.allowMultiple);
-                input = inputAttribute != null;
+                isInput = inputAttribute != null;
                 tooltip = tooltipAttribute?.tooltip;
 
-                if (!String.IsNullOrEmpty(inputAttribute?.name))
+                if (!string.IsNullOrEmpty(inputAttribute?.name))
                     name = inputAttribute.name;
-                if (!String.IsNullOrEmpty(outputAttribute?.name))
+                if (!string.IsNullOrEmpty(outputAttribute?.name))
                     name = outputAttribute.name;
 
                 // By default we set the behavior to null, if the field have a custom behavior, it will be set in the loop just below
-                nodeFields[field.Name] = new NodeFieldInformation(field, name, input, isMultiple, tooltip, vertical != null, null);
+                nodeFields[field.Name] = new NodeFieldInformation(field, name, isInput, isMultiple, tooltip, vertical != null, null);
             }
 
+            var methods = GetType().GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             foreach (var method in methods)
             {
                 var customPortBehaviorAttribute = method.GetCustomAttribute<CustomPortBehaviorAttribute>();
@@ -609,7 +619,7 @@ namespace GraphProcessor
         {
             // Fixup port data info if needed:
             if (portData.displayType == null)
-                portData.displayType = nodeFields[fieldName].info.FieldType;
+                portData.displayType = nodeFields[fieldName].fieldInfo.FieldType;
 
             if (input)
                 inputPorts.Add(new NodePort(this, fieldName, portData));
@@ -738,7 +748,13 @@ namespace GraphProcessor
         /// </summary>
         /// <param name="fieldName"></param>
         /// <returns></returns>
-        public bool IsFieldInput(string fieldName) => nodeFields[fieldName].input;
+        public bool IsFieldInput(string fieldName) => nodeFields[fieldName].isInput;
+
+        #region Message
+        [NonSerialized]
+        private List<string> m_Messages = new List<string>();
+        public event Action<string, NodeMessageType> onMessageAdded;
+        public event Action<string> onMessageRemoved;
 
         /// <summary>
         /// Add a message on the node
@@ -747,11 +763,11 @@ namespace GraphProcessor
         /// <param name="messageType"></param>
         public void AddMessage(string message, NodeMessageType messageType)
         {
-            if (messages.Contains(message))
+            if (m_Messages.Contains(message))
                 return;
 
             onMessageAdded?.Invoke(message, messageType);
-            messages.Add(message);
+            m_Messages.Add(message);
         }
 
         /// <summary>
@@ -761,7 +777,7 @@ namespace GraphProcessor
         public void RemoveMessage(string message)
         {
             onMessageRemoved?.Invoke(message);
-            messages.Remove(message);
+            m_Messages.Remove(message);
         }
 
         /// <summary>
@@ -769,10 +785,12 @@ namespace GraphProcessor
         /// </summary>
         public void ClearMessages()
         {
-            foreach (var message in messages)
+            foreach (var message in m_Messages)
                 onMessageRemoved?.Invoke(message);
-            messages.Clear();
+            m_Messages.Clear();
         }
+        #endregion Message
+
         #endregion
     }
 }

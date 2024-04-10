@@ -33,8 +33,6 @@ public class CustomPortData : BaseNode
     [CustomPortBehavior(nameof(inputs))]
     IEnumerable<PortData> GetPortsForInputs(List<SerializableEdge> edges)
     {
-        PortData pd = new PortData();
-
         foreach (var portData in portDatas)
         {
             yield return portData;

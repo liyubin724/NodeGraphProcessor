@@ -975,11 +975,11 @@ namespace GraphProcessor
 
                 if (nodeTarget.nodeFields.TryGetValue(port.fieldName, out var fieldInfo))
                 {
-                    var valueBeforeConnection = GetInputFieldValue(fieldInfo.info);
+                    var valueBeforeConnection = GetInputFieldValue(fieldInfo.fieldInfo);
 
                     if (valueBeforeConnection != null)
                     {
-                        fieldInfo.info.SetValue(nodeTarget, valueBeforeConnection);
+                        fieldInfo.fieldInfo.SetValue(nodeTarget, valueBeforeConnection);
                     }
                 }
             }

@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 using System.Reflection;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 namespace GraphProcessor
 {
@@ -114,10 +113,12 @@ namespace GraphProcessor
         static bool IsNodeAccessible(Type nodeType)
         {
             if (nodeType.IsAbstract)
+            {
                 return false;
+            }
 
             var identityAttr = nodeType.GetCustomAttribute<NodeIdentityAttribute>();
-            if (identityAttr != null && !identityAttr.enable)
+            if (identityAttr == null || !identityAttr.enable)
             {
                 return false;
             }
@@ -127,25 +128,21 @@ namespace GraphProcessor
 
         static bool IsNodeCompatibleToGraph(Type nodeType, Type graphType)
         {
-            if (!IsNodeAccessible(nodeType))
+            var nodeIdentityAttr = nodeType.GetCustomAttribute<NodeIdentityAttribute>();
+            if (nodeIdentityAttr == null)
             {
                 return false;
             }
 
-            var nodeIdentityAttr = nodeType.GetCustomAttribute<NodeIdentityAttribute>();
-            if (nodeIdentityAttr == null || nodeIdentityAttr.tags == null || nodeIdentityAttr.tags.Length == 0)
+            if (nodeIdentityAttr.tags == null || nodeIdentityAttr.tags.Length == 0)
             {
                 return true;
             }
 
-            if (graphType.IsAbstract)
-            {
-                return false;
-            }
             var graphIdentityAttr = graphType.GetCustomAttribute<GraphIdentifyAttribute>();
             if (graphIdentityAttr == null)
             {
-                return true;
+                return false;
             }
 
             var nodeTags = nodeIdentityAttr.tags;
@@ -250,11 +247,11 @@ namespace GraphProcessor
 
         static void AddNodeScriptAsset(Type type)
         {
-            var nodeScriptAsset = FindScriptFromClassName(type.Name);
+            var nodeScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name);
             // Try find the class name with Node name at the end
             if (nodeScriptAsset == null)
             {
-                nodeScriptAsset = FindScriptFromClassName(type.Name + "Node");
+                nodeScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name + "Node");
             }
 
             if (nodeScriptAsset != null)
@@ -277,33 +274,14 @@ namespace GraphProcessor
                 sm_NodeViewPerType[nodeType] = type;
             }
 
-            var nodeViewScriptAsset = FindScriptFromClassName(type.Name);
+            var nodeViewScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name);
             if (nodeViewScriptAsset == null)
-                nodeViewScriptAsset = FindScriptFromClassName(type.Name + "View");
+                nodeViewScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name + "View");
             if (nodeViewScriptAsset == null)
-                nodeViewScriptAsset = FindScriptFromClassName(type.Name + "NodeView");
+                nodeViewScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name + "NodeView");
 
             if (nodeViewScriptAsset != null)
                 sm_NodeViewScripts[type] = nodeViewScriptAsset;
-        }
-
-        static MonoScript FindScriptFromClassName(string className)
-        {
-            var scriptGUIDs = AssetDatabase.FindAssets($"t:script {className}");
-
-            if (scriptGUIDs.Length == 0)
-                return null;
-
-            foreach (var scriptGUID in scriptGUIDs)
-            {
-                var assetPath = AssetDatabase.GUIDToAssetPath(scriptGUID);
-                var script = AssetDatabase.LoadAssetAtPath<MonoScript>(assetPath);
-
-                if (script != null && string.Equals(className, Path.GetFileNameWithoutExtension(assetPath), StringComparison.OrdinalIgnoreCase))
-                    return script;
-            }
-
-            return null;
         }
 
         public static Type GetNodeViewTypeFromType(Type nodeType)
