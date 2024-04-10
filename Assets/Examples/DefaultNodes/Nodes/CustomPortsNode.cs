@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using GraphProcessor;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 [System.Serializable, NodeMenuItem("Custom/MultiPorts")]
 [NodeLayoutStyle("TestType")]
+[NodeIdentity("Custom Ports")]
 public class CustomPortsNode : BaseNode
 {
     [Input]
@@ -15,8 +15,6 @@ public class CustomPortsNode : BaseNode
     public List<float> outputs; // TODO: custom function for this one
 
     List<object> values = new List<object>();
-
-    public override string name => "CustomPorts";
 
     // We keep the max port count so it doesn't cause binding issues
     [SerializeField, HideInInspector]

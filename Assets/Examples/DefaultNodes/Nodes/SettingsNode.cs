@@ -1,27 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using GraphProcessor;
 using UnityEngine;
-using GraphProcessor;
-using System.Linq;
 
 public enum Setting
 {
-	S1,
-	S2,
-	S3,
+    S1,
+    S2,
+    S3,
 }
 
 [System.Serializable, NodeMenuItem("Custom/SettingsNode")]
+[NodeIdentity("Setting Node")]
 public class SettingsNode : BaseNode
 {
-	public Setting				setting;
-	public override string		name => "SettingsNode";
+    public Setting setting;
 
-	[Input]
-	public float			input;
-	
-	[Output]
-	public float			output;
+    [Input]
+    public float input;
 
-	protected override void Process() {}
+    [Output]
+    public float output;
+
+    protected override void Process() { }
 }

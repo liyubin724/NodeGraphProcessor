@@ -3,12 +3,11 @@ using UnityEngine;
 
 [System.Serializable, NodeMenuItem("Custom/OutputNode")]
 [NodeCapability(deletable = false)]
+[NodeIdentity("Output Node")]
 public class OutputNode : BaseNode
 {
     [Input(name = "In")]
     public float input;
-
-    public override string name => "OutputNode";
 
     protected override void Process()
     {

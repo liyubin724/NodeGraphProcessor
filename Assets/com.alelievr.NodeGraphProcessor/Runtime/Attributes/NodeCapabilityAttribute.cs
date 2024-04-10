@@ -7,5 +7,6 @@ namespace GraphProcessor
     {
         public bool deletable { get; set; } = true;
         public bool renamable { get; set; } = false;
+        public bool unlockable { get; set; } = true;
     }
 }

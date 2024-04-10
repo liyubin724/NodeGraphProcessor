@@ -1,23 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using GraphProcessor;
+﻿using GraphProcessor;
 using GraphProcessor.Examples;
+using UnityEngine;
 
 [NodeMenuItem("Print")]
+[NodeIdentity("Print")]
 public class PrintNode : BaseNode
 {
-	[Input]
-	public object	obj;
-
-	public override string name => "Print";
+    [Input]
+    public object obj;
 }
 
 [NodeMenuItem("Conditional/Print")]
+[NodeIdentity("Print")]
 public class ConditionalPrintNode : LinearConditionalNode
 {
-	[Input]
-	public object	obj;
-
-	public override string name => "Print";
+    [Input]
+    public object obj;
 }
