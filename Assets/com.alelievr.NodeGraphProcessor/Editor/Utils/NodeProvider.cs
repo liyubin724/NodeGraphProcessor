@@ -82,7 +82,7 @@ namespace GraphProcessor
         {
             foreach (var nodeType in TypeCache.GetTypesDerivedFrom<BaseNode>())
             {
-                if (!IsNodeAccessibleFromMenu(nodeType))
+                if (!IsNodeAccessible(nodeType))
                     continue;
 
                 if (IsNodeSpecificToGraph(nodeType))
@@ -111,7 +111,7 @@ namespace GraphProcessor
             ProvideNodePortCreationDescription(nodeType, targetDescription, graph);
         }
 
-        static bool IsNodeAccessibleFromMenu(Type nodeType)
+        static bool IsNodeAccessible(Type nodeType)
         {
             if (nodeType.IsAbstract)
                 return false;
@@ -123,6 +123,42 @@ namespace GraphProcessor
             }
 
             return nodeType.GetCustomAttributes<NodeMenuItemAttribute>().Count() > 0;
+        }
+
+        static bool IsNodeCompatibleToGraph(Type nodeType, Type graphType)
+        {
+            if (!IsNodeAccessible(nodeType))
+            {
+                return false;
+            }
+
+            var nodeIdentityAttr = nodeType.GetCustomAttribute<NodeIdentityAttribute>();
+            if (nodeIdentityAttr == null || nodeIdentityAttr.tags == null || nodeIdentityAttr.tags.Length == 0)
+            {
+                return true;
+            }
+
+            if (graphType.IsAbstract)
+            {
+                return false;
+            }
+            var graphIdentityAttr = graphType.GetCustomAttribute<GraphIdentifyAttribute>();
+            if (graphIdentityAttr == null)
+            {
+                return true;
+            }
+
+            var nodeTags = nodeIdentityAttr.tags;
+            var graphNodeTags = graphIdentityAttr.nodeTags;
+            foreach (var tag in graphNodeTags)
+            {
+                if (Array.IndexOf(nodeTags, tag) >= 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         // Check if node has anything that depends on the graph type or settings
@@ -168,7 +204,7 @@ namespace GraphProcessor
         {
             foreach (var nodeType in TypeCache.GetTypesDerivedFrom<BaseNode>())
             {
-                if (!IsNodeAccessibleFromMenu(nodeType))
+                if (!IsNodeAccessible(nodeType))
                     continue;
 
                 AddNodeScriptAsset(nodeType);
