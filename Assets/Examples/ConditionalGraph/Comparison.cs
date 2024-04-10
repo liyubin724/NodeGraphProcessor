@@ -1,7 +1,7 @@
 ﻿using GraphProcessor;
 using UnityEngine.Rendering;
 
-namespace NodeGraphProcessor.Examples
+namespace GraphProcessor.Examples
 {
 	[System.Serializable, NodeMenuItem("Conditional/Comparison")]
 	public class Comparison : BaseNode

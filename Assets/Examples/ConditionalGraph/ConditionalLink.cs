@@ -1,4 +1,4 @@
-namespace NodeGraphProcessor.Examples
+namespace GraphProcessor.Examples
 {
     public struct ConditionalLink {}
 }

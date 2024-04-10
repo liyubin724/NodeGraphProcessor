@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GraphProcessor;
-using NodeGraphProcessor.Examples;
+using GraphProcessor.Examples;
 
 [NodeMenuItem("Print")]
 public class PrintNode : BaseNode

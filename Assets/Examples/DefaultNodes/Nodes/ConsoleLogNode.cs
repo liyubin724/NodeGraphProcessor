@@ -2,7 +2,7 @@ using System;
 using GraphProcessor;
 using UnityEngine;
 
-namespace NodeGraphProcessor.Examples
+namespace GraphProcessor.Examples
 {
 	[Serializable, NodeMenuItem("Debug/Console Log")]
 	public class ConsoleNode : LinearConditionalNode

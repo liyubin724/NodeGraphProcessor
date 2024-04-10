@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using GraphProcessor;
-using NodeGraphProcessor.Examples;
+using GraphProcessor.Examples;
 
 public class RuntimeConditionalGraph : MonoBehaviour
 {

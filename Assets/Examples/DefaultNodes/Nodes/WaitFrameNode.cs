@@ -3,7 +3,7 @@ using System.Collections;
 using GraphProcessor;
 using UnityEngine;
 
-namespace NodeGraphProcessor.Examples
+namespace GraphProcessor.Examples
 {
 	[Serializable, NodeMenuItem("Functions/Wait Frames")]
 	public class WaitFrameNode : WaitableNode

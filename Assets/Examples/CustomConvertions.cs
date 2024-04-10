@@ -1,7 +1,7 @@
 using UnityEngine;
 using GraphProcessor;
 using System;
-using NodeGraphProcessor.Examples;
+using GraphProcessor.Examples;
 using System.Collections.Generic;
 
 public class CustomConvertions : ITypeAdapter
