@@ -12,6 +12,8 @@ namespace GraphProcessor
     [Serializable]
     public abstract partial class BaseNode
     {
+        public string GUID;
+        public int computeOrder = -1;
         /// <summary>
         /// the custom name of the node. 
         // The name of the node in case it was renamed by a user
@@ -19,6 +21,20 @@ namespace GraphProcessor
         /// This custom name will be serialized inside the node.
         /// </summary>
         public string customName = null;
+        //Node view datas
+        public Rect position;
+        /// <summary>
+        /// Is the node expanded
+        /// </summary>
+        public bool expanded;
+        /// <summary>
+        /// Is debug visible
+        /// </summary>
+        public bool debug;
+        /// <summary>
+        /// Node locked state
+        /// </summary>
+        public bool nodeLock;
 
         /// <summary>
         /// Is the node is locked (if locked it can't be moved)
@@ -35,23 +51,6 @@ namespace GraphProcessor
         /// </summary>
         [NonSerialized]
         public readonly NodeOutputPortContainer outputPorts;
-
-        public string GUID;
-        public int computeOrder = -1;
-        //Node view datas
-        public Rect position;
-        /// <summary>
-        /// Is the node expanded
-        /// </summary>
-        public bool expanded;
-        /// <summary>
-        /// Is debug visible
-        /// </summary>
-        public bool debug;
-        /// <summary>
-        /// Node locked state
-        /// </summary>
-        public bool nodeLock;
 
         public delegate void ProcessDelegate();
 
