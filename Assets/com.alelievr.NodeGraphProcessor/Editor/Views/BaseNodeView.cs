@@ -223,7 +223,7 @@ namespace GraphProcessor
             void CloseAndSaveTitleEditor(string newTitle)
             {
                 owner.RegisterCompleteObjectUndo("Renamed node " + newTitle);
-                nodeTarget.SetCustomName(newTitle);
+                nodeTarget.customName = newTitle;
 
                 // hide title TextBox
                 titleTextField.style.display = DisplayStyle.None;
@@ -236,7 +236,7 @@ namespace GraphProcessor
 
         void UpdateTitle()
         {
-            title = (nodeTarget.GetCustomName() == null) ? nodeTarget.GetType().Name : nodeTarget.GetCustomName();
+            title = nodeTarget.customName ?? nodeTarget.name;
         }
 
         void InitializeSettings()

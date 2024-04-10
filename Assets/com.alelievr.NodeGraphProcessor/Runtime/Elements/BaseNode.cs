@@ -14,23 +14,25 @@ namespace GraphProcessor
     {
         // The name of the node in case it was renamed by a user
         [SerializeField]
-        private string customName = null;
+        private string m_CustomName = null;
 
         /// <summary>
-        /// Set the custom name of the node. 
+        /// Set/Get the custom name of the node. 
         /// This is intended to be used by renamable nodes.
         /// This custom name will be serialized inside the node.
         /// </summary>
-        /// <param name="customNodeName">New name of the node.</param>
-        public void SetCustomName(string customName) => this.customName = customName;
+        public string customName
+        {
+            get
+            {
+                return m_CustomName;
+            }
 
-        /// <summary>
-        /// Get the name of the node. 
-        /// If the node have a custom name (set using the UI by double clicking on the node title) then it will return this name first, 
-        /// otherwise it returns the value of the name field.
-        /// </summary>
-        /// <returns>The name of the node as written in the title</returns>
-        public string GetCustomName() => customName;
+            set
+            {
+                m_CustomName = value;
+            }
+        }
 
         /// <summary>
         /// Name of the node, it will be displayed in the title section
@@ -89,11 +91,6 @@ namespace GraphProcessor
         }
 
         /// <summary>
-        /// If the node can be locked or not
-        /// </summary>
-        public virtual bool unlockable => true;
-
-        /// <summary>
         /// Is the node is locked (if locked it can't be moved)
         /// </summary>
         public virtual bool isLocked => nodeLock;
@@ -130,6 +127,24 @@ namespace GraphProcessor
                 return attr.showControlsOnHover;
             }
         }
+
+        /// <summary>
+        /// If the node can be locked or not
+        /// </summary>
+        public bool unlockable
+        {
+            get
+            {
+                var attr = GetType().GetCustomAttribute<NodeCapabilityAttribute>();
+                if (attr == null)
+                {
+                    return true;
+                }
+
+                return attr.unlockable;
+            }
+        }
+
 
         /// <summary>
         /// True if the node can be deleted, false otherwise
