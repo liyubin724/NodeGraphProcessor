@@ -2,35 +2,6 @@
 
 namespace GraphProcessor
 {
-
-    /// <summary>
-    /// Creates a vertical port instead of the default horizontal one
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-    public class VerticalAttribute : Attribute
-    {
-    }
-
-    /// <summary>
-    /// Register the node in the NodeProvider class. The node will also be available in the node creation window.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class NodeMenuItemAttribute : Attribute
-    {
-        public string menuTitle;
-        public Type onlyCompatibleWithGraph;
-
-        /// <summary>
-        /// Register the node in the NodeProvider class. The node will also be available in the node creation window.
-        /// </summary>
-        /// <param name="menuTitle">Path in the menu, use / as folder separators</param>
-        public NodeMenuItemAttribute(string menuTitle = null, Type onlyCompatibleWithGraph = null)
-        {
-            this.menuTitle = menuTitle;
-            this.onlyCompatibleWithGraph = onlyCompatibleWithGraph;
-        }
-    }
-
     /// <summary>
     /// Set a custom drawer for a field. It can then be created using the FieldFactory
     /// </summary>

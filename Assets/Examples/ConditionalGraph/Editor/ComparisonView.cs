@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 using GraphProcessor;
 using GraphProcessor.Examples;
 
-[NodeCustomEditor(typeof(Comparison))]
+[CustomNodeEditorAttribute(typeof(Comparison))]
 public class ComparisonView : BaseNodeView
 {
 	public override void Enable()

@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using GraphProcessor;
 
-[NodeCustomEditor(typeof(PrefabNode))]
+[CustomNodeEditorAttribute(typeof(PrefabNode))]
 public class PrefabNodeView : BaseNodeView
 {
 	public override void Enable()

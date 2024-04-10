@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 using GraphProcessor;
 using System.Linq;
 
-[NodeCustomEditor(typeof(StringNode))]
+[CustomNodeEditorAttribute(typeof(StringNode))]
 public class StringNodeView : BaseNodeView
 {
 	public override void Enable()

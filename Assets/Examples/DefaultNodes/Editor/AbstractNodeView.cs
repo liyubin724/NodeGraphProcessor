@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using GraphProcessor;
 
-[NodeCustomEditor(typeof(AbstractNode))]
+[CustomNodeEditorAttribute(typeof(AbstractNode))]
 public class AbstractNodeView : BaseNodeView
 {
 	public override void Enable()

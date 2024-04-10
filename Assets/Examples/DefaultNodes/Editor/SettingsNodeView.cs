@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using GraphProcessor;
 
-[NodeCustomEditor(typeof(SettingsNode))]
+[CustomNodeEditorAttribute(typeof(SettingsNode))]
 public class SettingsNodeView : BaseNodeView
 {
 	protected override bool hasSettings => true;

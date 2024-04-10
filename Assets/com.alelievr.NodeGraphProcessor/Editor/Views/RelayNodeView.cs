@@ -6,7 +6,7 @@ using System.Linq;
 using System;
 using UnityEditor.Experimental.GraphView;
 
-[NodeCustomEditor(typeof(RelayNode))]
+[CustomNodeEditorAttribute(typeof(RelayNode))]
 public class RelayNodeView : BaseNodeView
 {
 	RelayNode	relay => nodeTarget as RelayNode;

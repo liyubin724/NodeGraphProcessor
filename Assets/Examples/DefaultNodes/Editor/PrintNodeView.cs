@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 using GraphProcessor;
 using Unity.Jobs;
 
-[NodeCustomEditor(typeof(PrintNode))]
+[CustomNodeEditorAttribute(typeof(PrintNode))]
 public class PrintNodeView : BaseNodeView
 {
 	Label		printLabel;
@@ -37,7 +37,7 @@ public class PrintNodeView : BaseNodeView
 	}
 }
 
-[NodeCustomEditor(typeof(ConditionalPrintNode))]
+[CustomNodeEditorAttribute(typeof(ConditionalPrintNode))]
 public class ConditionalPrintNodeView : BaseNodeView
 {
 	Label		printLabel;

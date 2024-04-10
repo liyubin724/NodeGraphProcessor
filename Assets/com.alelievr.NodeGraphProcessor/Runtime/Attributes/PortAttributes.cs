@@ -43,4 +43,12 @@ namespace GraphProcessor
             this.allowMultiple = allowMultiple;
         }
     }
+
+    /// <summary>
+    /// Creates a vertical port instead of the default horizontal one
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+    public class VerticalAttribute : Attribute
+    {
+    }
 }

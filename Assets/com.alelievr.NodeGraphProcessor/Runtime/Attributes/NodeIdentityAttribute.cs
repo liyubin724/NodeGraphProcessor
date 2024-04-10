@@ -2,7 +2,7 @@
 
 namespace GraphProcessor
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class NodeIdentityAttribute : Attribute
     {
         public string name { get; private set; }

@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using GraphProcessor;
 
-[NodeCustomEditor(typeof(MessageNode2))]
+[CustomNodeEditorAttribute(typeof(MessageNode2))]
 public class MessageNode2View : BaseNodeView
 {
 	public override void Enable()

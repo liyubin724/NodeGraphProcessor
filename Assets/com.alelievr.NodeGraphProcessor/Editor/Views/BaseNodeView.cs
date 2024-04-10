@@ -15,7 +15,7 @@ using NodeView = UnityEditor.Experimental.GraphView.Node;
 
 namespace GraphProcessor
 {
-    [NodeCustomEditor(typeof(BaseNode))]
+    [CustomNodeEditorAttribute(typeof(BaseNode))]
     public class BaseNodeView : NodeView
     {
         public BaseNode nodeTarget;
@@ -236,7 +236,7 @@ namespace GraphProcessor
 
         void UpdateTitle()
         {
-            title = nodeTarget.customName ?? nodeTarget.name;
+            title = nodeTarget.displayName;
         }
 
         void InitializeSettings()

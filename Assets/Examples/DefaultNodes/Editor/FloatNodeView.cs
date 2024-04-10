@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using GraphProcessor;
 
-[NodeCustomEditor(typeof(FloatNode))]
+[CustomNodeEditorAttribute(typeof(FloatNode))]
 public class FloatNodeView : BaseNodeView
 {
 	public override void Enable()

@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using GraphProcessor;
 
-[NodeCustomEditor(typeof(CircleRadians))]
+[CustomNodeEditorAttribute(typeof(CircleRadians))]
 public class CircleRadiansView : BaseNodeView
 {
 	CircleRadians	node;

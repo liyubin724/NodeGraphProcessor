@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using GraphProcessor;
 
-[NodeCustomEditor(typeof(ColorNode))]
+[CustomNodeEditorAttribute(typeof(ColorNode))]
 public class ColorNodeView : BaseNodeView
 {
 	public override void Enable()

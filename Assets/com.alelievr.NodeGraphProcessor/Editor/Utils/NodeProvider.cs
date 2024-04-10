@@ -21,9 +21,9 @@ namespace GraphProcessor
             public string portDisplayName;
         }
 
-        static Dictionary<Type, MonoScript> nodeViewScripts = new Dictionary<Type, MonoScript>();
-        static Dictionary<Type, MonoScript> nodeScripts = new Dictionary<Type, MonoScript>();
-        static Dictionary<Type, Type> nodeViewPerType = new Dictionary<Type, Type>();
+        private static Dictionary<Type, MonoScript> sm_NodeViewScripts = new Dictionary<Type, MonoScript>();
+        private static Dictionary<Type, MonoScript> sm_NodeScripts = new Dictionary<Type, MonoScript>();
+        private static Dictionary<Type, Type> sm_NodeViewPerType = new Dictionary<Type, Type>();
 
         public class NodeDescriptions
         {
@@ -39,10 +39,10 @@ namespace GraphProcessor
             public Type compatibleWithGraphType;
         }
 
-        static Dictionary<BaseGraph, NodeDescriptions> specificNodeDescriptions = new Dictionary<BaseGraph, NodeDescriptions>();
-        static List<NodeSpecificToGraph> specificNodes = new List<NodeSpecificToGraph>();
+        private static Dictionary<BaseGraph, NodeDescriptions> sm_SpecificNodeDescriptions = new Dictionary<BaseGraph, NodeDescriptions>();
+        private static List<NodeSpecificToGraph> sm_SpecificNodes = new List<NodeSpecificToGraph>();
 
-        static NodeDescriptions genericNodes = new NodeDescriptions();
+        private static NodeDescriptions sm_GenericNodes = new NodeDescriptions();
 
         static NodeProvider()
         {
@@ -53,12 +53,12 @@ namespace GraphProcessor
         public static void LoadGraph(BaseGraph graph)
         {
             // Clear old graph data in case there was some
-            specificNodeDescriptions.Remove(graph);
+            sm_SpecificNodeDescriptions.Remove(graph);
             var descriptions = new NodeDescriptions();
-            specificNodeDescriptions.Add(graph, descriptions);
+            sm_SpecificNodeDescriptions.Add(graph, descriptions);
 
             var graphType = graph.GetType();
-            foreach (var nodeInfo in specificNodes)
+            foreach (var nodeInfo in sm_SpecificNodes)
             {
                 bool compatible = nodeInfo.compatibleWithGraphType == null || nodeInfo.compatibleWithGraphType == graphType;
 
@@ -75,7 +75,7 @@ namespace GraphProcessor
 
         public static void UnloadGraph(BaseGraph graph)
         {
-            specificNodeDescriptions.Remove(graph);
+            sm_SpecificNodeDescriptions.Remove(graph);
         }
 
         static void BuildGenericNodeCache()
@@ -88,7 +88,7 @@ namespace GraphProcessor
                 if (IsNodeSpecificToGraph(nodeType))
                     continue;
 
-                BuildCacheForNode(nodeType, genericNodes);
+                BuildCacheForNode(nodeType, sm_GenericNodes);
             }
         }
 
@@ -99,7 +99,7 @@ namespace GraphProcessor
             if (attrs != null && attrs.Length > 0)
             {
                 foreach (var attr in attrs)
-                    targetDescription.nodePerMenuTitle[attr.menuTitle] = nodeType;
+                    targetDescription.nodePerMenuTitle[attr.menuPath] = nodeType;
             }
 
             foreach (var field in nodeType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
@@ -115,6 +115,12 @@ namespace GraphProcessor
         {
             if (nodeType.IsAbstract)
                 return false;
+
+            var identityAttr = nodeType.GetCustomAttribute<NodeIdentityAttribute>();
+            if (identityAttr != null && !identityAttr.enable)
+            {
+                return false;
+            }
 
             return nodeType.GetCustomAttributes<NodeMenuItemAttribute>().Count() > 0;
         }
@@ -146,7 +152,7 @@ namespace GraphProcessor
 
                 foreach (var graphType in compatibleGraphTypes)
                 {
-                    specificNodes.Add(new NodeSpecificToGraph
+                    sm_SpecificNodes.Add(new NodeSpecificToGraph
                     {
                         nodeType = nodeType,
                         isCompatibleWithGraph = compatibleMethods,
@@ -209,32 +215,40 @@ namespace GraphProcessor
         static void AddNodeScriptAsset(Type type)
         {
             var nodeScriptAsset = FindScriptFromClassName(type.Name);
-
             // Try find the class name with Node name at the end
             if (nodeScriptAsset == null)
+            {
                 nodeScriptAsset = FindScriptFromClassName(type.Name + "Node");
+            }
+
             if (nodeScriptAsset != null)
-                nodeScripts[type] = nodeScriptAsset;
+            {
+                sm_NodeScripts[type] = nodeScriptAsset;
+            }
         }
 
         static void AddNodeViewScriptAsset(Type type)
         {
-            var attrs = type.GetCustomAttributes(typeof(NodeCustomEditor), false) as NodeCustomEditor[];
-
-            if (attrs != null && attrs.Length > 0)
+            var attrs = type.GetCustomAttributes<CustomNodeEditorAttribute>(false);
+            if (attrs == null || attrs.Count() == 0)
             {
-                Type nodeType = attrs.First().nodeType;
-                nodeViewPerType[nodeType] = type;
-
-                var nodeViewScriptAsset = FindScriptFromClassName(type.Name);
-                if (nodeViewScriptAsset == null)
-                    nodeViewScriptAsset = FindScriptFromClassName(type.Name + "View");
-                if (nodeViewScriptAsset == null)
-                    nodeViewScriptAsset = FindScriptFromClassName(type.Name + "NodeView");
-
-                if (nodeViewScriptAsset != null)
-                    nodeViewScripts[type] = nodeViewScriptAsset;
+                return;
             }
+
+            foreach (var attr in attrs)
+            {
+                Type nodeType = attr.nodeType;
+                sm_NodeViewPerType[nodeType] = type;
+            }
+
+            var nodeViewScriptAsset = FindScriptFromClassName(type.Name);
+            if (nodeViewScriptAsset == null)
+                nodeViewScriptAsset = FindScriptFromClassName(type.Name + "View");
+            if (nodeViewScriptAsset == null)
+                nodeViewScriptAsset = FindScriptFromClassName(type.Name + "NodeView");
+
+            if (nodeViewScriptAsset != null)
+                sm_NodeViewScripts[type] = nodeViewScriptAsset;
         }
 
         static MonoScript FindScriptFromClassName(string className)
@@ -249,7 +263,7 @@ namespace GraphProcessor
                 var assetPath = AssetDatabase.GUIDToAssetPath(scriptGUID);
                 var script = AssetDatabase.LoadAssetAtPath<MonoScript>(assetPath);
 
-                if (script != null && String.Equals(className, Path.GetFileNameWithoutExtension(assetPath), StringComparison.OrdinalIgnoreCase))
+                if (script != null && string.Equals(className, Path.GetFileNameWithoutExtension(assetPath), StringComparison.OrdinalIgnoreCase))
                     return script;
             }
 
@@ -260,13 +274,13 @@ namespace GraphProcessor
         {
             Type view;
 
-            if (nodeViewPerType.TryGetValue(nodeType, out view))
+            if (sm_NodeViewPerType.TryGetValue(nodeType, out view))
                 return view;
 
             Type baseType = null;
 
             // Allow for inheritance in node views: multiple C# node using the same view
-            foreach (var type in nodeViewPerType)
+            foreach (var type in sm_NodeViewPerType)
             {
                 // Find a view (not first fitted view) of nodeType
                 if (nodeType.IsSubclassOf(type.Key) && (baseType == null || type.Value.IsSubclassOf(baseType)))
@@ -281,10 +295,10 @@ namespace GraphProcessor
 
         public static IEnumerable<(string path, Type type)> GetNodeMenuEntries(BaseGraph graph = null)
         {
-            foreach (var node in genericNodes.nodePerMenuTitle)
+            foreach (var node in sm_GenericNodes.nodePerMenuTitle)
                 yield return (node.Key, node.Value);
 
-            if (graph != null && specificNodeDescriptions.TryGetValue(graph, out var specificNodes))
+            if (graph != null && sm_SpecificNodeDescriptions.TryGetValue(graph, out var specificNodes))
             {
                 foreach (var node in specificNodes.nodePerMenuTitle)
                     yield return (node.Key, node.Value);
@@ -293,24 +307,24 @@ namespace GraphProcessor
 
         public static MonoScript GetNodeViewScript(Type type)
         {
-            nodeViewScripts.TryGetValue(type, out var script);
+            sm_NodeViewScripts.TryGetValue(type, out var script);
 
             return script;
         }
 
         public static MonoScript GetNodeScript(Type type)
         {
-            nodeScripts.TryGetValue(type, out var script);
+            sm_NodeScripts.TryGetValue(type, out var script);
 
             return script;
         }
 
         public static IEnumerable<Type> GetSlotTypes(BaseGraph graph = null)
         {
-            foreach (var type in genericNodes.slotTypes)
+            foreach (var type in sm_GenericNodes.slotTypes)
                 yield return type;
 
-            if (graph != null && specificNodeDescriptions.TryGetValue(graph, out var specificNodes))
+            if (graph != null && sm_SpecificNodeDescriptions.TryGetValue(graph, out var specificNodes))
             {
                 foreach (var type in specificNodes.slotTypes)
                     yield return type;
@@ -319,7 +333,7 @@ namespace GraphProcessor
 
         public static IEnumerable<PortDescription> GetEdgeCreationNodeMenuEntry(PortView portView, BaseGraph graph = null)
         {
-            foreach (var description in genericNodes.nodeCreatePortDescription)
+            foreach (var description in sm_GenericNodes.nodeCreatePortDescription)
             {
                 if (!IsPortCompatible(description))
                     continue;
@@ -327,7 +341,7 @@ namespace GraphProcessor
                 yield return description;
             }
 
-            if (graph != null && specificNodeDescriptions.TryGetValue(graph, out var specificNodes))
+            if (graph != null && sm_SpecificNodeDescriptions.TryGetValue(graph, out var specificNodes))
             {
                 foreach (var description in specificNodes.nodeCreatePortDescription)
                 {

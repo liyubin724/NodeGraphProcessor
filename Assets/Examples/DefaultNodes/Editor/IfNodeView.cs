@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using GraphProcessor;
 
-[NodeCustomEditor(typeof(IfNode))]
+[CustomNodeEditorAttribute(typeof(IfNode))]
 public class IfNodeView : BaseNodeView
 {
 	public override void Enable()

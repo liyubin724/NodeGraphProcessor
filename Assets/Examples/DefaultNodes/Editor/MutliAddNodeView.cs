@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using GraphProcessor;
 
-[NodeCustomEditor(typeof(MultiAddNode))]
+[CustomNodeEditorAttribute(typeof(MultiAddNode))]
 public class MultiAddNodeView : BaseNodeView
 {
 	public override void Enable()

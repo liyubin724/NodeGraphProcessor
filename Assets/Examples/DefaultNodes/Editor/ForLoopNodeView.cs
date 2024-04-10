@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using GraphProcessor;
 
-[NodeCustomEditor(typeof(ForLoopNode))]
+[CustomNodeEditorAttribute(typeof(ForLoopNode))]
 public class ForLoopNodeView : BaseNodeView
 {
 	public override void Enable()

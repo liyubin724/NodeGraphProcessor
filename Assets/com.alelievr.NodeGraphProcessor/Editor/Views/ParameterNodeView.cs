@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 using GraphProcessor;
 using System.Linq;
 
-[NodeCustomEditor(typeof(ParameterNode))]
+[CustomNodeEditorAttribute(typeof(ParameterNode))]
 public class ParameterNodeView : BaseNodeView
 {
     ParameterNode parameterNode;

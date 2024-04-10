@@ -1,19 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
 using System;
 
 namespace GraphProcessor
 {
-	[AttributeUsage(AttributeTargets.Class)]
-	public class NodeCustomEditor : Attribute
-	{
-		public Type nodeType;
+    [AttributeUsage(AttributeTargets.Class)]
+    public class CustomNodeEditorAttribute : Attribute
+    {
+        public Type nodeType { get; private set; }
 
-		public NodeCustomEditor(Type nodeType)
-		{
-			this.nodeType = nodeType;
-		}
-	}
+        public CustomNodeEditorAttribute(Type nodeType)
+        {
+            this.nodeType = nodeType;
+        }
+    }
 }

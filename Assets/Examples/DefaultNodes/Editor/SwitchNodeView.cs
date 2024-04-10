@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using GraphProcessor;
 
-[NodeCustomEditor(typeof(SwitchNode))]
+[CustomNodeEditorAttribute(typeof(SwitchNode))]
 public class SwitchNodeView : BaseNodeView
 {
 	public override void Enable()
