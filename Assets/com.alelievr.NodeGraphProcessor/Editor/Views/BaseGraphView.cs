@@ -1,17 +1,14 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using UnityEditor.UIElements;
-using UnityEngine.UIElements;
-using UnityEditor.Experimental.GraphView;
 using System.Linq;
-using System;
-using UnityEditor.SceneManagement;
 using System.Reflection;
-
-using Status = UnityEngine.UIElements.DropdownMenuAction.Status;
+using UnityEditor;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
+using Status = UnityEngine.UIElements.DropdownMenuAction.Status;
 
 namespace GraphProcessor
 {

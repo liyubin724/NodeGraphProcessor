@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using UnityEngine;
-using UnityEditor.UIElements;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace GraphProcessor
 {
@@ -15,10 +13,11 @@ namespace GraphProcessor
     {
         BaseGraphView graphView;
         EditorWindow window;
-        Texture2D icon;
         EdgeView edgeFilter;
         PortView inputPortView;
         PortView outputPortView;
+
+        Texture2D icon;
 
         public void Initialize(BaseGraphView graphView, EditorWindow window, EdgeView edgeFilter = null)
         {
