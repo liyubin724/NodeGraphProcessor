@@ -956,7 +956,7 @@ namespace GraphProcessor
 
         public BaseNodeView AddNodeView(BaseNode node)
         {
-            var viewType = NodeProvider.GetNodeViewTypeFromType(node.GetType());
+            var viewType = NodeProvider.GetNodeViewTypeFromNodeType(node.GetType());
 
             if (viewType == null)
                 viewType = typeof(BaseNodeView);

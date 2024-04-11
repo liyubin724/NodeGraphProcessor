@@ -209,8 +209,12 @@ namespace GraphProcessor
 
             foreach (var nodeViewType in TypeCache.GetTypesDerivedFrom<BaseNodeView>())
             {
-                if (!nodeViewType.IsAbstract)
-                    AddNodeViewScriptAsset(nodeViewType);
+                if (nodeViewType.IsAbstract)
+                {
+                    continue;
+                }
+
+                AddNodeViewScriptAsset(nodeViewType);
             }
         }
 
@@ -284,27 +288,20 @@ namespace GraphProcessor
                 sm_NodeViewScripts[type] = nodeViewScriptAsset;
         }
 
-        public static Type GetNodeViewTypeFromType(Type nodeType)
+        public static Type GetNodeViewTypeFromNodeType(Type nodeType)
         {
-            Type view;
-
-            if (sm_NodeViewPerType.TryGetValue(nodeType, out view))
-                return view;
-
-            Type baseType = null;
-
-            // Allow for inheritance in node views: multiple C# node using the same view
-            foreach (var type in sm_NodeViewPerType)
+            if (sm_NodeViewPerType.TryGetValue(nodeType, out var viewType))
             {
-                // Find a view (not first fitted view) of nodeType
-                if (nodeType.IsSubclassOf(type.Key) && (baseType == null || type.Value.IsSubclassOf(baseType)))
-                    baseType = type.Value;
+                return viewType;
             }
 
-            if (baseType != null)
-                return baseType;
+            nodeType = nodeType.BaseType;
+            if (nodeType == null || (nodeType != typeof(BaseNode) && !nodeType.IsSubclassOf(typeof(BaseNode))))
+            {
+                return null;
+            }
 
-            return view;
+            return GetNodeViewTypeFromNodeType(nodeType);
         }
 
         public static IEnumerable<(string path, Type type)> GetNodeMenuEntries(BaseGraph graph = null)
