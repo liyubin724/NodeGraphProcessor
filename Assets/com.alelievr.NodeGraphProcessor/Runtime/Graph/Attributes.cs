@@ -145,7 +145,4 @@ namespace GraphProcessor
             this.name = name;
         }
     }
-
-    [AttributeUsage(AttributeTargets.Method)]
-    public class IsCompatibleWithGraph : Attribute { }
 }
