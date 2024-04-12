@@ -1,5 +1,15 @@
+PropertyField > * > Label
+{
+    min-width: auto;
+}
+
 #node {
     background-color: rgba(0, 63, 63, 0.8);
+}
+
+.node{
+    min-width: 120px;
+    width: auto;
 }
 
 #controls {
