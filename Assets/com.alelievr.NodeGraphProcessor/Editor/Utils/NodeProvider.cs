@@ -20,9 +20,12 @@ namespace GraphProcessor
             public string portDisplayName;
         }
 
-        private static Dictionary<Type, MonoScript> sm_NodeViewScripts = new Dictionary<Type, MonoScript>();
-        private static Dictionary<Type, MonoScript> sm_NodeScripts = new Dictionary<Type, MonoScript>();
-        private static Dictionary<Type, Type> sm_NodeViewPerType = new Dictionary<Type, Type>();
+        private static List<Type> sm_NodeTypes = new List<Type>();
+        private static List<Type> sm_NodeViewTypes = new List<Type>();
+        private static Dictionary<Type, MonoScript> sm_NodeScriptDic = new Dictionary<Type, MonoScript>();
+        private static Dictionary<Type, MonoScript> sm_NodeViewScriptDic = new Dictionary<Type, MonoScript>();
+        private static Dictionary<string, Type> sm_NodeMenuDic = new Dictionary<string, Type>();
+        private static Dictionary<Type, Type> sm_NodeTypeToNodeViewTypeDic = new Dictionary<Type, Type>();
 
         public class NodeDescriptions
         {
@@ -45,8 +48,50 @@ namespace GraphProcessor
 
         static NodeProvider()
         {
+            BuildNodeCache();
             BuildScriptCache();
             BuildGenericNodeCache();
+        }
+
+        private static void BuildNodeCache()
+        {
+            sm_NodeTypes.Clear();
+            sm_NodeMenuDic.Clear();
+            sm_NodeViewTypes.Clear();
+            sm_NodeTypeToNodeViewTypeDic.Clear();
+
+            foreach (var nodeType in TypeCache.GetTypesDerivedFrom<BaseNode>())
+            {
+                if (!IsNodeTypeAccessible(nodeType))
+                    continue;
+
+                sm_NodeTypes.Add(nodeType);
+
+                var menuItemAttrs = nodeType.GetCustomAttributes<NodeMenuItemAttribute>(false);
+                foreach (var menuItemAttr in menuItemAttrs)
+                {
+                    sm_NodeMenuDic.Add(menuItemAttr.menuPath, nodeType);
+                }
+            }
+
+            foreach (var nodeViewType in TypeCache.GetTypesDerivedFrom<BaseNodeView>())
+            {
+                if (!isNodeViewTypeAccessible(nodeViewType))
+                {
+                    continue;
+                }
+
+                sm_NodeViewTypes.Add(nodeViewType);
+
+                var attrs = nodeViewType.GetCustomAttributes<CustomNodeEditorAttribute>();
+                foreach (var attr in attrs)
+                {
+                    if (attr.nodeType != null)
+                    {
+                        sm_NodeTypeToNodeViewTypeDic.Add(attr.nodeType, nodeViewType);
+                    }
+                }
+            }
         }
 
         public static void LoadGraph(BaseGraph graph)
@@ -81,7 +126,7 @@ namespace GraphProcessor
         {
             foreach (var nodeType in TypeCache.GetTypesDerivedFrom<BaseNode>())
             {
-                if (!IsNodeAccessible(nodeType))
+                if (!IsNodeTypeAccessible(nodeType))
                     continue;
 
                 if (IsNodeSpecificToGraph(nodeType))
@@ -110,7 +155,7 @@ namespace GraphProcessor
             ProvideNodePortCreationDescription(nodeType, targetDescription, graph);
         }
 
-        static bool IsNodeAccessible(Type nodeType)
+        private static bool IsNodeTypeAccessible(Type nodeType)
         {
             if (nodeType.IsAbstract)
             {
@@ -126,8 +171,29 @@ namespace GraphProcessor
             return nodeType.GetCustomAttributes<NodeMenuItemAttribute>().Count() > 0;
         }
 
+        private static bool isNodeViewTypeAccessible(Type nodeViewType)
+        {
+            if (nodeViewType.IsAbstract)
+            {
+                return false;
+            }
+
+            return nodeViewType.GetCustomAttributes<CustomNodeEditorAttribute>().Count() > 0;
+        }
+
         static bool IsNodeCompatibleToGraph(Type nodeType, Type graphType)
         {
+            if (graphType == null)
+            {
+                return true;
+            }
+
+            var graphIdentityAttr = graphType.GetCustomAttribute<GraphIdentifyAttribute>();
+            if (graphIdentityAttr == null || graphIdentityAttr.nodeTags == null || graphIdentityAttr.nodeTags.Length == 0)
+            {
+                return true;
+            }
+
             var nodeIdentityAttr = nodeType.GetCustomAttribute<NodeIdentityAttribute>();
             if (nodeIdentityAttr == null)
             {
@@ -137,12 +203,6 @@ namespace GraphProcessor
             if (nodeIdentityAttr.tags == null || nodeIdentityAttr.tags.Length == 0)
             {
                 return true;
-            }
-
-            var graphIdentityAttr = graphType.GetCustomAttribute<GraphIdentifyAttribute>();
-            if (graphIdentityAttr == null)
-            {
-                return false;
             }
 
             var nodeTags = nodeIdentityAttr.tags;
@@ -197,27 +257,6 @@ namespace GraphProcessor
             return false;
         }
 
-        static void BuildScriptCache()
-        {
-            foreach (var nodeType in TypeCache.GetTypesDerivedFrom<BaseNode>())
-            {
-                if (!IsNodeAccessible(nodeType))
-                    continue;
-
-                AddNodeScriptAsset(nodeType);
-            }
-
-            foreach (var nodeViewType in TypeCache.GetTypesDerivedFrom<BaseNodeView>())
-            {
-                if (nodeViewType.IsAbstract)
-                {
-                    continue;
-                }
-
-                AddNodeViewScriptAsset(nodeViewType);
-            }
-        }
-
         static FieldInfo SetGraph = typeof(BaseNode).GetField("graph", BindingFlags.NonPublic | BindingFlags.Instance);
         static void ProvideNodePortCreationDescription(Type nodeType, NodeDescriptions targetDescription, BaseGraph graph = null)
         {
@@ -249,48 +288,9 @@ namespace GraphProcessor
             }
         }
 
-        static void AddNodeScriptAsset(Type type)
-        {
-            var nodeScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name);
-            // Try find the class name with Node name at the end
-            if (nodeScriptAsset == null)
-            {
-                nodeScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name + "Node");
-            }
-
-            if (nodeScriptAsset != null)
-            {
-                sm_NodeScripts[type] = nodeScriptAsset;
-            }
-        }
-
-        static void AddNodeViewScriptAsset(Type type)
-        {
-            var attrs = type.GetCustomAttributes<CustomNodeEditorAttribute>(false);
-            if (attrs == null || attrs.Count() == 0)
-            {
-                return;
-            }
-
-            foreach (var attr in attrs)
-            {
-                Type nodeType = attr.nodeType;
-                sm_NodeViewPerType[nodeType] = type;
-            }
-
-            var nodeViewScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name);
-            if (nodeViewScriptAsset == null)
-                nodeViewScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name + "View");
-            if (nodeViewScriptAsset == null)
-                nodeViewScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name + "NodeView");
-
-            if (nodeViewScriptAsset != null)
-                sm_NodeViewScripts[type] = nodeViewScriptAsset;
-        }
-
         public static Type GetNodeViewTypeFromNodeType(Type nodeType)
         {
-            if (sm_NodeViewPerType.TryGetValue(nodeType, out var viewType))
+            if (sm_NodeTypeToNodeViewTypeDic.TryGetValue(nodeType, out var viewType))
             {
                 return viewType;
             }
@@ -306,29 +306,23 @@ namespace GraphProcessor
 
         public static IEnumerable<(string path, Type type)> GetNodeMenuEntries(BaseGraph graph = null)
         {
-            foreach (var node in sm_GenericNodes.nodePerMenuTitle)
-                yield return (node.Key, node.Value);
-
-            if (graph != null && sm_SpecificNodeDescriptions.TryGetValue(graph, out var specificNodes))
+            foreach (var node in sm_NodeMenuDic)
             {
-                foreach (var node in specificNodes.nodePerMenuTitle)
+                if (IsNodeCompatibleToGraph(node.Value, graph?.GetType()))
+                {
                     yield return (node.Key, node.Value);
+                }
             }
+
+            //foreach (var node in sm_GenericNodes.nodePerMenuTitle)
+            //    yield return (node.Key, node.Value);
+            //if (graph != null && sm_SpecificNodeDescriptions.TryGetValue(graph, out var specificNodes))
+            //{
+            //    foreach (var node in specificNodes.nodePerMenuTitle)
+            //        yield return (node.Key, node.Value);
+            //}
         }
 
-        public static MonoScript GetNodeViewScript(Type type)
-        {
-            sm_NodeViewScripts.TryGetValue(type, out var script);
-
-            return script;
-        }
-
-        public static MonoScript GetNodeScript(Type type)
-        {
-            sm_NodeScripts.TryGetValue(type, out var script);
-
-            return script;
-        }
 
         public static IEnumerable<Type> GetSlotTypes(BaseGraph graph = null)
         {
@@ -376,6 +370,69 @@ namespace GraphProcessor
 
         //-------------------------
 
+        #region MonoScript
+        private static void BuildScriptCache()
+        {
+            foreach (var nodeType in sm_NodeTypes)
+            {
+                AddNodeScriptAsset(nodeType);
+            }
+
+            foreach (var nodeViewType in sm_NodeViewTypes)
+            {
+                AddNodeViewScriptAsset(nodeViewType);
+            }
+        }
+
+        private static void AddNodeScriptAsset(Type type)
+        {
+            var nodeScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name);
+            // Try find the class name with Node name at the end
+            if (nodeScriptAsset == null)
+            {
+                nodeScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name + "Node");
+            }
+
+            if (nodeScriptAsset != null)
+            {
+                sm_NodeScriptDic[type] = nodeScriptAsset;
+            }
+        }
+
+        private static void AddNodeViewScriptAsset(Type type)
+        {
+            var attrs = type.GetCustomAttributes<CustomNodeEditorAttribute>(false);
+            if (attrs == null || attrs.Count() == 0)
+            {
+                return;
+            }
+
+            var nodeViewScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name);
+            if (nodeViewScriptAsset == null)
+                nodeViewScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name + "View");
+            if (nodeViewScriptAsset == null)
+                nodeViewScriptAsset = AssetDatabaseHelper.FindScriptFromClassName(type.Name + "NodeView");
+
+            if (nodeViewScriptAsset != null)
+                sm_NodeViewScriptDic[type] = nodeViewScriptAsset;
+        }
+
+        public static MonoScript GetNodeViewScript(Type type)
+        {
+            sm_NodeViewScriptDic.TryGetValue(type, out var script);
+
+            return script;
+        }
+
+        public static MonoScript GetNodeScript(Type type)
+        {
+            sm_NodeScriptDic.TryGetValue(type, out var script);
+
+            return script;
+        }
+        #endregion
+
+        #region Create Node
         /// <summary>
         /// Creates a node of type T at a certain position
         /// </summary>
@@ -406,5 +463,7 @@ namespace GraphProcessor
 
             return node;
         }
+
+        #endregion
     }
 }

@@ -61,7 +61,7 @@ namespace GraphProcessor
         void CreateStandardNodeMenu(List<SearchTreeEntry> tree)
         {
             // Sort menu by alphabetical order and submenus
-            var nodeEntries = graphView.FilterCreateNodeMenuEntries().OrderBy(k => k.path);
+            var nodeEntries = graphView.FindCreateNodeMenuEntries().OrderBy(k => k.path);
             var titlePaths = new HashSet<string>();
 
             foreach (var nodeMenuItem in nodeEntries)

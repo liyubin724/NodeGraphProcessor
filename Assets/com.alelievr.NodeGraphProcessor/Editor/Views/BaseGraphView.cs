@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
@@ -1372,13 +1373,20 @@ namespace GraphProcessor
 
         protected virtual void InitializeView() { }
 
-        public virtual IEnumerable<(string path, Type type)> FilterCreateNodeMenuEntries()
+        public virtual bool FilterCreateNodeMenuEntry(string path, Type nodeType)
         {
-            // By default we don't filter anything
-            foreach (var nodeMenuItem in NodeProvider.GetNodeMenuEntries(graph))
-                yield return nodeMenuItem;
+            return true;
+        }
 
-            // TODO: add exposed properties to this list
+        public virtual IEnumerable<(string path, Type type)> FindCreateNodeMenuEntries()
+        {
+            foreach (var nodeMenuItem in NodeProvider.GetNodeMenuEntries(graph))
+            {
+                if (FilterCreateNodeMenuEntry(nodeMenuItem.path, nodeMenuItem.type))
+                {
+                    yield return nodeMenuItem;
+                }
+            }
         }
 
         public RelayNodeView AddRelayNode(PortView inputPort, PortView outputPort, Vector2 position)
