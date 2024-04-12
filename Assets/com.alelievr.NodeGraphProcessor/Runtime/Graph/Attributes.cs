@@ -47,7 +47,7 @@ namespace GraphProcessor
     }
 
     /// <summary>
-    /// Allow you to customize the input function of a port
+    /// Allow you to customize the out function of a port
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class CustomPortOutputAttribute : Attribute
