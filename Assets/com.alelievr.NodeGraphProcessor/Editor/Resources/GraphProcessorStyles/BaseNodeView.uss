@@ -3,6 +3,14 @@ PropertyField > * > Label
     min-width: auto;
 }
 
+TextField >Label{
+    min-width: auto;
+}
+
+TextField > TextInput{
+    min-width: 80px;
+}
+
 #node {
     background-color: rgba(0, 63, 63, 0.8);
 }
