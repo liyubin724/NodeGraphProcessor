@@ -9,7 +9,7 @@ namespace GraphProcessor
 
         public string[] nodeTags { get; private set; }
 
-        public GraphIdentifyAttribute(string name, params string[] nodeTags)
+        public GraphIdentifyAttribute(string name, string[] nodeTags = null)
         {
             this.name = name;
             this.nodeTags = nodeTags;
