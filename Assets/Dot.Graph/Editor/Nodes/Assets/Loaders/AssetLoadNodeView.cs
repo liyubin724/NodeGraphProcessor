@@ -36,8 +36,11 @@ namespace DotEditor.Graph
             };
             onPortDisconnected += (port) =>
             {
-                m_Node.asset = null;
-                UpdateAsset(null);
+                if (port.fieldName == nameof(AssetLoadNode.assetPath))
+                {
+                    m_Node.asset = null;
+                    UpdateAsset(null);
+                }
             };
 
             UpdateAsset(m_Node.asset);
