@@ -268,7 +268,8 @@ namespace GraphProcessor
             if (edgeWithRemoteCustomIO.Count == 0)
                 return;
 
-            //if there are custom IO implementation on the other ports, they'll need our value in the passThrough buffer
+            //if there are custom IO implementation on the other ports,
+            //they'll need our value in the passThrough buffer
             object ourValue = fieldInfo.GetValue(fieldOwner);
             foreach (var edge in edgeWithRemoteCustomIO)
                 edge.passThroughBuffer = ourValue;
@@ -382,7 +383,15 @@ namespace GraphProcessor
 
         public void PullDatas()
         {
-            ForEach(p => p.PullData());
+            //ForEach(p => p.PullData());
+
+            ForEach((port) =>
+            {
+                if (port.GetEdges().Count > 0)
+                {
+                    port.PullData();
+                }
+            });
         }
     }
 
@@ -393,7 +402,15 @@ namespace GraphProcessor
 
         public void PushDatas()
         {
-            ForEach(p => p.PushData());
+            //ForEach(p => p.PushData());
+
+            ForEach((port) =>
+            {
+                if (port.GetEdges().Count > 0)
+                {
+                    port.PushData();
+                }
+            });
         }
     }
 }
