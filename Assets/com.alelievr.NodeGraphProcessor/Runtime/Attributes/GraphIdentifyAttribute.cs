@@ -7,12 +7,17 @@ namespace GraphProcessor
     {
         public string name { get; private set; }
 
-        public string[] nodeTags { get; private set; }
+        /// <summary>
+        /// the tag of node
+        /// </summary>
+        public string[] includeTags { get; private set; }
+        public string[] excludeTags { get; private set; }
 
-        public GraphIdentifyAttribute(string name, string[] nodeTags = null)
+        public GraphIdentifyAttribute(string name, string[] includeTags = null, string[] excludeTags = null)
         {
             this.name = name;
-            this.nodeTags = nodeTags;
+            this.includeTags = includeTags;
+            this.excludeTags = excludeTags;
         }
     }
 }

@@ -309,28 +309,46 @@ namespace GraphProcessor
             }
 
             var graphIdentityAttr = graphType.GetCustomAttribute<GraphIdentifyAttribute>();
-            if (graphIdentityAttr == null || graphIdentityAttr.nodeTags == null || graphIdentityAttr.nodeTags.Length == 0)
+            if (graphIdentityAttr == null)
             {
                 return true;
             }
+
+            var includeTags = graphIdentityAttr.includeTags;
+            var excludeTags = graphIdentityAttr.excludeTags;
 
             var nodeIdentityAttr = nodeType.GetCustomAttribute<NodeIdentityAttribute>();
-            if (nodeIdentityAttr.tags == null || nodeIdentityAttr.tags.Length == 0)
+            var tags = nodeIdentityAttr.tags;
+            var isCompatible = false;
+            if (includeTags != null && includeTags.Length > 0)
             {
-                return true;
+                foreach (var tag in tags)
+                {
+                    if (Array.IndexOf(includeTags, tag) >= 0)
+                    {
+                        isCompatible = true;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                isCompatible = true;
             }
 
-            var nodeTags = nodeIdentityAttr.tags;
-            var graphNodeTags = graphIdentityAttr.nodeTags;
-            foreach (var tag in graphNodeTags)
+            if (excludeTags != null && excludeTags.Length > 0)
             {
-                if (Array.IndexOf(nodeTags, tag) >= 0)
+                foreach (var tag in tags)
                 {
-                    return true;
+                    if (Array.IndexOf(excludeTags, tag) >= 0)
+                    {
+                        isCompatible = false;
+                        break;
+                    }
                 }
             }
 
-            return false;
+            return isCompatible;
         }
 
         #endregion
