@@ -100,38 +100,6 @@ namespace GraphProcessor
         [NonSerialized]
         protected BaseGraph graph;
 
-        internal class NodeFieldInformation
-        {
-            public string name;
-            public string fieldName;
-            public FieldInfo fieldInfo;
-            public bool isInput;
-            public bool isMultiple;
-            public string tooltip;
-            public bool isVertical;
-
-            public CustomPortBehaviorDelegate behavior;
-
-            public NodeFieldInformation(
-                FieldInfo fieldInfo,
-                string name,
-                bool isInput,
-                bool isMultiple,
-                string tooltip,
-                bool isVertical,
-                CustomPortBehaviorDelegate behavior)
-            {
-                this.isInput = isInput;
-                this.isMultiple = isMultiple;
-                this.fieldInfo = fieldInfo;
-                this.name = name;
-                this.fieldName = fieldInfo.Name;
-                this.behavior = behavior;
-                this.tooltip = tooltip;
-                this.isVertical = isVertical;
-            }
-        }
-
         struct PortUpdate
         {
             public List<string> fieldNames;
@@ -451,8 +419,6 @@ namespace GraphProcessor
             return changed;
         }
 
-        HashSet<BaseNode> portUpdateHashSet = new HashSet<BaseNode>();
-
         internal void DisableInternal()
         {
             // port containers are initialized in the OnEnable
@@ -486,24 +452,18 @@ namespace GraphProcessor
                 var showInInspector = field.GetCustomAttribute<ShowInInspector>();
                 var vertical = field.GetCustomAttribute<VerticalAttribute>();
 
-                bool isMultiple = false;
-                bool isInput = false;
-                string name = field.Name;
-                string tooltip = null;
-
                 if (showInInspector != null)
                     _needsInspector = true;
 
-
-                //check if field is a collection type
-                isMultiple = (inputAttribute != null) ? inputAttribute.allowMultiple : (outputAttribute.allowMultiple);
-                isInput = inputAttribute != null;
-                tooltip = tooltipAttribute?.tooltip;
-
+                string name = field.Name;
                 if (!string.IsNullOrEmpty(inputAttribute?.name))
                     name = inputAttribute.name;
                 if (!string.IsNullOrEmpty(outputAttribute?.name))
                     name = outputAttribute.name;
+
+                bool isMultiple = (inputAttribute != null) ? inputAttribute.allowMultiple : (outputAttribute.allowMultiple);
+                bool isInput = inputAttribute != null;
+                string tooltip = tooltipAttribute?.tooltip;
 
                 // By default we set the behavior to null, if the field have a custom behavior, it will be set in the loop just below
                 nodeFields[field.Name] = new NodeFieldInformation(field, name, isInput, isMultiple, tooltip, vertical != null, null);
@@ -542,9 +502,7 @@ namespace GraphProcessor
 
         public void OnEdgeConnected(SerializableEdge edge)
         {
-            bool input = edge.inputNode == this;
-            NodePortContainer portCollection = (input) ? (NodePortContainer)inputPorts : outputPorts;
-
+            NodePortContainer portCollection = edge.inputNode == this ? inputPorts : outputPorts;
             portCollection.Add(edge);
 
             UpdateAllPorts();
@@ -559,9 +517,7 @@ namespace GraphProcessor
             if (edge == null)
                 return;
 
-            bool input = edge.inputNode == this;
-            NodePortContainer portCollection = (input) ? (NodePortContainer)inputPorts : outputPorts;
-
+            NodePortContainer portCollection = edge.inputNode == this ? inputPorts : outputPorts;
             portCollection.Remove(edge);
 
             // Reset default values of input port:
@@ -792,5 +748,37 @@ namespace GraphProcessor
         #endregion Message
 
         #endregion
+    }
+
+    internal class NodeFieldInformation
+    {
+        public string name;
+        public string fieldName;
+        public FieldInfo fieldInfo;
+        public bool isInput;
+        public bool isMultiple;
+        public string tooltip;
+        public bool isVertical;
+
+        public CustomPortBehaviorDelegate behavior;
+
+        public NodeFieldInformation(
+            FieldInfo fieldInfo,
+            string name,
+            bool isInput,
+            bool isMultiple,
+            string tooltip,
+            bool isVertical,
+            CustomPortBehaviorDelegate behavior)
+        {
+            this.isInput = isInput;
+            this.isMultiple = isMultiple;
+            this.fieldInfo = fieldInfo;
+            this.name = name;
+            this.fieldName = fieldInfo.Name;
+            this.behavior = behavior;
+            this.tooltip = tooltip;
+            this.isVertical = isVertical;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace GraphProcessor
@@ -57,17 +58,22 @@ namespace GraphProcessor
         /// Set a custom uss file for the node. 
         /// We use a Resources.Load to get the stylesheet so be sure to put the correct resources path
         /// </summary>
-        public string layoutStyle
+        public string[] layoutStyles
         {
             get
             {
-                var attr = GetType().GetCustomAttribute<NodeLayoutStyleAttribute>();
-                if (attr == null || string.IsNullOrEmpty(attr.stylePath))
+                var attrs = GetType().GetCustomAttributes<NodeLayoutStyleAttribute>();
+
+                List<string> styles = new List<string>();
+                foreach (var attr in attrs)
                 {
-                    return string.Empty;
+                    if (!string.IsNullOrEmpty(attr.stylePath))
+                    {
+                        styles.Add(attr.stylePath);
+                    }
                 }
 
-                return attr.stylePath;
+                return styles.ToArray();
             }
         }
 

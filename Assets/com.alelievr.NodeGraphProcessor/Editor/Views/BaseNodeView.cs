@@ -87,8 +87,14 @@ namespace GraphProcessor
 
             styleSheets.Add(Resources.Load<StyleSheet>(baseNodeStyle));
 
-            if (!string.IsNullOrEmpty(node.layoutStyle))
-                styleSheets.Add(Resources.Load<StyleSheet>(node.layoutStyle));
+            var layoutStyles = node.layoutStyles;
+            if (layoutStyles != null && layoutStyles.Length > 0)
+            {
+                foreach (var layoutStyle in layoutStyles)
+                {
+                    styleSheets.Add(Resources.Load<StyleSheet>(layoutStyle));
+                }
+            }
 
             InitializeView();
             InitializePorts();

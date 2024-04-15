@@ -33,7 +33,7 @@ namespace GraphProcessor
     }
 
     [System.Serializable]
-    public class BaseGraph : ScriptableObject, ISerializationCallbackReceiver
+    public partial class BaseGraph : ScriptableObject, ISerializationCallbackReceiver
     {
         static readonly int maxComputeOrderDepth = 1000;
 

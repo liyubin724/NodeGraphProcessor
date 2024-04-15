@@ -133,6 +133,8 @@ namespace GraphProcessor
 
         Dictionary<Type, (Type nodeType, MethodInfo initalizeNodeFromObject)> nodeTypePerCreateAssetType = new Dictionary<Type, (Type, MethodInfo)>();
 
+        readonly string baseGraphStyle = "GraphProcessorStyles/BaseGraphView";
+
         public BaseGraphView(EditorWindow window)
         {
             serializeGraphElements = SerializeGraphElementsCallback;
@@ -142,6 +144,20 @@ namespace GraphProcessor
             viewTransformChanged = ViewTransformChangedCallback;
             elementResized = ElementResizedCallback;
 
+            styleSheets.Add(Resources.Load<StyleSheet>(baseGraphStyle));
+            //var layoutStyles = graph.layoutStyles;
+            //if (layoutStyles != null && layoutStyles.Length > 0)
+            //{
+            //    foreach (var layoutStyle in layoutStyles)
+            //    {
+            //        styleSheets.Add(Resources.Load<StyleSheet>(layoutStyle));
+            //    }
+            //}
+
+            var gridBg = new GridBackground();
+            gridBg.StretchToParentSize();
+            Insert(0, gridBg);
+
             RegisterCallback<KeyDownEvent>(KeyDownCallback);
             RegisterCallback<DragPerformEvent>(DragPerformedCallback);
             RegisterCallback<DragUpdatedEvent>(DragUpdatedCallback);
@@ -150,7 +166,7 @@ namespace GraphProcessor
 
             InitializeManipulators();
 
-            SetupZoom(0.05f, 2f);
+            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
 
             Undo.undoRedoPerformed += ReloadView;
 
