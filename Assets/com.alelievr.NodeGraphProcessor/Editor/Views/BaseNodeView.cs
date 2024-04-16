@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 
 using Status = UnityEngine.UIElements.DropdownMenuAction.Status;
 using NodeView = UnityEditor.Experimental.GraphView.Node;
+using System.Xml.Linq;
 
 namespace GraphProcessor
 {
@@ -108,9 +109,9 @@ namespace GraphProcessor
 
             InitializeSettings();
 
-            RefreshExpandedState();
-
-            this.RefreshPorts();
+            //RefreshExpandedState();
+            expanded = nodeTarget.expanded;
+            RefreshPorts();
 
             RegisterCallback<GeometryChangedEvent>(OnGeometryChanged);
             RegisterCallback<DetachFromPanelEvent>(e => ExceptionToLog.Call(Disable));
@@ -1017,7 +1018,10 @@ namespace GraphProcessor
 
         public override bool expanded
         {
-            get { return base.expanded; }
+            get
+            {
+                return base.expanded;
+            }
             set
             {
                 base.expanded = value;
