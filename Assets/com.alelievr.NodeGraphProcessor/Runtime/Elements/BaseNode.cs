@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace GraphProcessor
 {
+    public delegate void ProcessDelegate();
+
     public delegate IEnumerable<PortData> CustomPortBehaviorDelegate(List<SerializableEdge> edges);
     public delegate IEnumerable<PortData> CustomPortTypeBehaviorDelegate(string fieldName, string displayName, object value);
 
@@ -47,8 +49,6 @@ namespace GraphProcessor
         [NonSerialized]
         public readonly NodeOutputPortContainer outputPorts;
 
-        public delegate void ProcessDelegate();
-
         /// <summary>
         /// Triggered when the node is processes
         /// </summary>
@@ -67,14 +67,6 @@ namespace GraphProcessor
         /// Triggered after a single/list of port(s) is updated, the parameter is the field name
         /// </summary>
         public event Action<string> onPortsUpdated;
-
-        [NonSerialized]
-        bool _needsInspector = false;
-
-        /// <summary>
-        /// Does the node needs to be visible in the inspector (when selected).
-        /// </summary>
-        public virtual bool needsInspector => _needsInspector;
 
         /// <summary>
         /// Is the node created from a duplicate operation (either ctrl-D or copy/paste).
@@ -444,11 +436,7 @@ namespace GraphProcessor
                     continue;
 
                 var tooltipAttribute = field.GetCustomAttribute<TooltipAttribute>();
-                var showInInspector = field.GetCustomAttribute<ShowInInspector>();
                 var vertical = field.GetCustomAttribute<VerticalAttribute>();
-
-                if (showInInspector != null)
-                    _needsInspector = true;
 
                 string name = field.Name;
                 if (!string.IsNullOrEmpty(inputAttribute?.name))

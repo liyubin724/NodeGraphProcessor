@@ -163,5 +163,18 @@ namespace GraphProcessor
             }
         }
 
+        public bool needInspector
+        {
+            get
+            {
+                var attr = GetType().GetCustomAttribute<NodeCapabilityAttribute>();
+                if (attr == null)
+                {
+                    return false;
+                }
+
+                return attr.needInspector;
+            }
+        }
     }
 }

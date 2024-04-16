@@ -942,7 +942,7 @@ namespace GraphProcessor
             nodeInspector.selectedNodes.Clear();
             foreach (var e in selection)
             {
-                if (e is BaseNodeView v && this.Contains(v) && v.nodeTarget.needsInspector)
+                if (e is BaseNodeView v && this.Contains(v) && v.nodeTarget.needInspector)
                     selectedNodeViews.Add(v);
             }
 

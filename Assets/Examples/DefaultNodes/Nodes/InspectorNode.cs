@@ -3,6 +3,7 @@ using UnityEngine;
 
 [System.Serializable, NodeMenuItem("Custom/InspectorNode")]
 [NodeIdentity("Inspector Node")]
+[NodeCapability(needInspector = true)]
 public class InspectorNode : BaseNode
 {
     [Input(name = "In")]
