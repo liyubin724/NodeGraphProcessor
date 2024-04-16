@@ -352,5 +352,33 @@ namespace GraphProcessor
         }
 
         #endregion
+
+        private static string[] sm_PortStyles;
+        public static string[] FindPortStyles()
+        {
+            if (sm_PortStyles != null)
+            {
+                return sm_PortStyles;
+            }
+
+            var methodInfos = from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                              from type in assembly.GetTypes()
+                              from method in type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+                              let attr = method.GetCustomAttribute<CustomPortStyleAttribute>()
+                              where attr != null
+                              select method;
+            List<string> portStyles = new List<string>();
+            foreach (var methodInfo in methodInfos)
+            {
+                var paths = methodInfo.Invoke(null, null) as string[];
+                if (paths != null && paths.Length > 0)
+                {
+                    portStyles.AddRange(paths);
+                }
+            }
+            sm_PortStyles = portStyles.Distinct().ToArray();
+
+            return sm_PortStyles;
+        }
     }
 }

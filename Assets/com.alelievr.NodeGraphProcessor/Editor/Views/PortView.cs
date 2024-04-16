@@ -1,10 +1,9 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
-using System;
 using System.Reflection;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace GraphProcessor
 {
@@ -21,8 +20,6 @@ namespace GraphProcessor
 
         protected FieldInfo fieldInfo;
         protected BaseEdgeConnectorListener listener;
-
-        string userPortStyleFile = "PortViewTypes";
 
         List<EdgeView> edges = new List<EdgeView>();
 
@@ -43,14 +40,20 @@ namespace GraphProcessor
 
             UpdatePortSize();
 
-            var userPortStyle = Resources.Load<StyleSheet>(userPortStyleFile);
-            if (userPortStyle != null)
-                styleSheets.Add(userPortStyle);
+            var portStyles = NodeProvider.FindPortStyles();
+            if (portStyles != null)
+            {
+                foreach (var portStyle in portStyles)
+                {
+                    var style = Resources.Load<StyleSheet>(portStyle);
+                    styleSheets.Add(style);
+                }
+            }
 
             if (portData.vertical)
                 AddToClassList("Vertical");
 
-            this.tooltip = portData.tooltip;
+            this.tooltip = string.IsNullOrEmpty(portData.tooltip) ? portData.displayType.Name : portData.tooltip;
         }
 
         public static PortView CreatePortView(Direction direction, FieldInfo fieldInfo, PortData portData, BaseEdgeConnectorListener edgeConnectorListener)
@@ -110,7 +113,7 @@ namespace GraphProcessor
             if (name != null)
                 portName = name;
             visualClass = "Port_" + portType.Name;
-            tooltip = portData.tooltip;
+            tooltip = string.IsNullOrEmpty(portData.tooltip) ? portData.displayType.Name : portData.tooltip;
         }
 
         public override void Connect(Edge edge)
@@ -175,6 +178,15 @@ namespace GraphProcessor
         public List<EdgeView> GetEdges()
         {
             return edges;
+        }
+
+        [CustomPortStyle]
+        private static string[] GetPortStyles()
+        {
+            return new string[]
+            {
+                "PortViewTypes"
+            };
         }
     }
 }
