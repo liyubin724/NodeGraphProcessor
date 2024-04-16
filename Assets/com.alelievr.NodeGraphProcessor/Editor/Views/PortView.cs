@@ -113,7 +113,6 @@ namespace GraphProcessor
             if (name != null)
                 portName = name;
             visualClass = "Port_" + portType.Name;
-            tooltip = string.IsNullOrEmpty(portData.tooltip) ? portData.displayType.Name : portData.tooltip;
         }
 
         public override void Connect(Edge edge)
