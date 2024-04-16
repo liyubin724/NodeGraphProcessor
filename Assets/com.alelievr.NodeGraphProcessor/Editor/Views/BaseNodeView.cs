@@ -1031,7 +1031,7 @@ namespace GraphProcessor
 
         public void ChangeLockStatus()
         {
-            nodeTarget.nodeLock ^= true;
+            nodeTarget.isLocked ^= true;
         }
 
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)

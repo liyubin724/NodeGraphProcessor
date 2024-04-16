@@ -32,14 +32,9 @@ namespace GraphProcessor
         /// </summary>
         public bool debug;
         /// <summary>
-        /// Node locked state
-        /// </summary>
-        public bool nodeLock;
-
-        /// <summary>
         /// Is the node is locked (if locked it can't be moved)
         /// </summary>
-        public bool isLocked => nodeLock;
+        public bool isLocked = false;
 
         /// <summary>
         /// Container of input ports
