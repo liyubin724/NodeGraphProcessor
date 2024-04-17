@@ -7,7 +7,7 @@ using UnityEngine;
 namespace DotEngine.Graph
 {
     [Serializable]
-    [NodeIdentity("Find Assets In Folder", new string[] { "path", "assets" })]
+    [NodeIdentity("Find Assets In Folder", new string[] { "path", "asset" })]
     [NodeMenuItem("Assets/Finder/Find Assets In Folder")]
     public class FindAssetsInFolderNode : BaseNode
     {

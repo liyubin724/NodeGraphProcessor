@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedNodes: []
   nodes:
-  - id: 0
-  - id: 1
-  - id: 2
-  - id: 3
-  - id: 4
-  - id: 5
-  - id: 6
+  - rid: 0
+  - rid: 1
+  - rid: 2
+  - rid: 3
+  - rid: 4
+  - rid: 5
+  - rid: 6
   edges:
   - GUID: 2bb2c320-a55d-4b23-841e-b8aba69b2e11
     owner: {fileID: 11400000}
@@ -96,16 +96,18 @@ MonoBehaviour:
   exposedParameters: []
   serializedParameterList: []
   stickyNotes: []
-  position: {x: 65, y: 64, z: 0}
-  scale: {x: 1, y: 1, z: 1}
+  nodeInspectorReference: {fileID: 0}
+  position: {x: -482, y: -45, z: 0}
+  scale: {x: 1.3225, y: 1.3225, z: 1}
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: 0
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
         GUID: 2f089938-d30d-4bd9-9857-de6a5801e62b
         computeOrder: -2
+        customName: 
         position:
           serializedVersion: 2
           x: 237
@@ -117,12 +119,12 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000001:
+    - rid: 1
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
         GUID: 21f662be-bf13-42f9-ad9b-31b04ea42fe2
         computeOrder: -2
+        customName: 
         position:
           serializedVersion: 2
           x: 588
@@ -134,12 +136,12 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000002:
+    - rid: 2
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
         GUID: 1739adca-36aa-463c-9c68-91e09886a730
         computeOrder: -2
+        customName: 
         position:
           serializedVersion: 2
           x: 357
@@ -151,12 +153,12 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000003:
+    - rid: 3
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
         GUID: 26ee6fe3-fb0f-4db4-a564-72696588cca4
         computeOrder: 0
+        customName: 
         position:
           serializedVersion: 2
           x: 585
@@ -168,12 +170,12 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000004:
+    - rid: 4
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
         GUID: 99c74fae-5055-4e73-a5b0-d3fe92433345
         computeOrder: 1
+        customName: 
         position:
           serializedVersion: 2
           x: 759
@@ -185,12 +187,12 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000005:
+    - rid: 5
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
         GUID: 89fc8a9b-018b-4db5-b97c-4f10c0b45545
         computeOrder: 2
+        customName: 
         position:
           serializedVersion: 2
           x: 906
@@ -202,12 +204,12 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000006:
+    - rid: 6
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
-        nodeCustomName: 
         GUID: 0f0a50d4-cae8-48ae-ae48-f8c15420b14a
         computeOrder: 3
+        customName: 
         position:
           serializedVersion: 2
           x: 1084

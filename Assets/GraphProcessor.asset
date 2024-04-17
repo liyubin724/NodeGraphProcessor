@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31390c44c9f3a3d40b424bf6821999a2, type: 3}
+  m_Name: GraphProcessor
+  m_EditorClassIdentifier: 
+  serializedNodes: []
+  nodes:
+  - rid: 4209874279311343645
+  - rid: 4209874279311343647
+  - rid: 4209874279311343649
+  edges:
+  - GUID: c31c292e-022b-428a-8c37-6e66f6991fc2
+    inputNodeGUID: cdd845c2-5f2f-4c08-9d6f-c7f7f3a87026
+    outputNodeGUID: 49f18051-7ca6-40ba-be27-57488efa81de
+    inputFieldName: folderPath
+    outputFieldName: assetPath
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: cc9a5407-2c6e-4aff-824f-2af3b87cd8c2
+    inputNodeGUID: ec8587ec-de92-4118-aba2-b3137c4862fa
+    outputNodeGUID: cdd845c2-5f2f-4c08-9d6f-c7f7f3a87026
+    inputFieldName: value
+    outputFieldName: assetPaths
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  groups: []
+  stackNodes: []
+  pinnedElements:
+  - position:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 150
+      height: 200
+    opened: 0
+    editorType:
+      serializedType: GraphProcessor.ExposedParameterView, com.alelievr.NodeGraphProcessor.Editor,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - position:
+      serializedVersion: 2
+      x: 0
+      y: 22
+      width: 150
+      height: 200
+    opened: 1
+    editorType:
+      serializedType: GraphProcessor.ProcessorView, com.alelievr.NodeGraphProcessor.Editor,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  exposedParameters: []
+  serializedParameterList: []
+  stickyNotes: []
+  nodeInspectorReference: {fileID: 0}
+  position: {x: 201, y: -10, z: 0}
+  scale: {x: 1, y: 1, z: 1}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4209874279311343645
+      type: {class: AssetFolderPathNode, ns: DotEngine.Graph, asm: Assembly-CSharp}
+      data:
+        GUID: 49f18051-7ca6-40ba-be27-57488efa81de
+        computeOrder: 0
+        customName: 
+        position:
+          serializedVersion: 2
+          x: -21
+          y: 163
+          width: 255
+          height: 99
+        expanded: 1
+        debug: 0
+        isLocked: 0
+        assetPath: Assets/Examples/Resources
+    - rid: 4209874279311343647
+      type: {class: FindAssetsInFolderNode, ns: DotEngine.Graph, asm: Assembly-CSharp}
+      data:
+        GUID: cdd845c2-5f2f-4c08-9d6f-c7f7f3a87026
+        computeOrder: 1
+        customName: 
+        position:
+          serializedVersion: 2
+          x: 352
+          y: 173
+          width: 186
+          height: 93
+        expanded: 1
+        debug: 0
+        isLocked: 0
+        folderPath: Assets/Examples/Resources
+        assetPaths:
+        - Assets/Examples/Resources/Cube.prefab
+        - Assets/Examples/Resources/PortViewTypes.uss
+        - Assets/Examples/Resources/TestType.uss
+        includeSubdir: 1
+    - rid: 4209874279311343649
+      type: {class: DisplayNode, ns: DotEngine.Graph, asm: Assembly-CSharp}
+      data:
+        GUID: ec8587ec-de92-4118-aba2-b3137c4862fa
+        computeOrder: 2
+        customName: 
+        position:
+          serializedVersion: 2
+          x: 626
+          y: 173
+          width: 267
+          height: 89
+        expanded: 1
+        debug: 0
+        isLocked: 0

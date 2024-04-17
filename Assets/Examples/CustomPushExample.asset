@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedNodes: []
   nodes:
-  - id: 0
-  - id: 1
-  - id: 2
-  - id: 3
-  - id: 4
-  - id: 5
-  - id: 6
-  - id: 7
-  - id: 8
-  - id: 9
-  - id: 10
+  - rid: 0
+  - rid: 1
+  - rid: 2
+  - rid: 3
+  - rid: 4
+  - rid: 5
+  - rid: 6
+  - rid: 7
+  - rid: 8
+  - rid: 9
+  - rid: 10
   edges:
   - GUID: 035ee169-e916-40b5-aecc-831d072ea9ab
     owner: {fileID: 11400000}
@@ -152,15 +152,18 @@ MonoBehaviour:
   exposedParameters: []
   serializedParameterList: []
   stickyNotes: []
+  nodeInspectorReference: {fileID: 0}
   position: {x: -99, y: 382, z: 0}
   scale: {x: 0.8695652, y: 0.8695652, z: 1}
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: 0
       type: {class: CircleRadians, ns: , asm: Assembly-CSharp}
       data:
         GUID: 7078860c-f7cb-4534-befd-da3c678d17ee
         computeOrder: 0
+        customName: 
         position:
           serializedVersion: 2
           x: 159
@@ -176,11 +179,12 @@ MonoBehaviour:
         - 2.5132742
         - 3.7699113
         - 5.0265484
-    00000001:
+    - rid: 1
       type: {class: PrintNode, ns: , asm: Assembly-CSharp}
       data:
         GUID: 0d8cd048-486b-4cce-9bd3-616bd2255d45
         computeOrder: 1
+        customName: 
         position:
           serializedVersion: 2
           x: 496
@@ -190,11 +194,12 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
-    00000002:
+    - rid: 2
       type: {class: PrintNode, ns: , asm: Assembly-CSharp}
       data:
         GUID: e2203ce1-49be-41ea-814a-465faf267adb
         computeOrder: 2
+        customName: 
         position:
           serializedVersion: 2
           x: 382.73535
@@ -204,11 +209,12 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
-    00000003:
+    - rid: 3
       type: {class: PrintNode, ns: , asm: Assembly-CSharp}
       data:
         GUID: 3b193543-3bd6-44d6-9664-115ecc6f2502
         computeOrder: 3
+        customName: 
         position:
           serializedVersion: 2
           x: 382.8053
@@ -218,11 +224,12 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
-    00000004:
+    - rid: 4
       type: {class: PrintNode, ns: , asm: Assembly-CSharp}
       data:
         GUID: e3318e7b-5469-424c-ab54-9524e62907a8
         computeOrder: 4
+        customName: 
         position:
           serializedVersion: 2
           x: 498
@@ -232,11 +239,12 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
-    00000005:
+    - rid: 5
       type: {class: PrintNode, ns: , asm: Assembly-CSharp}
       data:
         GUID: 83c994d8-6442-4e61-82e1-e83537229fda
         computeOrder: 5
+        customName: 
         position:
           serializedVersion: 2
           x: 499
@@ -246,11 +254,12 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
-    00000006:
+    - rid: 6
       type: {class: MultiAddNode, ns: , asm: Assembly-CSharp}
       data:
         GUID: 6b00dec7-a9af-4c2c-91fe-edb8f892882f
         computeOrder: 7
+        customName: 
         position:
           serializedVersion: 2
           x: 734
@@ -261,11 +270,12 @@ MonoBehaviour:
         debug: 0
         nodeLock: 0
         output: 0
-    00000007:
+    - rid: 7
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
         GUID: 02bc84c5-93ad-4a5e-b627-e930d133a1fd
         computeOrder: 6
+        customName: 
         position:
           serializedVersion: 2
           x: 394
@@ -277,11 +287,12 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000008:
+    - rid: 8
       type: {class: CustomPortsNode, ns: , asm: Assembly-CSharp}
       data:
         GUID: 1f8d14f7-5355-4734-8837-36668dd8e8ba
         computeOrder: 8
+        customName: 
         position:
           serializedVersion: 2
           x: 730
@@ -294,11 +305,12 @@ MonoBehaviour:
         inputs: []
         outputs: []
         portCount: 5
-    00000009:
+    - rid: 9
       type: {class: PrintNode, ns: , asm: Assembly-CSharp}
       data:
         GUID: 39f87d68-86a6-4b72-8a26-315c18d08525
         computeOrder: 9
+        customName: 
         position:
           serializedVersion: 2
           x: 1027
@@ -308,11 +320,12 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
-    0000000A:
+    - rid: 10
       type: {class: CustomPortsNode, ns: , asm: Assembly-CSharp}
       data:
         GUID: 137e400a-732b-4a4a-a216-ac084fe082d4
         computeOrder: 10
+        customName: 
         position:
           serializedVersion: 2
           x: 733.13043
