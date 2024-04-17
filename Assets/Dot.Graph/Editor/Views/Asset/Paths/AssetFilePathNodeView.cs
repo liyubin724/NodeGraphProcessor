@@ -7,13 +7,23 @@ namespace DotEditor.Graph
     [CustomNodeEditor(typeof(AssetFilePathNode))]
     public class AssetFilePathNodeView : AssetPathNodeView
     {
-        protected override string OpenPathPanel(string fullPath)
+        protected override string OpenPathPanel(string assetPath)
         {
-#if UNITY_EDITOR
-            return EditorUtility.OpenFilePanel("File", fullPath, null);
-#else
-            return null;
-#endif
+            if (string.IsNullOrEmpty(assetPath))
+            {
+                assetPath = AssetUtil.GetAssetPath();
+            }
+            else
+            {
+                assetPath = AssetUtil.GetDiskFilePath(assetPath);
+            }
+            string path = EditorUtility.OpenFilePanel("Open File", assetPath, null);
+            if (string.IsNullOrEmpty(path))
+            {
+                return null;
+            }
+
+            return AssetUtil.GetAssetFilePath(path);
         }
     }
 }

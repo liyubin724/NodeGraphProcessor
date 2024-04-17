@@ -7,6 +7,6 @@ namespace DotEngine.Graph
     {
         [Output]
         [SerializeField]
-        public string path;
+        public string assetPath;
     }
 }

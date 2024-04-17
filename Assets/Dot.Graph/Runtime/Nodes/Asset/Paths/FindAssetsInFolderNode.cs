@@ -8,7 +8,7 @@ namespace DotEngine.Graph
 {
     [Serializable]
     [NodeIdentity("Find Assets In Folder", new string[] { "path", "assets" })]
-    [NodeMenuItem("Assets/Paths/Find Assets In Folder")]
+    [NodeMenuItem("Assets/Finder/Find Assets In Folder")]
     public class FindAssetsInFolderNode : BaseNode
     {
         [Input]
@@ -34,7 +34,9 @@ namespace DotEngine.Graph
             if (string.IsNullOrEmpty(diskPath))
             {
                 AddMessage("The folder in not in Assets", NodeMessageType.Error);
+                return;
             }
+
             if (!Directory.Exists(diskPath))
             {
                 AddMessage($"The folder({folderPath}) is not found", NodeMessageType.Error);

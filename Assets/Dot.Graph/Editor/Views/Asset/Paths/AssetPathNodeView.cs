@@ -1,14 +1,11 @@
 ﻿using DotEngine.Graph;
 using GraphProcessor;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace DotEditor.Graph
 {
     public abstract class AssetPathNodeView : BaseNodeView
     {
-        private string m_AssetPath = Application.dataPath.Replace("\\", "/");
-
         private AssetPathNode m_PathNode;
 
         private TextField m_PathField;
@@ -21,22 +18,22 @@ namespace DotEditor.Graph
             selectFolderContainer.style.flexDirection = FlexDirection.Row;
 
             m_PathField = new TextField("File");
-            m_PathField.value = m_PathNode.path;
+            m_PathField.value = m_PathNode.assetPath;
+            m_PathField.RegisterValueChangedCallback(evt =>
+            {
+                m_PathNode.assetPath = evt.newValue;
+            });
             selectFolderContainer.Add(m_PathField);
 
             var browseBtn = new Button(() =>
             {
-#if UNITY_EDITOR
-                var path = OpenPathPanel(m_AssetPath);
-                if (!string.IsNullOrEmpty(path))
+                var path = OpenPathPanel(m_PathNode.assetPath);
+                if (string.IsNullOrEmpty(path))
                 {
-                    path = path.Replace("\\", "/");
-                    path = path.Replace(m_AssetPath, "Assets");
-
-                    m_PathField.value = path;
-                    m_PathNode.path = path;
+                    return;
                 }
-#endif
+
+                m_PathField.value = path;
             });
             browseBtn.text = "Browse";
             selectFolderContainer.Add(browseBtn);
@@ -44,6 +41,6 @@ namespace DotEditor.Graph
             controlsContainer.Add(selectFolderContainer);
         }
 
-        protected abstract string OpenPathPanel(string fullPath);
+        protected abstract string OpenPathPanel(string assetPath);
     }
 }

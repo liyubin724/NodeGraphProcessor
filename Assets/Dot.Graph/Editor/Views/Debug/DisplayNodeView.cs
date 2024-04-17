@@ -1,5 +1,7 @@
 using DotEngine.Graph;
 using GraphProcessor;
+using System.Collections;
+using System.Text;
 using UnityEngine.UIElements;
 
 namespace DotEditor.Graph
@@ -28,7 +30,19 @@ namespace DotEditor.Graph
         {
             if (m_Node.value != null)
             {
-                m_Label.text = m_Node.value.ToString();
+                if (m_Node.value is IList list)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        builder.AppendLine($"{i}: {list[i].ToString()}");
+                    }
+                    m_Label.text = builder.ToString();
+                }
+                else
+                {
+                    m_Label.text = m_Node.value.ToString();
+                }
             }
             else
             {

@@ -6,7 +6,7 @@ namespace DotEngine.Graph
 {
     [Serializable]
     [NodeIdentity("Asset File Path", new string[] { "path", "assets" })]
-    [NodeMenuItem("Assets/Paths/File Path")]
+    [NodeMenuItem("Assets/File Path")]
     public class AssetFilePathNode : AssetPathNode
     {
     }
