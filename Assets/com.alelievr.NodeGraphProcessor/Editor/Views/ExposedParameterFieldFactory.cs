@@ -18,9 +18,9 @@ namespace GraphProcessor
     {
         BaseGraph graph;
         [SerializeField]
-        ExposedParameterWorkaround  exposedParameterObject;
-        SerializedObject            serializedObject;
-        SerializedProperty          serializedParameters;
+        ExposedParameterWorkaround exposedParameterObject;
+        SerializedObject serializedObject;
+        SerializedProperty serializedParameters;
 
         Dictionary<ExposedParameter, object> oldParameterValues = new Dictionary<ExposedParameter, object>();
         Dictionary<ExposedParameter, ExposedParameter.Settings> oldParameterSettings = new Dictionary<ExposedParameter, ExposedParameter.Settings>();
@@ -67,12 +67,12 @@ namespace GraphProcessor
                 oldParameterValues[parameter] = parameter.value;
             }));
 
-			// Disallow picking scene objects when the graph is not linked to a scene
+            // Disallow picking scene objects when the graph is not linked to a scene
             if (!this.graph.IsLinkedToScene())
             {
-				var objectField = view.Q<ObjectField>();
-				if (objectField != null)
-					objectField.allowSceneObjects = false;
+                var objectField = view.Q<ObjectField>();
+                if (objectField != null)
+                    objectField.allowSceneObjects = false;
             }
             return view;
         }
