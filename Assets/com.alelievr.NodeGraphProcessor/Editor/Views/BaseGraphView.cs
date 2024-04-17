@@ -307,7 +307,7 @@ namespace GraphProcessor
             {
                 var edge = JsonSerializer.Deserialize<SerializableEdge>(serializedEdge);
 
-                edge.Deserialize();
+                edge.Deserialize(graph);
 
                 // Find port of new nodes:
                 copiedNodesMap.TryGetValue(edge.inputNode.GUID, out var oldInputNode);

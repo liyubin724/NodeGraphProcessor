@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace GraphProcessor
 {
@@ -19,20 +20,21 @@ namespace GraphProcessor
         public string inputPortIdentifier;
         public string outputPortIdentifier;
 
-        private BaseGraph owner;
+        [NonSerialized]
+        public BaseGraph graph;
 
-        [System.NonSerialized]
+        [NonSerialized]
         public BaseNode inputNode;
-        [System.NonSerialized]
+        [NonSerialized]
         public NodePort inputPort;
 
-        [System.NonSerialized]
+        [NonSerialized]
         public BaseNode outputNode;
-        [System.NonSerialized]
+        [NonSerialized]
         public NodePort outputPort;
 
         //temporary object used to send port to port data when a custom input/output function is used.
-        [System.NonSerialized]
+        [NonSerialized]
         public object passThroughBuffer;
 
         public SerializableEdge() { }
@@ -42,7 +44,7 @@ namespace GraphProcessor
             return new SerializableEdge
             {
                 GUID = System.Guid.NewGuid().ToString(),
-                owner = graph,
+                graph = graph,
                 inputNode = inputPort.owner,
                 inputFieldName = inputPort.fieldName,
                 outputNode = outputPort.owner,
@@ -66,13 +68,15 @@ namespace GraphProcessor
         public void OnAfterDeserialize() { }
 
         //here our owner have been deserialized
-        public void Deserialize()
+        public void Deserialize(BaseGraph graph)
         {
-            if (!owner.nodesPerGUID.ContainsKey(outputNodeGUID) || !owner.nodesPerGUID.ContainsKey(inputNodeGUID))
+            this.graph = graph;
+
+            if (!graph.nodesPerGUID.ContainsKey(outputNodeGUID) || !graph.nodesPerGUID.ContainsKey(inputNodeGUID))
                 return;
 
-            outputNode = owner.nodesPerGUID[outputNodeGUID];
-            inputNode = owner.nodesPerGUID[inputNodeGUID];
+            outputNode = graph.nodesPerGUID[outputNodeGUID];
+            inputNode = graph.nodesPerGUID[inputNodeGUID];
             inputPort = inputNode.GetPort(inputFieldName, inputPortIdentifier);
             outputPort = outputNode.GetPort(outputFieldName, outputPortIdentifier);
         }

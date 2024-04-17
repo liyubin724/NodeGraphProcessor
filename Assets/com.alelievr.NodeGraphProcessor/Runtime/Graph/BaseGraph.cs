@@ -191,7 +191,7 @@ namespace GraphProcessor
 
             foreach (var edge in edges.ToList())
             {
-                edge.Deserialize();
+                edge.Deserialize(this);
                 edgesPerGUID[edge.GUID] = edge;
 
                 // Sanity check for the edge:
