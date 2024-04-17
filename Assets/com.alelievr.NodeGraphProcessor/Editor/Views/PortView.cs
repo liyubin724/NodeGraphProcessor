@@ -184,7 +184,7 @@ namespace GraphProcessor
         {
             return new string[]
             {
-                "PortViewTypes"
+                "GraphProcessorStyles/PortViewTypes"
             };
         }
     }
