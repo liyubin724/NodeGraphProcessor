@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace DotEngine.Graph
@@ -11,50 +12,76 @@ namespace DotEngine.Graph
     [NodeMenuItem("Assets/Finder/Find Assets In Folder")]
     public class FindAssetsInFolderNode : BaseNode
     {
-        [Input]
-        [ShowAsDrawer]
-        public string folderPath;
+        [Input(allowMultiple = true)]
+        public string[] folderPaths;
 
         [Output]
-        public List<string> assetPaths = new List<string>();
+        public string[] assetPaths = new string[0];
 
         public bool includeSubdir = true;
 
+        [CustomPortBehavior(nameof(folderPaths))]
+        IEnumerable<PortData> GetPortsForInputs(List<SerializableEdge> edges)
+        {
+            var maxIndex = -1;
+            foreach (var edge in edges)
+            {
+                var identifier = edge.inputPortIdentifier;
+                if (!string.IsNullOrEmpty(identifier) && int.TryParse(identifier, out var index))
+                {
+                    if (index > maxIndex)
+                    {
+                        maxIndex = index;
+                    }
+                }
+            }
+            for (int i = 0; i <= maxIndex + 1; i++)
+            {
+                yield return new PortData { displayName = i.ToString(), displayType = typeof(string), identifier = i.ToString() };
+            }
+        }
+
+        [CustomPortInput(nameof(folderPaths), typeof(string), allowCast = true)]
+        public void GetInputs(List<SerializableEdge> edges)
+        {
+            folderPaths = edges.Select(e => (string)e.passThroughBuffer).ToArray();
+        }
+
         protected override void Process()
         {
-            assetPaths.Clear();
+            assetPaths = new string[0];
 
-            if (string.IsNullOrEmpty(folderPath))
+            List<string> assets = new List<string>();
+            foreach (var folderPath in folderPaths)
             {
-                AddMessage("The folder is empty", NodeMessageType.Error);
-                return;
-            }
-
-            var diskPath = AssetUtil.GetDiskFilePath(folderPath);
-            if (string.IsNullOrEmpty(diskPath))
-            {
-                AddMessage("The folder in not in Assets", NodeMessageType.Error);
-                return;
-            }
-
-            if (!Directory.Exists(diskPath))
-            {
-                AddMessage($"The folder({folderPath}) is not found", NodeMessageType.Error);
-                return;
-            }
-
-            var files = Directory.GetFiles(diskPath, "*", includeSubdir ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
-            foreach (var file in files)
-            {
-                var assetPath = AssetUtil.GetAssetFilePath(file);
-                var ext = Path.GetExtension(assetPath).ToLower();
-                if (ext == ".meta")
+                var diskPath = AssetUtil.GetDiskFilePath(folderPath);
+                if (string.IsNullOrEmpty(diskPath))
                 {
+                    AddMessage("The folder in not in Assets", NodeMessageType.Error);
                     continue;
                 }
 
-                assetPaths.Add(assetPath);
+                if (!Directory.Exists(diskPath))
+                {
+                    AddMessage($"The folder({folderPath}) is not found", NodeMessageType.Error);
+                    continue;
+                }
+
+                var files = Directory.GetFiles(diskPath, "*", includeSubdir ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+                foreach (var file in files)
+                {
+                    var assetPath = AssetUtil.GetAssetFilePath(file);
+                    var ext = Path.GetExtension(assetPath).ToLower();
+                    if (ext == ".meta")
+                    {
+                        continue;
+                    }
+
+                    assets.Add(assetPath);
+                }
             }
+
+            assetPaths = assets.Distinct().ToArray();
         }
     }
 }
