@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-namespace DotEngine.Graph
+namespace DotEngine.Graph.Assets
 {
     [Serializable]
     [NodeIdentity("Find Assets In Folder", new string[] { "path", "asset" })]

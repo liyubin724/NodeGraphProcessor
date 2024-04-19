@@ -1,8 +1,9 @@
 ﻿using DotEngine.Graph;
+using DotEngine.Graph.Assets;
 using GraphProcessor;
 using UnityEditor;
 
-namespace DotEditor.Graph
+namespace DotEditor.Graph.Assets
 {
     [CustomNodeEditor(typeof(AssetFolderPathNode))]
     public class AssetFolderPathNodeView : AssetPathNodeView

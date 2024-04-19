@@ -1,7 +1,7 @@
 ﻿using GraphProcessor;
 using UnityEngine;
 
-namespace DotEngine.Graph
+namespace DotEngine.Graph.Assets
 {
     public abstract class AssetPathNode : BaseNode
     {
