@@ -44,7 +44,22 @@ namespace DotEngine.Graph
         [CustomPortInput(nameof(folderPaths), typeof(string), allowCast = true)]
         public void GetInputs(List<SerializableEdge> edges)
         {
-            folderPaths = edges.Select(e => (string)e.passThroughBuffer).ToArray();
+            var paths = edges.Select(e => (string)e.passThroughBuffer).ToArray();
+            foreach (var path in paths)
+            {
+                if (string.IsNullOrEmpty(path)) continue;
+                if (Array.IndexOf(folderPaths, path) >= 0) continue;
+
+                var tempPaths = folderPaths;
+                folderPaths = new string[tempPaths.Length + 1];
+                Array.Copy(tempPaths, folderPaths, tempPaths.Length);
+                folderPaths[folderPaths.Length - 1] = path;
+            }
+        }
+
+        protected override void BeforePullInputDatas()
+        {
+            folderPaths = new string[0];
         }
 
         protected override void Process()
