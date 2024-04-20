@@ -8,23 +8,24 @@ namespace DotEngine.Graph.Assets
 {
     [Serializable]
     [NodeIdentity("File Name Filter", new string[] { "filter", "asset" })]
-    [NodeMenuItem("Assets/Filters/File Name Filter")]
+    [NodeMenuItem("Assets/Filters/File Name")]
     public class FileNameFilterNode : FilterNode
     {
+        public bool withExt = false;
         public string regex;
 
         protected override void Process()
         {
-            if (input == null || input.Length == 0) return;
+            if (inputAssets == null || inputAssets.Length == 0) return;
 
             List<string> results = new List<string>();
 
-            foreach (var item in input)
+            foreach (var item in inputAssets)
             {
                 if (item == null) continue;
                 if (string.IsNullOrEmpty(item)) continue;
 
-                string fileName = Path.GetFileNameWithoutExtension(item);
+                string fileName = withExt ? Path.GetFileName(item) : Path.GetFileNameWithoutExtension(item);
                 if (string.IsNullOrEmpty(fileName)) continue;
 
                 if (string.IsNullOrEmpty(regex) || Regex.IsMatch(fileName, regex))
@@ -33,7 +34,7 @@ namespace DotEngine.Graph.Assets
                 }
             }
 
-            output = results.ToArray();
+            outputAssets = results.ToArray();
         }
     }
 }

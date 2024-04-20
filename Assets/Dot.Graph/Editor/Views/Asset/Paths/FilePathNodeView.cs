@@ -1,30 +1,30 @@
 ﻿using DotEngine.Graph;
-using DotEngine.Graph.Assets;
 using GraphProcessor;
 using UnityEditor;
 
 namespace DotEditor.Graph.Assets
 {
-    [CustomNodeEditor(typeof(AssetFilePathNode))]
-    public class AssetFilePathNodeView : AssetPathNodeView
+    [CustomNodeEditor(typeof(DotEngine.Graph.Assets.FilePathNode))]
+    public class FilePathNodeView : PathNodeView
     {
         protected override string OpenPathPanel(string assetPath)
         {
             if (string.IsNullOrEmpty(assetPath))
             {
-                assetPath = AssetUtil.GetAssetPath();
+                assetPath = AssetUtil.GetAssetDiskPath();
             }
             else
             {
-                assetPath = AssetUtil.GetDiskFilePath(assetPath);
+                assetPath = AssetUtil.GetDiskPath(assetPath);
             }
+
             string path = EditorUtility.OpenFilePanel("Open File", assetPath, null);
             if (string.IsNullOrEmpty(path))
             {
                 return null;
             }
 
-            return AssetUtil.GetAssetFilePath(path);
+            return AssetUtil.GetAssetPath(path);
         }
     }
 }

@@ -5,9 +5,9 @@ namespace DotEngine.Graph.Assets
     public abstract class FilterNode : BaseNode
     {
         [Input]
-        public string[] input;
+        public string[] inputAssets;
 
         [Output]
-        public string[] output;
+        public string[] outputAssets;
     }
 }

@@ -5,12 +5,12 @@ namespace DotEngine.Graph
     public static class AssetUtil
     {
         private static string AssetPath = Application.dataPath.Replace("\\", "/");
-        public static string GetAssetPath()
+        public static string GetAssetDiskPath()
         {
             return AssetPath;
         }
 
-        public static string GetAssetFilePath(string filePath)
+        public static string GetAssetPath(string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
             {
@@ -27,7 +27,7 @@ namespace DotEngine.Graph
             return null;
         }
 
-        public static string GetDiskFilePath(string assetPath)
+        public static string GetDiskPath(string assetPath)
         {
             if (string.IsNullOrEmpty(assetPath))
             {

@@ -8,9 +8,9 @@ using UnityEngine;
 namespace DotEngine.Graph.Assets
 {
     [Serializable]
-    [NodeIdentity("Find Assets In Folder", new string[] { "path", "asset" })]
-    [NodeMenuItem("Assets/Finder/Find Assets In Folder")]
-    public class FindAssetsInFolderNode : BaseNode
+    [NodeIdentity("Find Assets", new string[] { "path", "asset" })]
+    [NodeMenuItem("Assets/Finder/Find Assets From Folders")]
+    public class FindAssetsInFoldersNode : BaseNode
     {
         [Input(allowMultiple = true)]
         public string[] folderPaths;
@@ -69,7 +69,7 @@ namespace DotEngine.Graph.Assets
             List<string> assets = new List<string>();
             foreach (var folderPath in folderPaths)
             {
-                var diskPath = AssetUtil.GetDiskFilePath(folderPath);
+                var diskPath = AssetUtil.GetDiskPath(folderPath);
                 if (string.IsNullOrEmpty(diskPath))
                 {
                     AddMessage("The folder in not in Assets", NodeMessageType.Error);
@@ -85,7 +85,7 @@ namespace DotEngine.Graph.Assets
                 var files = Directory.GetFiles(diskPath, "*", includeSubdir ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
                 foreach (var file in files)
                 {
-                    var assetPath = AssetUtil.GetAssetFilePath(file);
+                    var assetPath = AssetUtil.GetAssetPath(file);
                     var ext = Path.GetExtension(assetPath).ToLower();
                     if (ext == ".meta")
                     {
