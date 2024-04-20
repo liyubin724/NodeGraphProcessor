@@ -15,6 +15,8 @@ namespace DotEngine.Graph.Assets
 
         protected override void Process()
         {
+            outputAssets = null;
+
             if (inputAssets == null || inputAssets.Length == 0) return;
 
             List<string> results = new List<string>();

@@ -21,6 +21,8 @@ namespace DotEngine.Graph.Assets
 
         protected override void Process()
         {
+            assets = null;
+
             if (string.IsNullOrEmpty(folderPath))
             {
                 AddMessage("The path of folder is empty", NodeMessageType.Error);
@@ -47,7 +49,7 @@ namespace DotEngine.Graph.Assets
             {
                 var assetPath = AssetUtil.GetAssetPath(file);
                 var ext = Path.GetExtension(assetPath).ToLower();
-                if (ext == ".meta")
+                if (ext == ".meta" && ignoreMeta)
                 {
                     continue;
                 }

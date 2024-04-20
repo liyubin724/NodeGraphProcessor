@@ -19,6 +19,7 @@ namespace DotEngine.Graph.Assets
         public string[] assetPaths = new string[0];
 
         public bool includeSubdir = true;
+        public bool ignoreMeta = true;
 
         [CustomPortBehavior(nameof(folderPaths))]
         IEnumerable<PortData> GetPortsForInputs(List<SerializableEdge> edges)
@@ -64,7 +65,7 @@ namespace DotEngine.Graph.Assets
 
         protected override void Process()
         {
-            assetPaths = new string[0];
+            assetPaths = null;
 
             List<string> assets = new List<string>();
             foreach (var folderPath in folderPaths)
@@ -87,7 +88,7 @@ namespace DotEngine.Graph.Assets
                 {
                     var assetPath = AssetUtil.GetAssetPath(file);
                     var ext = Path.GetExtension(assetPath).ToLower();
-                    if (ext == ".meta")
+                    if (ext == ".meta" && ignoreMeta)
                     {
                         continue;
                     }

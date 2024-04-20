@@ -16,6 +16,8 @@ namespace DotEngine.Graph.Assets
 
         protected override void Process()
         {
+            assetPath = null;
+
             if (string.IsNullOrEmpty(diskPath))
             {
                 AddMessage("The path of asset is empty", NodeMessageType.Error);
