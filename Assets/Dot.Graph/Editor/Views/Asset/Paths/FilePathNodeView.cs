@@ -1,10 +1,12 @@
-﻿using DotEngine.Graph;
+﻿using DotEngine.Graph.Assets;
 using GraphProcessor;
 using UnityEditor;
 
+using AssetUtil = DotEngine.Graph.AssetUtil;
+
 namespace DotEditor.Graph.Assets
 {
-    [CustomNodeEditor(typeof(DotEngine.Graph.Assets.FilePathNode))]
+    [CustomNodeEditor(typeof(FilePathNode))]
     public class FilePathNodeView : PathNodeView
     {
         protected override string OpenPathPanel(string assetPath)

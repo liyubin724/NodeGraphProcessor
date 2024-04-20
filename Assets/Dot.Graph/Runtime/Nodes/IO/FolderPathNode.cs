@@ -1,20 +1,13 @@
 using GraphProcessor;
 using System;
-using UnityEngine;
 
-namespace DotEngine.Graph
+namespace DotEngine.Graph.IO
 {
     [Serializable]
-    [NodeIdentity("Folder Path", new string[] { "io", "common" })]
-    [NodeMenuItem("Common/IO/Folder Path")]
-    public class FolderPathNode : BaseNode
+    [NodeIdentity("Folder Path", new string[] { "io", "path" })]
+    [NodeMenuItem("IO/Path/Folder Path")]
+    public class FolderPathNode : PathNode
     {
-        [Output]
-        [SerializeField]
-        public string path;
-
-        [SerializeField]
-        public bool isRelativeToAssets = true;
     }
 }
 

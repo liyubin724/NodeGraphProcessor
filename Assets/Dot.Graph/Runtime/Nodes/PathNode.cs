@@ -1,6 +1,6 @@
 ﻿using GraphProcessor;
 
-namespace DotEngine.Graph.Assets
+namespace DotEngine.Graph
 {
     public abstract class PathNode : BaseNode
     {
