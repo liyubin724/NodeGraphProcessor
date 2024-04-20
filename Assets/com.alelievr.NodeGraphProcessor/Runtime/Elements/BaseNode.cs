@@ -515,6 +515,8 @@ namespace GraphProcessor
 
         public void OnProcess()
         {
+            ClearMessages();
+
             ExceptionToLog.Call(() => BeforePullInputDatas());
             {
                 inputPorts.PullDatas();
