@@ -1,12 +1,8 @@
 ﻿using GraphProcessor;
-using System;
 using UnityEditor;
 
 namespace DotEditor.Graph.Assets
 {
-    //    [Serializable]
-    //    [NodeIdentity("Asset Importer(Editor)", new string[] { "editor", "importer", "asset" })]
-    //    [NodeMenuItem("Assets/Filters/Importer(In Editor)")]
     public abstract class AssetImporterNode<T> : BaseNode where T : AssetImporter
     {
         [Input]
