@@ -23,7 +23,15 @@ namespace DotEditor.Graph.Assets
 
         public SpriteSettingData setting = new SpriteSettingData();
 
-        public IOSTexturePlatformSettingData iosPlatformSetting = new IOSTexturePlatformSettingData();
+        [Input]
+        public TextureImporterPlatformSettings defaultSetting;
+        [Input]
+        public TextureImporterPlatformSettings standaloneSetting;
+        [Input]
+        public TextureImporterPlatformSettings androidSetting;
+        [Input]
+        public TextureImporterPlatformSettings iosSetting;
+
         protected override void Process()
         {
             if (assetPaths == null || assetPaths.Length == 0)
@@ -62,7 +70,10 @@ namespace DotEditor.Graph.Assets
 
             importer.SetTextureSettings(tis);
 
-            importer.GetPlatformTextureSettings("Default");
+            importer.SetPlatformTextureSettings(defaultSetting);
+            importer.SetPlatformTextureSettings(standaloneSetting);
+            importer.SetPlatformTextureSettings(androidSetting);
+            importer.SetPlatformTextureSettings(iosSetting);
 
             AssetDatabase.ImportAsset(assetPath);
         }
