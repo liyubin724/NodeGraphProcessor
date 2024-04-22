@@ -1,0 +1,355 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31390c44c9f3a3d40b424bf6821999a2, type: 3}
+  m_Name: atlas-graph
+  m_EditorClassIdentifier: 
+  serializedNodes: []
+  nodes:
+  - rid: 4209874394228457491
+  - rid: 4209874394228457492
+  - rid: 4209874394228457493
+  - rid: 4209874394228457495
+  - rid: 4209874394228457496
+  - rid: 4209874394228457497
+  - rid: 4209874394228457498
+  - rid: 4209874394228457499
+  edges:
+  - GUID: 7209c39f-cd53-4709-9f82-e173e3400167
+    inputNodeGUID: 371b7396-b9b5-4f49-a9e4-4e88520e6735
+    outputNodeGUID: 6d1fb009-688a-4c65-b2c6-84894268c865
+    inputFieldName: folderPath
+    outputFieldName: path
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 741015b9-ef23-429a-9a3f-0c1867f6d433
+    inputNodeGUID: bbdf92ab-95b1-4a51-97a5-60f0c47b7d4d
+    outputNodeGUID: 371b7396-b9b5-4f49-a9e4-4e88520e6735
+    inputFieldName: inputAssets
+    outputFieldName: assets
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 3756d23a-f61e-475d-bf6a-7cc7a8555451
+    inputNodeGUID: a483751e-80d9-4b7e-bf6d-023345e59765
+    outputNodeGUID: bbdf92ab-95b1-4a51-97a5-60f0c47b7d4d
+    inputFieldName: assetPaths
+    outputFieldName: outputAssets
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 3a8db61b-2e25-429c-8330-c92e6bc62e1e
+    inputNodeGUID: a483751e-80d9-4b7e-bf6d-023345e59765
+    outputNodeGUID: 14653a95-1ded-497c-9c2c-8665a09b87ed
+    inputFieldName: defaultSetting
+    outputFieldName: output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 66bf2f43-8b57-46ef-90a6-0764580fec40
+    inputNodeGUID: a483751e-80d9-4b7e-bf6d-023345e59765
+    outputNodeGUID: 175bc5de-710d-4d4d-8ef1-48150e8a2401
+    inputFieldName: standaloneSetting
+    outputFieldName: output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 15a34302-dfdb-4552-a675-25b7fb1a5726
+    inputNodeGUID: a483751e-80d9-4b7e-bf6d-023345e59765
+    outputNodeGUID: 55ee0ab3-104d-4c26-8604-7fb928511116
+    inputFieldName: androidSetting
+    outputFieldName: output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: e5c2ebae-2d3a-4c79-bde3-20a078e21cab
+    inputNodeGUID: a483751e-80d9-4b7e-bf6d-023345e59765
+    outputNodeGUID: 9d4e3d9b-9bc9-49dd-b384-dfe2dacf37f2
+    inputFieldName: iosSetting
+    outputFieldName: output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  groups: []
+  stackNodes: []
+  pinnedElements:
+  - position:
+      serializedVersion: 2
+      x: 19
+      y: 297
+      width: 150
+      height: 200
+    opened: 1
+    editorType:
+      serializedType: GraphProcessor.ProcessorView, com.alelievr.NodeGraphProcessor.Editor,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  exposedParameters: []
+  serializedParameterList: []
+  stickyNotes: []
+  nodeInspectorReference: {fileID: 0}
+  position: {x: -346, y: -144, z: 0}
+  scale: {x: 1, y: 1, z: 1}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4209874394228457491
+      type: {class: FolderPathNode, ns: DotEngine.Graph.Assets, asm: Assembly-CSharp}
+      data:
+        GUID: 6d1fb009-688a-4c65-b2c6-84894268c865
+        computeOrder: 0
+        customName: 
+        position:
+          serializedVersion: 2
+          x: 376
+          y: 226
+          width: 100
+          height: 100
+        expanded: 1
+        debug: 0
+        isLocked: 0
+        path: Assets/ArtRes/UI/Atlas
+    - rid: 4209874394228457492
+      type: {class: FindAssetsInFolderNode, ns: DotEngine.Graph.Assets, asm: Assembly-CSharp}
+      data:
+        GUID: 371b7396-b9b5-4f49-a9e4-4e88520e6735
+        computeOrder: 1
+        customName: 
+        position:
+          serializedVersion: 2
+          x: 664
+          y: 226
+          width: 162
+          height: 111
+        expanded: 1
+        debug: 0
+        isLocked: 0
+        folderPath: Assets/ArtRes/UI/Atlas
+        assets:
+        - Assets/ArtRes/UI/Atlas/common-atlas.spriteatlas
+        includeSubdir: 1
+        ignoreMeta: 1
+    - rid: 4209874394228457493
+      type: {class: FileExtFilterNode, ns: DotEngine.Graph.Assets, asm: Assembly-CSharp}
+      data:
+        GUID: bbdf92ab-95b1-4a51-97a5-60f0c47b7d4d
+        computeOrder: 2
+        customName: 
+        position:
+          serializedVersion: 2
+          x: 880
+          y: 225
+          width: 205
+          height: 112
+        expanded: 1
+        debug: 0
+        isLocked: 0
+        inputAssets:
+        - Assets/ArtRes/UI/Atlas/common-atlas.spriteatlas
+        outputAssets:
+        - Assets/ArtRes/UI/Atlas/common-atlas.spriteatlas
+        ext: .spriteatlas
+        ignoreCase: 1
+    - rid: 4209874394228457495
+      type: {class: SpriteAtlasSettingNode, ns: DotEditor.Graph.Assets, asm: Assembly-CSharp-Editor}
+      data:
+        GUID: a483751e-80d9-4b7e-bf6d-023345e59765
+        computeOrder: 7
+        customName: 
+        position:
+          serializedVersion: 2
+          x: 1204
+          y: 325
+          width: 191
+          height: 336
+        expanded: 1
+        debug: 0
+        isLocked: 0
+        assetPaths:
+        - Assets/ArtRes/UI/Atlas/common-atlas.spriteatlas
+        isIncludeInBuild: 1
+        isAllowRotation: 0
+        isTightPacking: 1
+        isAlphaDilation: 0
+        padding: 4
+        readable: 0
+        mipmap: 0
+        sRGBTexture: 1
+        filterMode: 1
+        defaultSetting:
+          m_Name: Default
+          m_Overridden: 1
+          m_MaxTextureSize: 2048
+          m_ResizeAlgorithm: 0
+          m_TextureFormat: 4
+          m_TextureCompression: 1
+          m_CompressionQuality: 50
+          m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+          m_CrunchedCompression: 0
+          m_AllowsAlphaSplitting: 0
+          m_AndroidETC2FallbackOverride: 0
+        standaloneSetting:
+          m_Name: Standalone
+          m_Overridden: 1
+          m_MaxTextureSize: 2048
+          m_ResizeAlgorithm: 0
+          m_TextureFormat: 4
+          m_TextureCompression: 1
+          m_CompressionQuality: 50
+          m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+          m_CrunchedCompression: 0
+          m_AllowsAlphaSplitting: 0
+          m_AndroidETC2FallbackOverride: 0
+        androidSetting:
+          m_Name: Android
+          m_Overridden: 1
+          m_MaxTextureSize: 2048
+          m_ResizeAlgorithm: 0
+          m_TextureFormat: 47
+          m_TextureCompression: 1
+          m_CompressionQuality: 50
+          m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+          m_CrunchedCompression: 0
+          m_AllowsAlphaSplitting: 0
+          m_AndroidETC2FallbackOverride: 0
+        iosSetting:
+          m_Name: iPhone
+          m_Overridden: 1
+          m_MaxTextureSize: 2048
+          m_ResizeAlgorithm: 0
+          m_TextureFormat: 48
+          m_TextureCompression: 1
+          m_CompressionQuality: 50
+          m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+          m_CrunchedCompression: 0
+          m_AllowsAlphaSplitting: 0
+          m_AndroidETC2FallbackOverride: 0
+    - rid: 4209874394228457496
+      type: {class: TexturePlatformSettingNode, ns: DotEditor.Graph.Assets, asm: Assembly-CSharp-Editor}
+      data:
+        GUID: 14653a95-1ded-497c-9c2c-8665a09b87ed
+        computeOrder: 6
+        customName: 
+        position:
+          serializedVersion: 2
+          x: 768
+          y: 366.85
+          width: 224
+          height: 155
+        expanded: 1
+        debug: 0
+        isLocked: 0
+        output:
+          m_Name: Default
+          m_Overridden: 1
+          m_MaxTextureSize: 2048
+          m_ResizeAlgorithm: 0
+          m_TextureFormat: 4
+          m_TextureCompression: 1
+          m_CompressionQuality: 50
+          m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+          m_CrunchedCompression: 0
+          m_AllowsAlphaSplitting: 0
+          m_AndroidETC2FallbackOverride: 0
+        setting:
+          name: Default
+          maxSize: 2048
+          resizeAlgorithm: 0
+          format: 4
+    - rid: 4209874394228457497
+      type: {class: TexturePlatformSettingNode, ns: DotEditor.Graph.Assets, asm: Assembly-CSharp-Editor}
+      data:
+        GUID: 175bc5de-710d-4d4d-8ef1-48150e8a2401
+        computeOrder: 5
+        customName: 
+        position:
+          serializedVersion: 2
+          x: 768
+          y: 521.85004
+          width: 224
+          height: 155
+        expanded: 1
+        debug: 0
+        isLocked: 0
+        output:
+          m_Name: Standalone
+          m_Overridden: 1
+          m_MaxTextureSize: 2048
+          m_ResizeAlgorithm: 0
+          m_TextureFormat: 4
+          m_TextureCompression: 1
+          m_CompressionQuality: 50
+          m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+          m_CrunchedCompression: 0
+          m_AllowsAlphaSplitting: 0
+          m_AndroidETC2FallbackOverride: 0
+        setting:
+          name: Standalone
+          maxSize: 2048
+          resizeAlgorithm: 0
+          format: 4
+    - rid: 4209874394228457498
+      type: {class: TexturePlatformSettingNode, ns: DotEditor.Graph.Assets, asm: Assembly-CSharp-Editor}
+      data:
+        GUID: 9d4e3d9b-9bc9-49dd-b384-dfe2dacf37f2
+        computeOrder: 3
+        customName: 
+        position:
+          serializedVersion: 2
+          x: 768
+          y: 832.0001
+          width: 224
+          height: 155
+        expanded: 1
+        debug: 0
+        isLocked: 0
+        output:
+          m_Name: iPhone
+          m_Overridden: 1
+          m_MaxTextureSize: 2048
+          m_ResizeAlgorithm: 0
+          m_TextureFormat: 48
+          m_TextureCompression: 1
+          m_CompressionQuality: 50
+          m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+          m_CrunchedCompression: 0
+          m_AllowsAlphaSplitting: 0
+          m_AndroidETC2FallbackOverride: 0
+        setting:
+          name: iPhone
+          maxSize: 2048
+          resizeAlgorithm: 0
+          format: 48
+    - rid: 4209874394228457499
+      type: {class: TexturePlatformSettingNode, ns: DotEditor.Graph.Assets, asm: Assembly-CSharp-Editor}
+      data:
+        GUID: 55ee0ab3-104d-4c26-8604-7fb928511116
+        computeOrder: 4
+        customName: 
+        position:
+          serializedVersion: 2
+          x: 768
+          y: 676.85
+          width: 224
+          height: 155
+        expanded: 1
+        debug: 0
+        isLocked: 0
+        output:
+          m_Name: Android
+          m_Overridden: 1
+          m_MaxTextureSize: 2048
+          m_ResizeAlgorithm: 0
+          m_TextureFormat: 47
+          m_TextureCompression: 1
+          m_CompressionQuality: 50
+          m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+          m_CrunchedCompression: 0
+          m_AllowsAlphaSplitting: 0
+          m_AndroidETC2FallbackOverride: 0
+        setting:
+          name: Android
+          maxSize: 2048
+          resizeAlgorithm: 0
+          format: 47
