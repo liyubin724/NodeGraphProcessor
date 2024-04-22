@@ -322,12 +322,19 @@ namespace GraphProcessor
             var isCompatible = false;
             if (includeTags != null && includeTags.Length > 0)
             {
-                foreach (var tag in tags)
+                if (tags == null)
                 {
-                    if (Array.IndexOf(includeTags, tag) >= 0)
+                    isCompatible = false;
+                }
+                else
+                {
+                    foreach (var tag in tags)
                     {
-                        isCompatible = true;
-                        break;
+                        if (Array.IndexOf(includeTags, tag) >= 0)
+                        {
+                            isCompatible = true;
+                            break;
+                        }
                     }
                 }
             }
