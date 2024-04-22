@@ -5,7 +5,7 @@ using UnityEditor;
 using GraphProcessor;
 using UnityEngine.UIElements;
 
-//[CustomEditor(typeof(BaseGraph), true)]
+[CustomEditor(typeof(BaseGraph), true)]
 public class GraphAssetInspector : GraphInspector
 {
     // protected override void CreateInspector()
