@@ -8,7 +8,7 @@ namespace DotEditor.Graph.Assets
         private bool m_ProcessorVisible = false;
         protected override void OnRefreshToolbarView(EnhancedToolbarView toolbarView)
         {
-            toolbarView.AddLeftToggle("Show Processor", m_ProcessorVisible, (v) =>
+            toolbarView.AddRightToggle("Show Processor", m_ProcessorVisible, (v) =>
             {
                 graphView.ToggleView<ProcessorView>();
             });
