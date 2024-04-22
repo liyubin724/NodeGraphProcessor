@@ -11,7 +11,7 @@ namespace GraphProcessor
     public class GraphWindow : EditorWindow
     {
         private static Dictionary<Type, Type> sm_GraphWindowDic = new Dictionary<Type, Type>();
-        public static void OpenWindow(BaseGraph graph)
+        public static void OpenWindow(GraphAsset graph)
         {
             if (!sm_GraphWindowDic.TryGetValue(graph.GetType(), out var winType))
             {
@@ -52,90 +52,74 @@ namespace GraphProcessor
         public EnhancedToolbarView toolbarView => m_ToolbarView;
         public BaseGraphView graphView => m_GraphView;
 
-        private BaseGraph m_Graph;
-        public BaseGraph graph => m_Graph;
+        private GraphAsset m_GraphAsset;
+        public GraphAsset graph => m_GraphAsset;
 
-        public event Action<BaseGraph> onGraphLoaded;
-        public event Action<BaseGraph> onGraphUnloaded;
+        public event Action<GraphAsset> onGraphLoaded;
+        public event Action<GraphAsset> onGraphUnloaded;
 
         private void CreateGUI()
-        {
-            CreateRootView();
-            CreateToolbarView();
-            CreateGraphView();
-        }
-
-        private void CreateRootView()
         {
             m_RootView = rootVisualElement;
             m_RootView.name = "graph-root";
 
-            OnInitilizeRootView(rootView);
-        }
-
-        private void CreateToolbarView()
-        {
-            if (m_ToolbarView == null)
-            {
-                m_ToolbarView = new EnhancedToolbarView();
-                m_RootView.Add(m_ToolbarView);
-            }
-
-            m_ToolbarView.Clear();
-
-            OnInitilizeToolbarView(m_ToolbarView);
-        }
-
-        private void CreateGraphView()
-        {
             m_GraphView = new BaseGraphView(this);
             m_RootView.Add(m_GraphView);
 
-            OnInitlizeGraphView(m_GraphView);
+            m_ToolbarView = new EnhancedToolbarView();
+            m_RootView.Add(m_ToolbarView);
         }
 
-        public void InitWithGraph(BaseGraph graph)
+        public void InitWithGraph(GraphAsset graphAsset)
         {
-            if (m_Graph != null && m_Graph != graph)
+            if (m_GraphAsset != null && m_GraphAsset != graphAsset)
             {
-                SaveGraph();
+                SaveGraphAsset();
 
-                onGraphUnloaded?.Invoke(m_Graph);
-                m_Graph = null;
+                onGraphUnloaded?.Invoke(m_GraphAsset);
             }
 
-            m_Graph = graph;
-            onGraphLoaded?.Invoke(m_Graph);
+            m_GraphAsset = graphAsset;
+            onGraphLoaded?.Invoke(m_GraphAsset);
 
-            if (m_GraphView != null)
+            m_GraphView.Initialize(m_GraphAsset);
+
+            RefreshGraphView();
+            RefreshToolbarView();
+        }
+
+        private void RefreshToolbarView()
+        {
+            m_ToolbarView.Clear();
+
+            m_ToolbarView.AddLeftButton("Save", () =>
             {
-                m_RootView.Remove(m_GraphView);
-                m_GraphView = null;
-            }
+                SaveGraphAsset();
+            });
+            m_ToolbarView.AddLeftButton("Ping", () =>
+            {
+                PingGraphAsset();
+            });
+
+            OnRefreshToolbarView(m_ToolbarView);
         }
 
-        protected virtual void OnInitilizeRootView(VisualElement rootView)
+        private void RefreshGraphView()
         {
+            OnRefreshGraphView(m_GraphView);
         }
 
-        protected virtual void OnInitilizeToolbarView(EnhancedToolbarView toolbarView)
+        protected virtual void OnRefreshToolbarView(EnhancedToolbarView toolbarView) { }
+        protected virtual void OnRefreshGraphView(BaseGraphView graphView) { }
+
+        private void SaveGraphAsset()
         {
-
-        }
-
-        protected virtual void OnInitlizeGraphView(BaseGraphView graphView)
-        {
-
-        }
-
-        private void SaveGraph()
-        {
-            if (m_Graph == null)
+            if (m_GraphAsset == null)
             {
                 return;
             }
 
-            var assetPath = AssetDatabase.GetAssetPath(m_Graph);
+            var assetPath = AssetDatabase.GetAssetPath(m_GraphAsset);
             if (string.IsNullOrEmpty(assetPath))
             {
                 assetPath = EditorUtility.SaveFilePanelInProject("Save Graph", "graph", "asset", "");
@@ -144,15 +128,29 @@ namespace GraphProcessor
                     return;
                 }
 
-                AssetDatabase.CreateAsset(m_Graph, assetPath);
+                AssetDatabase.CreateAsset(m_GraphAsset, assetPath);
                 AssetDatabase.ImportAsset(assetPath);
             }
             else
             {
-                EditorUtility.SetDirty(m_Graph);
+                EditorUtility.SetDirty(m_GraphAsset);
                 AssetDatabase.SaveAssets();
             }
 
+        }
+
+        private void PingGraphAsset()
+        {
+            if (m_GraphAsset == null)
+            {
+                return;
+            }
+
+            var assetPath = AssetDatabase.GetAssetPath(m_GraphAsset);
+            if (!string.IsNullOrEmpty(assetPath))
+            {
+                EditorGUIUtility.PingObject(m_GraphAsset);
+            }
         }
     }
 }

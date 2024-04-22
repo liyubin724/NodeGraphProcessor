@@ -3,8 +3,8 @@ using UnityEngine.UIElements;
 
 namespace GraphProcessor
 {
-    [CustomEditor(typeof(BaseGraph), true)]
-    public class GraphEditor : GraphInspector
+    [CustomEditor(typeof(GraphAsset), true)]
+    public class GraphAssetEditor : GraphInspector
     {
         protected override void CreateInspector()
         {
@@ -12,11 +12,9 @@ namespace GraphProcessor
 
             var openBtn = new Button(() =>
             {
-                GraphWindow.OpenWindow(target as BaseGraph);
-            })
-            {
-                text = "Open Graph Window"
-            };
+                GraphWindow.OpenWindow(target as GraphAsset);
+            });
+            openBtn.text = "Open Graph Window";
             root.Add(openBtn);
         }
     }
