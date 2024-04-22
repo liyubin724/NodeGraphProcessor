@@ -77,11 +77,11 @@ MonoBehaviour:
   pinnedElements:
   - position:
       serializedVersion: 2
-      x: 0
-      y: 0
+      x: 76
+      y: 289
       width: 150
       height: 200
-    opened: 0
+    opened: 1
     editorType:
       serializedType: GraphProcessor.ProcessorView, com.alelievr.NodeGraphProcessor.Editor,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -89,8 +89,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: 196, y: -75, z: 0}
-  scale: {x: 0.8695652, y: 0.8695652, z: 1}
+  position: {x: 0, y: 0, z: 0}
+  scale: {x: 1, y: 1, z: 1}
   references:
     version: 2
     RefIds:

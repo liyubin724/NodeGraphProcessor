@@ -90,7 +90,7 @@ namespace GraphProcessor
 
         private void RefreshToolbarView()
         {
-            m_ToolbarView.Clear();
+            m_ToolbarView.RemoveAllElements();
 
             m_ToolbarView.AddLeftButton("Save", () =>
             {
