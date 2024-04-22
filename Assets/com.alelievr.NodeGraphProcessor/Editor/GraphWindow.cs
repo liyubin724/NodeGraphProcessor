@@ -96,7 +96,12 @@ namespace GraphProcessor
             {
                 SaveGraphAsset();
             });
-            m_ToolbarView.AddLeftButton("Ping", () =>
+            m_ToolbarView.AddLeftButton("Center", () =>
+            {
+                m_GraphView.ResetPositionAndZoom();
+            });
+
+            m_ToolbarView.AddRightButton("Ping", () =>
             {
                 PingGraphAsset();
             });
