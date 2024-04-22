@@ -15,15 +15,22 @@ namespace DotEditor.Graph.Assets
         [Input(allowMultiple = true)]
         public string[] assetPaths;
 
+        [HideInInspector]
+        public SpriteImportMode mode = SpriteImportMode.Single;
         public int pixelsPerUnit = 100;
+        public string packingTag = "";
         public SpriteMeshType meshType = SpriteMeshType.FullRect;
 
-
+        [Space]
         public bool sRGBTexture = true;
         public TextureImporterAlphaSource alphaSource = TextureImporterAlphaSource.FromInput;
         public bool alphaIsTransparency = true;
+        public bool readable = false;
+        public bool mipmap = false;
 
-        public SpriteSettingData setting = new SpriteSettingData();
+        [Space]
+        public TextureWrapMode wrapMode = TextureWrapMode.Clamp;
+        public FilterMode filterMode = FilterMode.Bilinear;
 
         [Input]
         public TextureImporterPlatformSettings defaultSetting;
@@ -77,23 +84,23 @@ namespace DotEditor.Graph.Assets
             TextureImporter importer = AssetImporter.GetAtPath(assetPath) as TextureImporter;
 
             importer.textureType = TextureImporterType.Sprite;
-            importer.spriteImportMode = SpriteImportMode.Single;
-            importer.spritePackingTag = "";
+            importer.spriteImportMode = mode;
+            importer.spritePackingTag = packingTag;
             importer.alphaSource = alphaSource;
             importer.alphaIsTransparency = alphaIsTransparency;
             importer.sRGBTexture = sRGBTexture;
-            importer.isReadable = false;
-            importer.mipmapEnabled = false;
+            importer.isReadable = readable;
+            importer.mipmapEnabled = mipmap;
 
-            importer.wrapMode = TextureWrapMode.Clamp;
-            importer.filterMode = FilterMode.Bilinear;
+            importer.wrapMode = wrapMode;
+            importer.filterMode = filterMode;
 
             TextureImporterSettings tis = new TextureImporterSettings();
             importer.ReadTextureSettings(tis);
-
-            tis.spriteMeshType = meshType;
-            tis.spritePixelsPerUnit = pixelsPerUnit;
-
+            {
+                tis.spriteMeshType = meshType;
+                tis.spritePixelsPerUnit = pixelsPerUnit;
+            }
             importer.SetTextureSettings(tis);
 
             importer.SetPlatformTextureSettings(defaultSetting);
