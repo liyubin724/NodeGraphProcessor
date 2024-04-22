@@ -10,7 +10,7 @@ namespace DotEditor.Graph.Assets
     [Serializable]
     [NodeIdentity("Texture As Sprite(Editor)", new string[] { "editor", "setting", "asset" })]
     [NodeMenuItem("Assets/Setting/Texture As Sprite(In Editor)")]
-    public class TextureAsSpriteNode : BaseNode
+    public class SpriteSettingNode : BaseNode
     {
         [Input(allowMultiple = true)]
         public string[] assetPaths;
