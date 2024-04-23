@@ -32,7 +32,6 @@ MonoBehaviour:
   - rid: 4209874124234817757
   edges:
   - GUID: a71011e7-132b-4cbb-929f-8a9a4025ec32
-    owner: {fileID: 11400000}
     inputNodeGUID: e00032bc-e54e-4c8b-84c9-51eb5103abc2
     outputNodeGUID: 80f2299f-e7f8-45ce-a46c-fe74ae2a58f7
     inputFieldName: inputs
@@ -40,7 +39,6 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: 59f6d606-0bf0-49c5-a278-737629fe8aca
-    owner: {fileID: 11400000}
     inputNodeGUID: e00032bc-e54e-4c8b-84c9-51eb5103abc2
     outputNodeGUID: cac5f34e-166a-4f09-a2a0-9a805d70b7a7
     inputFieldName: inputs
@@ -48,7 +46,6 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: 06d15c0b-ce7a-46d2-b44b-c81a9bdda2eb
-    owner: {fileID: 11400000}
     inputNodeGUID: 18e4ddea-7bcd-446f-bd8b-0f5cca686f4c
     outputNodeGUID: d7d3e119-2a57-44c1-ab92-8de53b335999
     inputFieldName: inputs
@@ -56,7 +53,6 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: f9d6e68a-5871-4cbf-8ed0-af967c675a29
-    owner: {fileID: 11400000}
     inputNodeGUID: 18e4ddea-7bcd-446f-bd8b-0f5cca686f4c
     outputNodeGUID: 72b4a43d-1c20-49e8-84c2-ad1ebd4d3f1f
     inputFieldName: inputs
@@ -64,7 +60,6 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: 6d4544d9-03e0-425e-a37b-ef46cfc5a3a6
-    owner: {fileID: 11400000}
     inputNodeGUID: 70760904-88ea-4e03-8fdb-fb6377f9bcfd
     outputNodeGUID: 2ce9dd45-d5fe-4829-9a7e-77027b620366
     inputFieldName: inputs
@@ -72,7 +67,6 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: 67fe0855-4b44-4201-8fce-77d0ef7fd0ac
-    owner: {fileID: 11400000}
     inputNodeGUID: 70760904-88ea-4e03-8fdb-fb6377f9bcfd
     outputNodeGUID: f277b514-cc12-44f0-aee2-b095a39eb103
     inputFieldName: inputs
@@ -80,7 +74,6 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: ff535c14-026f-4af1-9739-738eca034df1
-    owner: {fileID: 11400000}
     inputNodeGUID: 057208a7-faeb-41f9-b152-b2cfa3843888
     outputNodeGUID: 0b887ee0-c1bb-4ebd-9d59-dfad6ca5d169
     inputFieldName: executed
@@ -88,7 +81,6 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: b2333c33-8446-4028-9668-7cb12fa27f63
-    owner: {fileID: 11400000}
     inputNodeGUID: 575b566d-578e-4d1c-8278-3fe61059696a
     outputNodeGUID: 0b887ee0-c1bb-4ebd-9d59-dfad6ca5d169
     inputFieldName: executed
@@ -96,7 +88,6 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: cf7202ef-b75c-45dc-b406-57fe16322ec9
-    owner: {fileID: 11400000}
     inputNodeGUID: d5ca5207-95e0-48d1-a3a8-a3a01ede32ff
     outputNodeGUID: 575b566d-578e-4d1c-8278-3fe61059696a
     inputFieldName: executed
@@ -104,7 +95,6 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: 093f56b5-f27c-4e24-903d-b90bda1c6a38
-    owner: {fileID: 11400000}
     inputNodeGUID: d5ca5207-95e0-48d1-a3a8-a3a01ede32ff
     outputNodeGUID: 057208a7-faeb-41f9-b152-b2cfa3843888
     inputFieldName: executed
@@ -112,7 +102,6 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: 45f4f738-4334-4379-bca8-bfff23a90b12
-    owner: {fileID: 11400000}
     inputNodeGUID: 02938362-e7d5-4446-b4ce-e740710062d3
     outputNodeGUID: d5ca5207-95e0-48d1-a3a8-a3a01ede32ff
     inputFieldName: executed
@@ -120,7 +109,6 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: 91163516-0f7c-4ac3-bf73-4b3affe902dc
-    owner: {fileID: 11400000}
     inputNodeGUID: 02938362-e7d5-4446-b4ce-e740710062d3
     outputNodeGUID: d5ca5207-95e0-48d1-a3a8-a3a01ede32ff
     inputFieldName: obj
@@ -128,7 +116,6 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: 551f4048-86f7-4bd8-8497-6895e1bc0b3c
-    owner: {fileID: 11400000}
     inputNodeGUID: ab35bbd6-77b3-4047-89c3-65e89faebd54
     outputNodeGUID: d5ca5207-95e0-48d1-a3a8-a3a01ede32ff
     inputFieldName: executed
@@ -136,11 +123,17 @@ MonoBehaviour:
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: 2920d9b2-c919-49a6-bf89-31a741542df4
-    owner: {fileID: 11400000}
     inputNodeGUID: ab35bbd6-77b3-4047-89c3-65e89faebd54
     outputNodeGUID: 60483d14-2e65-48f0-8c6a-828ed62a7401
     inputFieldName: obj
     outputFieldName: output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 06fada8d-ac69-49ec-8e14-4b226d637973
+    inputNodeGUID: 057208a7-faeb-41f9-b152-b2cfa3843888
+    outputNodeGUID: 0b887ee0-c1bb-4ebd-9d59-dfad6ca5d169
+    inputFieldName: executed
+    outputFieldName: true
     inputPortIdentifier: 
     outputPortIdentifier: 
   groups: []
@@ -199,7 +192,7 @@ MonoBehaviour:
           height: 138.00002
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         start: 0
         end: 10
         index: 9
@@ -211,13 +204,13 @@ MonoBehaviour:
         customName: 
         position:
           serializedVersion: 2
-          x: 903.00024
-          y: -43.72803
-          width: 144
-          height: 120.000015
-        expanded: 0
+          x: 1116.0436
+          y: -80.52174
+          width: 124
+          height: 56
+        expanded: 1
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         condition: 0
         compareOperator: 0
     - rid: 4209874124234817744
@@ -232,9 +225,9 @@ MonoBehaviour:
           y: -121.72805
           width: 144
           height: 120.000015
-        expanded: 0
+        expanded: 1
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         condition: 0
         compareOperator: 0
     - rid: 4209874124234817745
@@ -251,7 +244,7 @@ MonoBehaviour:
           height: 101
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 84
     - rid: 4209874124234817746
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
@@ -267,7 +260,7 @@ MonoBehaviour:
           height: 101
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 42
         input: 42
     - rid: 4209874124234817747
@@ -284,7 +277,7 @@ MonoBehaviour:
           height: 101
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 42
         input: 42
     - rid: 4209874124234817748
@@ -299,9 +292,9 @@ MonoBehaviour:
           y: 82.27198
           width: 144
           height: 120.000015
-        expanded: 0
+        expanded: 1
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         condition: 0
         compareOperator: 0
     - rid: 4209874124234817749
@@ -318,7 +311,7 @@ MonoBehaviour:
           height: 101
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 42
     - rid: 4209874124234817750
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
@@ -334,7 +327,7 @@ MonoBehaviour:
           height: 101
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 12
         input: 12
     - rid: 4209874124234817751
@@ -351,7 +344,7 @@ MonoBehaviour:
           height: 101
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 30
         input: 30
     - rid: 4209874124234817752
@@ -368,7 +361,7 @@ MonoBehaviour:
           height: 101
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 42
     - rid: 4209874124234817753
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
@@ -384,7 +377,7 @@ MonoBehaviour:
           height: 101
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 21
         input: 21
     - rid: 4209874124234817754
@@ -401,7 +394,7 @@ MonoBehaviour:
           height: 101
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: 21
         input: 21
     - rid: 4209874124234817755
@@ -418,7 +411,7 @@ MonoBehaviour:
           height: 114
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
     - rid: 4209874124234817756
       type: {class: ConditionalPrintNode, ns: , asm: Assembly-CSharp}
       data:
@@ -433,7 +426,7 @@ MonoBehaviour:
           height: 115.00001
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
     - rid: 4209874124234817757
       type: {class: StringNode, ns: , asm: Assembly-CSharp}
       data:
@@ -448,5 +441,5 @@ MonoBehaviour:
           height: 179
         expanded: 0
         debug: 0
-        nodeLock: 0
+        isLocked: 0
         output: Loop is done !

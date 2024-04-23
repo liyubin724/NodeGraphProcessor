@@ -812,8 +812,9 @@ namespace GraphProcessor
                         );
 
                         // We only add the type that implements the interface, not it's children
-                        if (initializeFunction.DeclaringType == nodeInfo.type)
-                            nodeTypePerCreateAssetType[genericArgumentType] = (nodeInfo.type, initializeFunction);
+                        //不再屏蔽,只要实现对应的接口即可
+                        //if (initializeFunction.DeclaringType == nodeInfo.type)
+                        nodeTypePerCreateAssetType[genericArgumentType] = (nodeInfo.type, initializeFunction);
                     }
                 }
             }
