@@ -50,7 +50,7 @@ namespace GraphProcessor
                 desc.type = nodeType;
                 desc.scriptAsset = FindNodeScriptAsset(nodeType);
                 desc.menuItems = (
-                        from attr in nodeType.GetCustomAttributes<NodeMenuItemAttribute>()
+                        from attr in nodeType.GetCustomAttributes<NodeMenuItemAttribute>(false)
                         where attr != null && !string.IsNullOrEmpty(attr.menuPath)
                         select attr.menuPath
                     ).ToArray();
