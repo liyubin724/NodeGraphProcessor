@@ -5,8 +5,8 @@ using UnityEngine;
 namespace DotEngine.Graph
 {
     [Serializable]
-    [NodeIdentity("Texture 2D", new string[] { "uobject", "common" })]
-    [NodeMenuItem("Common/UObjects/Texture 2D")]
+    [NodeIdentity("Scriptable Object", new string[] { "uobject", "common" })]
+    [NodeMenuItem("Common/UObjects/Scriptable Object")]
     public class ScriptableObjectAssetNode : UObjectNode<ScriptableObject>
     {
     }
